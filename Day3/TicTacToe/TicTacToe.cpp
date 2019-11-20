@@ -3,101 +3,100 @@
 using namespace std;
 // all global variable
 const int size_Board = 5;
-const int winValue = 3;
+const int winValue = 4;
 string board[size_Board][size_Board];
 string name1;
 string name2;
 int turn = 0;
 int playerturn = 1;
-
+int lastI;
+int lastJ;
 int isWin()
 {
-    // Check horizontal
-    for (int i = 0; i < size_Board; i++)
+    // Vertical check
+    int count = 0;
+    int tempI;
+    int tempJ;
+    // down
+    for (tempI = lastI; tempI < size_Board - 1; tempI++)
     {
-        int count = 0;
-        for (int j = 0; j < size_Board - 1; j++)
+        if (board[tempI][tempJ] == board[tempI + 1][tempJ])
         {
-            if (board[i][j] == board[i][j + 1])
-            {
-                count++;
-            }
-            else
-            {
-                count = 0;
-            }
-            // If one player win
-            if (count == winValue - 1)
-            {
-                if (board[i][j] == "O")
-                {
-                    return 1;
-                }
-                else
-                {
-                    return 2;
-                }
-            }
+            count++;
+        }
+        else
+        {
+            tempI += size_Board;
         }
     }
 
-    // Check vertically
-    for (int j = 0; j < size_Board; j++)
+    // up
+    for (tempI = lastI; tempI > 1; tempI--)
     {
-        int count = 0;
-        for (int i = 0; i < size_Board - 1; i++)
+        if (board[tempI][tempJ] == board[tempI - 1][tempJ])
         {
-            if (board[i][j] == board[i + 1][j])
-            {
-                count++;
-            }
-            else
-            {
-                count = 0;
-            }
-            // If one player win
-            if (count == winValue - 1)
-            {
-                if (board[i][j] == "O")
-                {
-                    return 1;
-                }
-                else
-                {
-                    return 2;
-                }
-            }
+            count++;
+        }
+        else
+        {
+            tempI -= size_Board;
         }
     }
 
-    // Check diagonal
-    for (int j = 0; j < size_Board - 1; j++)
+    if (count >= winValue - 2)
     {
-        int count = 0;
-        for (int i = 0; i < size_Board - 1; i++)
+        if (board[lastI][lastJ] == "O")
         {
-            if (board[i][j] == board[i + 1][j + 1])
-            {
-                count++;
-            }
-            else
-            {
-                count = 0;
-            }
-
-            if (count == winValue - 1)
-            {
-                if (board[i][j] == "O")
-                {
-                    return 1;
-                }
-                else
-                {
-                    return 2;
-                }
-            }
+            return 1;
+        }
+        else
+        {
+            return 2;
         }
     }
+
+    // Horizontal check
+    count = 0;
+    // down
+    for (tempJ = lastJ; tempJ < size_Board - 1; tempJ++)
+    {
+        if (board[tempI][tempJ] == board[tempI][tempJ + 1])
+        {
+            count++;
+        }
+        else
+        {
+            tempJ += size_Board;
+        }
+    }
+
+    // up
+    for (tempJ = lastJ; tempJ > 1; tempJ--)
+    {
+        if (board[tempI][tempJ] == board[tempI][tempJ - 1])
+        {
+            count++;
+        }
+        else
+        {
+            tempJ -= size_Board;
+        }
+    }
+
+    if (count >= winValue - 2)
+    {
+        if (board[lastI][lastJ] == "O")
+        {
+            return 1;
+        }
+        else
+        {
+            return 2;
+        }
+    }
+
+
+    // Diagonal Check
 }
 
 void gamePlay()
@@ -127,6 +126,8 @@ void gamePlay()
         {
             if (board[i][j] == choice)
             {
+                lastJ = j;
+                lastI = i;
                 // Check turn
                 // put the value opposite with the turn
                 if (playerturn == 2)
@@ -209,13 +210,14 @@ void generateWinBoard()
     board[1][0] = "X";
     board[2][0] = "X";
     board[3][0] = "X";
-    board[4][0] = "X";
+    // board[4][0] = "X";
 }
 int main()
 {
     generateBoard();
     generateWinBoard();
     draw();
+    gamePlay();
     cout << isWin();
     // bool startGame = introduction();
     // if (startGame == false)

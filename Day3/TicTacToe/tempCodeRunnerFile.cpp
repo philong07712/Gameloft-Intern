@@ -1,1 +1,2 @@
-ing(i + 1) + to_string
+
+    int value = std::stoi("64");
