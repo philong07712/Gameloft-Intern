@@ -1,0 +1,28 @@
+﻿1. Ta có chương trình chạy ban đầu có 2 con trỏ là ptr_a và ptr_b.
+con trỏ trỏ về con trỏ ptr_c.
+-	Ban đầu ptr_a sẽ nhận 1 ô nhớ từ heap.
+-	sau đó giá trị của ptr_a là 3.
+-	giá trị ptr_b sao chép của ptr_a nên là 3.
+-	=> giá trị in ra là 3 3
+
+-	Sau đó ptr_b sẽ khởi tạo 1 ô nhớ từ heap và nhận giá trị 9
+-	=> giá trị in ra là 3 9
+
+-	gán giá trị của b(ô nhớ nhận từ heap) là a = 3
+-	=> in ra là 3 3
+
+-	Hủy giá trị từ heap của a.
+-	ptr_a và ptr_b cùng trỏ về ô nhớ heap của b;
+-	=> in ra là 3 3
+
+-	ptr_c sẽ trỏ về con trỏ a
+-	*ptr_c sẽ in ra địa chỉ của a và **ptr_c in ra giá trị của a.
+
+2.
+-	Lỗi của chương trình này là do mảng a là ở vùng nhớ stack
+=> không thể dùng delete với vùng nhớ stack.
+
+3.
+- Tạo sao chúng ta nên sử dụng delete:
+	+ Delete 
+
