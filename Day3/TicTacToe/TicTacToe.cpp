@@ -3,7 +3,7 @@
 using namespace std;
 // all global variable
 const int size_Board = 5;
-const int winValue = 4;
+const int winValue = 3;
 string board[size_Board][size_Board];
 string name1;
 string name2;
@@ -13,10 +13,11 @@ int lastI;
 int lastJ;
 int isWin()
 {
+    cout << lastI << " " << lastJ << endl;
     // Vertical check
     int count = 0;
-    int tempI;
-    int tempJ;
+    int tempI = lastI;
+    int tempJ = lastJ;
     // down
     for (tempI = lastI; tempI < size_Board - 1; tempI++)
     {
@@ -31,7 +32,7 @@ int isWin()
     }
 
     // up
-    for (tempI = lastI; tempI > 1; tempI--)
+    for (tempI = lastI; tempI > 0; tempI--)
     {
         if (board[tempI][tempJ] == board[tempI - 1][tempJ])
         {
@@ -43,7 +44,7 @@ int isWin()
         }
     }
 
-    if (count >= winValue - 2)
+    if (count >= winValue - 1)
     {
         if (board[lastI][lastJ] == "O")
         {
@@ -57,6 +58,8 @@ int isWin()
 
     // Horizontal check
     count = 0;
+    tempI = lastI;
+    tempJ = lastJ;
     // down
     for (tempJ = lastJ; tempJ < size_Board - 1; tempJ++)
     {
@@ -71,7 +74,7 @@ int isWin()
     }
 
     // up
-    for (tempJ = lastJ; tempJ > 1; tempJ--)
+    for (tempJ = lastJ; tempJ > 0; tempJ--)
     {
         if (board[tempI][tempJ] == board[tempI][tempJ - 1])
         {
@@ -83,7 +86,7 @@ int isWin()
         }
     }
 
-    if (count >= winValue - 2)
+    if (count >= winValue - 1)
     {
         if (board[lastI][lastJ] == "O")
         {
@@ -95,8 +98,44 @@ int isWin()
         }
     }
 
-
     // Diagonal Check
+
+    // count = 0;
+    // for (tempJ = lastJ, tempI = lastI; tempI > 1 || tempJ > 1; tempI--,tempJ--)
+    // {
+    //     if (board[tempI][tempJ] == board[tempI - 1][tempJ - 1])
+    //     {
+    //         count++;
+    //     }
+    //     else
+    //     {
+    //         tempJ -= size_Board;
+    //     }
+
+    // }
+    // for (tempJ = lastJ, tempI = lastI; tempI > size_Board - 1 || tempJ > size_Board - 1; tempI++, tempJ++)
+    // {
+    //     if (board[tempI][tempJ] == board[tempI + 1][tempJ + 1])
+    //     {
+    //         count++;
+    //     }
+    //     else
+    //     {
+    //         tempJ += size_Board;
+    //     }
+    // }
+    // if (count >= winValue - 1)
+    // {
+    //     if (board[lastI][lastJ] == "O")
+    //     {
+    //         return 1;
+    //     }
+    //     else
+    //     {
+    //         return 2;
+    //     }
+    // }
+    return 0;
 }
 
 void gamePlay()
@@ -207,44 +246,39 @@ bool introduction()
 void generateWinBoard()
 {
     board[0][0] = "X";
-    board[1][0] = "X";
-    board[2][0] = "X";
-    board[3][0] = "X";
-    // board[4][0] = "X";
+    board[1][1] = "X";
+    board[2][2] = "X";
+    board[3][3] = "X";
+    board[4][4] = "X";
 }
 int main()
 {
-    generateBoard();
-    generateWinBoard();
-    draw();
-    gamePlay();
-    cout << isWin();
-    // bool startGame = introduction();
-    // if (startGame == false)
-    // {
-    //     return 0;
-    // }
+    bool startGame = introduction();
+    if (startGame == false)
+    {
+        return 0;
+    }
 
-    // generateBoard();
-    // draw();
-    // int check = 0;
-    // while (check == 0)
-    // {
-    //     gamePlay();
-    //     draw();
-    //     check = isWin();
-    // }
-    // // Congratulation winner
-    // if (check == 1)
-    // {
-    //     cout << "Congratulation " << name1 << " has won";
-    // }
-    // else if (check == 2)
-    // {
-    //     cout << "Congratulation " << name2 << " has won";
-    // }
-    // else
-    // {
-    //     cout << "It is a tieeeee match!!";
-    // }
+    generateBoard();
+    draw();
+    int check = 0;
+    while (check == 0)
+    {
+        gamePlay();
+        draw();
+        check = isWin();
+    }
+    // Congratulation winner
+    if (check == 1)
+    {
+        cout << "Congratulation " << name1 << " has won";
+    }
+    else if (check == 2)
+    {
+        cout << "Congratulation " << name2 << " has won";
+    }
+    else
+    {
+        cout << "It is a tieeeee match!!";
+    }
 }
