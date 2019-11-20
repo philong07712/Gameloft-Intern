@@ -2,9 +2,7 @@
 #include <string>
 using namespace std;
 // all global variable
-const int size_Board = 5;
-const int winValue = 3;
-string board[size_Board][size_Board];
+string board[3][3];
 string name1;
 string name2;
 int turn = 0;
@@ -12,92 +10,77 @@ int playerturn = 1;
 
 int isWin()
 {
-    // Check horizontal
-    for (int i = 0; i < size_Board; i++)
+    // kiem tra horizontal
+    for (int i = 0; i < 3; i++)
     {
-        int count = 0;
-        for (int j = 0; j < size_Board - 1; j++)
+        if (board[i][0] == board[i][1] &&
+            board[i][1] == board[i][2])
         {
-            if (board[i][j] == board[i][j + 1])
+            if (board[i][0] == "O")
             {
-                count++;
+                return 1;
             }
             else
             {
-                count = 0;
-            }
-            // If one player win
-            if (count == winValue - 1)
-            {
-                if (board[i][j] == "O")
-                {
-                    return 1;
-                }
-                else
-                {
-                    return 2;
-                }
+                return 2;
             }
         }
     }
-
-    // Check vertically
-    for (int j = 0; j < size_Board; j++)
+    // check vertical
+    for (int j = 0; j < 3; j++)
     {
-        int count = 0;
-        for (int i = 0; i < size_Board - 1; i++)
+        if (board[0][j] == board[1][j] &&
+            board[1][j] == board[2][j])
         {
-            if (board[i][j] == board[i + 1][j])
+            if (board[0][j] == "O")
             {
-                count++;
+                return 1;
             }
             else
             {
-                count = 0;
-            }
-            // If one player win
-            if (count == winValue - 1)
-            {
-                if (board[i][j] == "O")
-                {
-                    return 1;
-                }
-                else
-                {
-                    return 2;
-                }
+                return 2;
             }
         }
     }
-
-    // Check diagonal
-    for (int j = 0; j < size_Board - 1; j++)
+    // check diagonal
+    int i = 0;
+    if (board[i][i] == board[i + 1][i + 1] &&
+        board[i + 1][i + 1] == board[i + 2][i + 2])
     {
-        int count = 0;
-        for (int i = 0; i < size_Board - 1; i++)
+        if (board[i][i] == "O")
         {
-            if (board[i][j] == board[i + 1][j + 1])
-            {
-                count++;
-            }
-            else
-            {
-                count = 0;
-            }
+            return 1;
+        }
+        else
+        {
+            return 2;
+        }
+    }
 
-            if (count == winValue - 1)
+    if (board[0][2] == board[1][1] &&
+        board[1][1] == board[2][0])
+    {
+        if (board[0][2] == "O")
+        {
+            return 1;
+        }
+        else
+        {
+            return 2;
+        }
+    }
+
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            if (board[i][j] != "X" || board[i][j] != "O")
             {
-                if (board[i][j] == "O")
-                {
-                    return 1;
-                }
-                else
-                {
-                    return 2;
-                }
+                return 0;
             }
         }
     }
+    return 3;
 }
 
 void gamePlay()
@@ -121,9 +104,9 @@ void gamePlay()
     }
 
     // Set board value
-    for (int i = 0; i < size_Board; i++)
+    for (int i = 0; i < 3; i++)
     {
-        for (int j = 0; j < size_Board; j++)
+        for (int j = 0; j < 3; j++)
         {
             if (board[i][j] == choice)
             {
@@ -143,9 +126,9 @@ void gamePlay()
 
 void generateBoard()
 {
-    for (int i = 0; i < size_Board; i++)
+    for (int i = 0; i < 3; i++)
     {
-        for (int j = 0; j < size_Board; j++)
+        for (int j = 0; j < 3; j++)
         {
             board[i][j] = to_string(i + 1) + to_string(j + 1);
         }
@@ -156,31 +139,12 @@ void draw()
 {
     cout << "\tTic Tac Toe\n\n";
     cout << name1 << "\tO\t" << name2 << "\tX\n\n";
-    for (int j = 0; j < size_Board; j++)
+    cout << " _______________________\n";
+    for (int i = 0; i < 3; i++)
     {
-        cout << " _______";
-    }
-    cout << "\n";
-    for (int i = 0; i < size_Board; i++)
-    {
-        for (int j = 0; j < size_Board; j++)
-        {
-            cout << "|\t";
-        }
-        cout << "|\n";
-
-        for (int j = 0; j < size_Board; j++)
-        {
-            cout << "|  " << board[i][j] << "\t";
-        }
-        // cout << "|  " << board[i][0] << "\t|  " << board[i][1] << "\t|  " << board[i][2] << "\t|\n";
-        cout << "|\n";
-
-        for (int j = 0; j < size_Board; j++)
-        {
-            cout << "|_______";
-        }
-        cout << "|\n";
+        cout << "|\t|\t|\t|\n";
+        cout << "|  " << board[i][0] << "\t|  " << board[i][1] << "\t|  " << board[i][2] << "\t|\n";
+        cout << "|_______|_______|_______|\n";
     }
 }
 
@@ -203,46 +167,35 @@ bool introduction()
     cout << "\n";
     return true;
 }
-void generateWinBoard()
-{
-    board[0][0] = "X";
-    board[1][0] = "X";
-    board[2][0] = "X";
-    board[3][0] = "X";
-    board[4][0] = "X";
-}
+
 int main()
 {
-    generateBoard();
-    generateWinBoard();
-    draw();
-    cout << isWin();
-    // bool startGame = introduction();
-    // if (startGame == false)
-    // {
-    //     return 0;
-    // }
+    bool startGame = introduction();
+    if (startGame == false)
+    {
+        return 0;
+    }
 
-    // generateBoard();
-    // draw();
-    // int check = 0;
-    // while (check == 0)
-    // {
-    //     gamePlay();
-    //     draw();
-    //     check = isWin();
-    // }
-    // // Congratulation winner
-    // if (check == 1)
-    // {
-    //     cout << "Congratulation " << name1 << " has won";
-    // }
-    // else if (check == 2)
-    // {
-    //     cout << "Congratulation " << name2 << " has won";
-    // }
-    // else
-    // {
-    //     cout << "It is a tieeeee match!!";
-    // }
+    generateBoard();
+    draw();
+    int check = 0;
+    while (check == 0)
+    {
+        gamePlay();
+        draw();
+        check = isWin();
+    }
+    // Congratulation winner
+    if (check == 1)
+    {
+        cout << "Congratulation " << name1 << " has won";
+    }
+    else if (check == 2)
+    {
+        cout << "Congratulation " << name2 << " has won";
+    }
+    else
+    {
+        cout << "It is a tieeeee match!!";
+    }
 }
