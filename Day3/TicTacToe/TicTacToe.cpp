@@ -100,41 +100,41 @@ int isWin()
 
     // Diagonal Check
 
-    // count = 0;
-    // for (tempJ = lastJ, tempI = lastI; tempI > 1 || tempJ > 1; tempI--,tempJ--)
-    // {
-    //     if (board[tempI][tempJ] == board[tempI - 1][tempJ - 1])
-    //     {
-    //         count++;
-    //     }
-    //     else
-    //     {
-    //         tempJ -= size_Board;
-    //     }
+    count = 0;
+    for (tempJ = lastJ, tempI = lastI; tempI > 0 || tempJ > 0; tempI--,tempJ--)
+    {
+        if (board[tempI][tempJ] == board[tempI - 1][tempJ - 1])
+        {
+            count++;
+        }
+        else
+        {
+            tempJ -= size_Board;
+        }
 
-    // }
-    // for (tempJ = lastJ, tempI = lastI; tempI > size_Board - 1 || tempJ > size_Board - 1; tempI++, tempJ++)
-    // {
-    //     if (board[tempI][tempJ] == board[tempI + 1][tempJ + 1])
-    //     {
-    //         count++;
-    //     }
-    //     else
-    //     {
-    //         tempJ += size_Board;
-    //     }
-    // }
-    // if (count >= winValue - 1)
-    // {
-    //     if (board[lastI][lastJ] == "O")
-    //     {
-    //         return 1;
-    //     }
-    //     else
-    //     {
-    //         return 2;
-    //     }
-    // }
+    }
+    for (tempJ = lastJ, tempI = lastI; tempI > size_Board - 1 || tempJ > size_Board - 1; tempI++, tempJ++)
+    {
+        if (board[tempI][tempJ] == board[tempI + 1][tempJ + 1])
+        {
+            count++;
+        }
+        else
+        {
+            tempJ += size_Board;
+        }
+    }
+    if (count >= winValue - 1)
+    {
+        if (board[lastI][lastJ] == "O")
+        {
+            return 1;
+        }
+        else
+        {
+            return 2;
+        }
+    }
     return 0;
 }
 
