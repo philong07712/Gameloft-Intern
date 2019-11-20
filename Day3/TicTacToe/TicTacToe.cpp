@@ -2,8 +2,8 @@
 #include <string>
 using namespace std;
 // all global variable
-const int size_Board = 5;
-const int winValue = 3;
+const int size_Board = 7;
+const int winValue = 4;
 string board[size_Board][size_Board];
 string name1;
 string name2;
