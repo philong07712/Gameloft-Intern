@@ -1,5 +1,7 @@
-# include "Student.cpp"
+# include "ListStudent.cpp"
 int main() {
-    Student s;
-    s.display();
+    ListStudent list;
+    list.input();
+    list.input();
+    list.display();
 }
