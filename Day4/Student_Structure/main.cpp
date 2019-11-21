@@ -17,17 +17,17 @@ int menu()
 
 int main()
 {
-    ListStudent list;
+    ListStudent *list = new ListStudent;
     while (true)
     {
         int choose = menu();
         switch (choose)
         {
         case 1:
-            list.input();
+            list->input();
             break;
         case 2:
-            list.display();
+            list->display();
             break;
         case 3:
             cout << "Save";

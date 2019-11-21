@@ -4,7 +4,7 @@
 class ListStudent {
     public:
     int size;
-    vector<Student> list_Student;
+    vector<Student*> list_Student;
     ListStudent();
     ListStudent(const ListStudent&);
     void input();
