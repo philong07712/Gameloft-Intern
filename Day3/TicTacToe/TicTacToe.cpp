@@ -2,8 +2,8 @@
 #include <string>
 using namespace std;
 // all global variable
-const int size_Board = 7;
-const int winValue = 4;
+const int size_Board = 8;
+const int winValue = 5;
 string board[size_Board][size_Board];
 string name1;
 string name2;
@@ -272,9 +272,9 @@ bool introduction()
         return false;
     }
     cout << "Enter Player 1 Name: ";
-    cin >> name1;
+    getline(cin, name1);
     cout << "Enter Player 2 Name: ";
-    cin >> name2;
+    getline(cin, name2);
     cout << "\n";
     return true;
 }
