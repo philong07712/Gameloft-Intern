@@ -272,8 +272,10 @@ bool introduction()
         return false;
     }
     cout << "Enter Player 1 Name: ";
+    cin.ignore();
     getline(cin, name1);
     cout << "Enter Player 2 Name: ";
+    cin.ignore();
     getline(cin, name2);
     cout << "\n";
     return true;

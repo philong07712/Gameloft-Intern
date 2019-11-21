@@ -17,14 +17,30 @@ ListStudent::ListStudent(const ListStudent &list)
     }
 }
 
+bool ListStudent::isDuplicateID(int checkID)
+{
+    for (int i = 0; i < this->size; i++)
+    {
+        if (checkID == list_Student[i].id)
+        {
+            return true;
+        }
+    }
+    return false;
+}
 void ListStudent::input()
 {
-    this->size++;
     int inputID;
     string inputName;
     float inputScore;
-    cout << "ID: ";
-    cin >> inputID;
+    bool check = true;
+    do
+    {
+        cout << "ID: ";
+        cin >> inputID;
+        check = isDuplicateID(inputID);
+    } while (check == true);
+
     cout << "Name: ";
     cin.ignore();
     getline(cin, inputName);
@@ -35,6 +51,7 @@ void ListStudent::input()
     } while (inputScore < 0 || inputScore > 10);
     Student newS(inputID, inputName, inputScore);
     this->list_Student.push_back(newS);
+    this->size++;
 }
 
 void ListStudent::display()
