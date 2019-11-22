@@ -1,8 +1,6 @@
-#include "FluVirus.cpp"
+#include "DengueVirus.cpp"
 int main()
 {
-    Virus *fvirus = new FluVirus;
-    cout << fvirus->getM_resistance();
-    Virus *f2 = new FluVirus;
+    Virus *dvirus = new DengueVirus;
 
 }
