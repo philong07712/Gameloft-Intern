@@ -8,6 +8,6 @@ public:
     float score;
     Student(int, string, float);
     Student(const Student &);
-    void display();
+    string display();
     ~Student();
 };

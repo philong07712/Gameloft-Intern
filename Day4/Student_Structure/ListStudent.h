@@ -9,6 +9,7 @@ class ListStudent {
     ListStudent(const ListStudent&);
     void input();
     void display();
+    string saveString();
     bool isDuplicateID(int);
     ~ListStudent();
 };

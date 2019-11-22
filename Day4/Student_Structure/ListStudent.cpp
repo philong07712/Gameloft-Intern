@@ -59,11 +59,19 @@ void ListStudent::display()
     cout << "ID\t\tFULL NAME\t\tSCORE\n";
     for (int i = 0; i < this->size; i++)
     {
-        list_Student[i]->display();
+        cout << list_Student[i]->display();
         cout << "\n";
     }
 }
 
+string ListStudent::saveString() {
+    string save = "";
+    for (int i = 0; i < this->size; i++) {
+        save += list_Student[i]->display();
+        save += "\n";
+    }
+    return save;
+}
 ListStudent::~ListStudent()
 {
 }

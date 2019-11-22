@@ -15,8 +15,14 @@ Student::Student(const Student &s)
     this->score = s.score;
 }
 
-void Student::display() {
-    cout << this->id << "\t\t" << this->name << "\t\t" << this->score;
+string Student::display() {
+    string output = "";
+    output += to_string(this->id);
+    output += "\t\t";
+    output += this->name;
+    output += "\t\t";
+    output += to_string(this->score);
+    return output;
 }
 
 Student::~Student()

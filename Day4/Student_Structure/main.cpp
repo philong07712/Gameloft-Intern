@@ -1,4 +1,5 @@
 #include "ListStudent.cpp"
+#include <fstream>
 
 int menu()
 {
@@ -17,7 +18,9 @@ int menu()
 
 int main()
 {
+
     ListStudent *list = new ListStudent;
+    ofstream myfile;
     while (true)
     {
         int choose = menu();
@@ -30,13 +33,14 @@ int main()
             list->display();
             break;
         case 3:
-            cout << "Save";
+            myfile.open("FileSave.txt");
+            myfile << list->saveString();
+            myfile.close();
             break;
         case 4:
             cout << "Load";
             break;
         case 0:
-            cout << "return";
             return 0;
         default:
             cout << "Wrong choice!!!!\n";
