@@ -1,10 +1,5 @@
-#include "DengueVirus.cpp"
+#include "Patient.cpp"
 int main()
 {
-    Virus *v1 = new DengueVirus;
-    Virus *v2 = new DengueVirus;
-    cout << v1->getM_resistance();
-    cout << "\n";
-    cout << v2->getM_resistance();
-    delete v1, v2;
+    Patient *human = new Patient;
 }

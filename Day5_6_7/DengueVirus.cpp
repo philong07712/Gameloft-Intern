@@ -4,7 +4,6 @@
 #include <list>
 DengueVirus::DengueVirus()
 {
-    srand(time(0));
     this->DoBorn();
     this->InitResistance();
 }
@@ -58,10 +57,6 @@ Virus *DengueVirus::DoClone()
         list[i].setM_dna(this->getM_dna());
         list[i].setM_resistance(this->getM_resistance());
         list[i].setM_protein(this->getM_protein());
-    }
-    for (int i = 0; i < 2; i++)
-    {
-        cout << list[i].getM_resistance();
     }
     return list;
 }

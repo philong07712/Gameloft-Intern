@@ -1,16 +1,18 @@
 #pragma once
 #include "FluVirus.h"
 #include <time.h>
+# define RED 0xff0000
+# define BLUE 0x0000ff
+
 FluVirus::FluVirus()
 {
-    srand(time(0));
     this->DoBorn();
     this->InitResistance();
 }
 void FluVirus::DoBorn()
 {
     this->LoadADNInformation();
-    int *colorArray = new int[2]{0x0000ff, 0xff0000};
+    int *colorArray = new int[2]{BLUE, RED};
     // set Random value change eachtime call
     // random [0, 1]
     int index = rand() % 2;
@@ -45,7 +47,7 @@ void FluVirus::InitResistance()
 {
     int resit;
     // random value for color blue
-    if (this->m_color == 0x0000ff)
+    if (this->m_color == BLUE)
     {
         resit = 10 + rand() % 11;
     }
