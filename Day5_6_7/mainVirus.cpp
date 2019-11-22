@@ -1,6 +1,5 @@
-# include "Virus.cpp" 
+# include "FluVirus.cpp" 
 int main() {
-    Virus v;
-    v.LoadADNInformation();
-    
+    FluVirus *fvirus = new FluVirus;
+    fvirus->DoBorn();
 }

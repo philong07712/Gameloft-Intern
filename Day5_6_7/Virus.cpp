@@ -1,3 +1,4 @@
+#pragma once
 #include "Virus.h"
 #include <iostream>
 #include <fstream>
