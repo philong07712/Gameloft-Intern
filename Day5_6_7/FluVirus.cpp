@@ -1,6 +1,10 @@
 #pragma once
 #include "FluVirus.h"
 #include <time.h>
+FluVirus::FluVirus() {
+    this->DoBorn();
+    this->InitResistance();
+}
 void FluVirus::DoBorn()
 {
     this->LoadADNInformation();
@@ -13,27 +17,44 @@ void FluVirus::DoBorn()
     delete[] colorArray;
 }
 
-void FluVirus::DoClone()
+int FluVirus::getM_color() {
+    return this->m_color;
+}
+
+void FluVirus::setM_color(int color) {
+    this->m_color = color;
+}
+Virus* FluVirus::DoClone()
 {
-    cout << "Clone";
+    FluVirus *v = new FluVirus();
+    v->setM_dna(this->getM_dna());
+    v->setM_resistance(this->getM_resistance());
+    v->setM_color(this->getM_color());
+    return new FluVirus;
 }
 
 void FluVirus::DoDie()
 {
-    cout << "Die";
+    cout << "Released all virus data";
 }
 
 void FluVirus::InitResistance()
 {
     int resit;
     srand(time(0));
+    // random value for color blue
     if (this->m_color == 0x0000ff)
     {
         resit = 10 + rand() % 11;
     }
+    // random value for color red;
     else
     {
         resit = 10 + rand() % 6;
     }
     this->setM_resistance(resit);
+}
+
+FluVirus::~FluVirus() {
+    this->DoDie();
 }
