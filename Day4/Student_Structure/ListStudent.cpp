@@ -28,6 +28,11 @@ bool ListStudent::isDuplicateID(int checkID)
     }
     return false;
 }
+void ListStudent::addStudent(int n_id, string n_name, float n_Score) {
+    this->size++;
+    Student *s = new Student(n_id, n_name, n_Score);
+    this->list_Student.push_back(s);
+}
 void ListStudent::input()
 {
     int inputID;

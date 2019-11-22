@@ -1,5 +1,6 @@
 #include "ListStudent.cpp"
 #include <fstream>
+#include <sstream>
 
 int menu()
 {
@@ -18,8 +19,15 @@ int menu()
 
 int main()
 {
-
     ListStudent *list = new ListStudent;
+
+    ifstream myfileLoad("FileLoad.txt");
+    string line;
+    string token;
+    string tab = "\t\t";
+    int addID;
+    string addName;
+    float addScore;
     ofstream myfile;
     while (true)
     {
@@ -38,7 +46,30 @@ int main()
             myfile.close();
             break;
         case 4:
-            cout << "Load";
+            if (myfileLoad.is_open())
+            {
+                while (getline(myfileLoad, line))
+                {
+                    // Get ID
+                    token = line.substr(0, line.find(tab));
+                    line.erase(0, line.find(tab) + tab.length());
+                    // Set ID from string to int
+                    stringstream ss;
+                    ss << token;
+                    ss >> addID;
+                    // Get Name from the txt file
+                    token = line.substr(0, line.find(tab));
+                    addName = token;
+                    line.erase(0, line.find(tab) + tab.length());
+                    // Get Score
+                    token = line.substr(0, line.find("\n"));
+                    line.erase(0, line.find(tab) + tab.length());
+                    // Set score from string to Float
+                    addScore = stod(token);
+                    list->addStudent(addID, addName, addScore);
+                }
+                myfileLoad.close();
+            }
             break;
         case 0:
             return 0;
