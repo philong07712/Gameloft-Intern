@@ -46,10 +46,10 @@ void DengueVirus::InitResistance()
 
 void DengueVirus::DoDie()
 {
-    cout << "Died";
+    delete[] this->m_protein;
 }
 
-Virus *DengueVirus::DoClone()
+Virus* DengueVirus::DoClone()
 {
     DengueVirus *list = new DengueVirus[2];
     for (int i = 0; i < 2; i++)
