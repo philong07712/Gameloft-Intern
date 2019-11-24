@@ -20,6 +20,7 @@ void Patient::DoStart()
         {
             this->m_virusList.push_back(new FluVirus);
         }
+        
         // case Dengue
         else
         {
