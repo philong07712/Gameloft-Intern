@@ -45,13 +45,12 @@ void Patient::TakeMedicine(int medicine_resitance)
     {
         (*it)->ReduceResistance(medicine_resitance);
         // Clone virus stage
-        if ((*it)->getM_resistance() > 0)
+        if ((*it)->getResistance() > 0)
         {
             list<Virus *> cloned = (*it)->DoClone();
             this->m_virusList.insert(it, cloned.begin(), cloned.end());
         }
         // If virus was died
-        //! Not finished
         else
         {
             delete *it;
@@ -62,7 +61,7 @@ void Patient::TakeMedicine(int medicine_resitance)
     // Testing after cloned
     for (it = this->m_virusList.begin(); it != this->m_virusList.end(); it++)
     {
-        sum += (*it)->getM_resistance();
+        sum += (*it)->getResistance();
     }
     cout << "Sum: " << sum << endl;
     if (this->m_resistance < sum)

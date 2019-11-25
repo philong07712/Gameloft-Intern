@@ -6,8 +6,8 @@ class DengueVirus : public Virus
 
 public:
     DengueVirus();
-    char *getM_protein();
-    void setM_protein(char*);
+    char *getProtein();
+    void setProtein(char*);
     //
     void DoBorn();
     list<Virus*> DoClone();

@@ -41,7 +41,7 @@ void DengueVirus::InitResistance()
         resit = 21 + rand() % 10;
     }
 
-    this->setM_resistance(resit);
+    this->setResistance(resit);
 }
 
 
@@ -50,21 +50,18 @@ list<Virus*> DengueVirus::DoClone()
     list<Virus*> l;
     for (int i = 0; i < 2; i++)
     {
-        DengueVirus *v = new DengueVirus;
-        v->setM_dna(this->getM_dna());
-        v->setM_resistance(this->getM_resistance());
-        v->setM_protein(this->getM_protein());
+        DengueVirus *v = new DengueVirus(*this);
         l.push_back(v);
     }
     return l;
 }
 
-char *DengueVirus::getM_protein()
+char *DengueVirus::getProtein()
 {
     return this->m_protein;
 }
 
-void DengueVirus::setM_protein(char *c)
+void DengueVirus::setProtein(char *c)
 {
     strcpy(this->m_protein, c);
 }

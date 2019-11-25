@@ -9,8 +9,8 @@ int main()
     char t = '0';
     while (p.GetState() == 1)
     {
-        printf("Take Medicine (0 = NO, 1 = YES): \n");
-        scanf("%c", &t);
+        cout << "Take Medicine (0 = NO, 1 = YES): \n";
+        cin >> t;
         if (t == '1')
         {
             int min = 1;

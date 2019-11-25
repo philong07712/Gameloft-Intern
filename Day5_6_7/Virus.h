@@ -10,10 +10,10 @@ public:
     Virus(const Virus &);        //
     void LoadADNInformation();   //
     void ReduceResistance(int);  //
-    char *getM_dna() const;      //
-    int getM_resistance() const; //
-    void setM_dna(char *);       //
-    void setM_resistance(int);   //
+    char *getDna() const;      //
+    int getResistance() const; //
+    void setDna(char *);       //
+    void setResistance(int);   //
     // pure virtual method
     virtual void DoBorn() = 0;
     virtual ~Virus(); 

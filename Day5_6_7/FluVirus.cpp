@@ -20,23 +20,23 @@ void FluVirus::DoBorn()
     delete[] colorArray;
 }
 
-int FluVirus::getM_color()
+int FluVirus::getColor()
 {
     return this->m_color;
 }
 
-void FluVirus::setM_color(int color)
+void FluVirus::setColor(int color)
 {
     this->m_color = color;
 }
 list<Virus *> FluVirus::DoClone()
 {
     list<Virus *> l;
-    FluVirus *v = new FluVirus();
-    v->setM_dna(this->getM_dna());
-    v->setM_resistance(this->getM_resistance());
-    v->setM_color(this->getM_color());
-    l.push_back(v);
+    FluVirus *v = new FluVirus(*this);
+    // v->setM_dna(this->getM_dna());
+    // v->setM_resistance(this->getM_resistance());
+    // v->setM_color(this->getM_color());
+    // l.push_back(v);
     return l;
 }
 
@@ -53,7 +53,7 @@ void FluVirus::InitResistance()
     {
         resit = 10 + rand() % 6;
     }
-    this->setM_resistance(resit);
+    this->setResistance(resit);
 }
 
 void FluVirus::DoDie()

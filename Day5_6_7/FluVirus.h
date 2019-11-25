@@ -8,8 +8,8 @@ class FluVirus : public Virus
 
 public:
     FluVirus();
-    int getM_color();
-    void setM_color(int);
+    int getColor();
+    void setColor(int);
     void DoBorn();
     list<Virus *> DoClone();
     void DoDie();

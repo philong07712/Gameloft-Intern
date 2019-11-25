@@ -11,26 +11,26 @@ Virus::Virus() : m_dna(NULL), m_resistance(10)
 
 Virus::Virus(const Virus &v)
 {
-    this->m_dna = v.getM_dna();
-    this->m_resistance = v.getM_resistance();
+    this->m_dna = v.getDna();
+    this->m_resistance = v.getResistance();
 }
 
-char *Virus::getM_dna() const
+char *Virus::getDna() const
 {
     return this->m_dna;
 }
 
-int Virus::getM_resistance() const
+int Virus::getResistance() const
 {
     return this->m_resistance;
 }
 
-void Virus::setM_dna(char *dna)
+void Virus::setDna(char *dna)
 {
     this->m_dna = dna;
 }
 
-void Virus::setM_resistance(int resit)
+void Virus::setResistance(int resit)
 {
     this->m_resistance = resit;
 }
