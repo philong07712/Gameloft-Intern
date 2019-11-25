@@ -71,8 +71,7 @@ void DengueVirus::setM_protein(char *c)
 
 void DengueVirus::DoDie()
 {
-    cout << "Dengue die" << endl;
-    delete[] this->m_protein;
+    // cout << "DengueVirus died" << endl;
 }
 
 DengueVirus::~DengueVirus()

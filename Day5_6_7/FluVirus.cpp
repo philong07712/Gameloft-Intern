@@ -29,7 +29,7 @@ void FluVirus::setM_color(int color)
 {
     this->m_color = color;
 }
-list<Virus *>FluVirus::DoClone()
+list<Virus *> FluVirus::DoClone()
 {
     list<Virus *> l;
     FluVirus *v = new FluVirus();
@@ -38,11 +38,6 @@ list<Virus *>FluVirus::DoClone()
     v->setM_color(this->getM_color());
     l.push_back(v);
     return l;
-}
-
-void FluVirus::DoDie()
-{
-    cout << "Released all Flu virus data" << endl;
 }
 
 void FluVirus::InitResistance()
@@ -59,6 +54,11 @@ void FluVirus::InitResistance()
         resit = 10 + rand() % 6;
     }
     this->setM_resistance(resit);
+}
+
+void FluVirus::DoDie()
+{
+    // cout << "FluVirus died" << endl; 
 }
 
 FluVirus::~FluVirus()

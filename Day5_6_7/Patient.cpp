@@ -64,7 +64,7 @@ void Patient::TakeMedicine(int medicine_resitance)
     {
         sum += (*it)->getM_resistance();
     }
-    //!Not finished
+    cout << "Sum: " << sum << endl;
     if (this->m_resistance < sum)
     {
         this->DoDie();
@@ -78,6 +78,7 @@ int Patient::GetState()
 
 void Patient::DoDie()
 {
+    cout << "Patient has died";
     this->m_state = 0;
     list<Virus*> :: iterator it;
     for (it = this->m_virusList.begin(); it != this->m_virusList.end(); it++) {
@@ -87,5 +88,5 @@ void Patient::DoDie()
 
 Patient::~Patient()
 {
-    this->DoDie();
+    // this->DoDie();
 }

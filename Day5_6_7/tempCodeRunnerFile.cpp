@@ -1,1 +1,1 @@
-FluVirus
+            cout << medicine_resistance;
