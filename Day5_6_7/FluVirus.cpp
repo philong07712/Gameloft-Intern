@@ -29,13 +29,15 @@ void FluVirus::setM_color(int color)
 {
     this->m_color = color;
 }
-Virus *FluVirus::DoClone()
+list<Virus*> FluVirus::DoClone()
 {
+    list<Virus*> l;
     FluVirus *v = new FluVirus();
     v->setM_dna(this->getM_dna());
     v->setM_resistance(this->getM_resistance());
     v->setM_color(this->getM_color());
-    return v;
+    l.push_back(v);
+    return l;
 }
 
 void FluVirus::DoDie()

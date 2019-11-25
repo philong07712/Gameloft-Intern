@@ -10,7 +10,7 @@ public:
     void setM_protein(char*);
     //
     void DoBorn();
-    Virus *DoClone();
+    list<Virus*> DoClone();
     void DoDie();
     void InitResistance();
     ~DengueVirus();

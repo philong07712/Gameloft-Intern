@@ -7,7 +7,7 @@ using namespace std;
 class Patient
 {
     int m_resistance;
-    vector<Virus *> m_virusList;
+    list<Virus *> m_virusList;
     int m_state;
 
 public:

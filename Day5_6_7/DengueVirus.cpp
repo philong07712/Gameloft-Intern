@@ -49,16 +49,18 @@ void DengueVirus::DoDie()
     delete[] this->m_protein;
 }
 
-Virus* DengueVirus::DoClone()
+list<Virus*> DengueVirus::DoClone()
 {
-    DengueVirus *list = new DengueVirus[2];
+    list<Virus*> l;
     for (int i = 0; i < 2; i++)
     {
-        list[i].setM_dna(this->getM_dna());
-        list[i].setM_resistance(this->getM_resistance());
-        list[i].setM_protein(this->getM_protein());
+        DengueVirus *v = new DengueVirus;
+        v->setM_dna(this->getM_dna());
+        v->setM_resistance(this->getM_resistance());
+        v->setM_protein(this->getM_protein());
+        l.push_back(v);
     }
-    return list;
+    return l;
 }
 
 char *DengueVirus::getM_protein()

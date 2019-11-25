@@ -20,7 +20,7 @@ void Patient::DoStart()
         {
             this->m_virusList.push_back(new FluVirus);
         }
-        
+
         // case Dengue
         else
         {
@@ -36,16 +36,27 @@ void Patient::InitResistance()
     this->m_resistance = resit;
 }
 
-
 void Patient::TakeMedicine(int medicine_resitance)
 {
     int resVirus = 0;
-    for (int i = 0; i < this->m_virusList.size(); i++) {
-        this->m_virusList[i]->ReduceResistance(medicine_resitance);
-        if (this->m_virusList[i]->getM_resistance > 0) {
-            // add cloned virus to the list
-            this->m_virusList.push_back(this->m_virusList[i]->DoClone());
+    list<Virus *>::iterator it;
+    // iteator all the Viruses
+    for (it = this->m_virusList.begin(); it != this->m_virusList.end(); it++)
+    {
+        (*it)->ReduceResistance(medicine_resitance);
+        // Testing
+        cout << "After take medicine : " << (*it)->getM_resistance() << endl;
+        // Clone virus stage
+        if ((*it)->getM_resistance() > 0)
+        {
+            list<Virus *> cloned = (*it)->DoClone();
+            this->m_virusList.insert(it, cloned.begin(), cloned.end());
         }
+    }
+    // Testing after cloned
+    for (it = this->m_virusList.begin(); it != this->m_virusList.end(); it++)
+    {
+        cout << "Finish cloned: " << (*it)->getM_resistance() << endl;
     }
 }
 

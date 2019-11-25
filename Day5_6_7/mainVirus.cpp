@@ -2,4 +2,5 @@
 int main()
 {
     Patient *human = new Patient;
+    human->TakeMedicine(10);
 }
