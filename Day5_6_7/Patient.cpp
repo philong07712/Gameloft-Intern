@@ -44,22 +44,48 @@ void Patient::TakeMedicine(int medicine_resitance)
     for (it = this->m_virusList.begin(); it != this->m_virusList.end(); it++)
     {
         (*it)->ReduceResistance(medicine_resitance);
-        // Testing
-        cout << "After take medicine : " << (*it)->getM_resistance() << endl;
         // Clone virus stage
         if ((*it)->getM_resistance() > 0)
         {
             list<Virus *> cloned = (*it)->DoClone();
             this->m_virusList.insert(it, cloned.begin(), cloned.end());
         }
+        // If virus was died
+        //! Not finished
+        else
+        {
+            delete *it;
+            this->m_virusList.erase(it++);
+        }
     }
+    int sum = 0;
     // Testing after cloned
     for (it = this->m_virusList.begin(); it != this->m_virusList.end(); it++)
     {
-        cout << "Finish cloned: " << (*it)->getM_resistance() << endl;
+        sum += (*it)->getM_resistance();
+    }
+    //!Not finished
+    if (this->m_resistance < sum)
+    {
+        this->DoDie();
+    }
+}
+
+int Patient::GetState()
+{
+    return this->m_state;
+}
+
+void Patient::DoDie()
+{
+    this->m_state = 0;
+    list<Virus*> :: iterator it;
+    for (it = this->m_virusList.begin(); it != this->m_virusList.end(); it++) {
+        delete *it;
     }
 }
 
 Patient::~Patient()
 {
+    this->DoDie();
 }

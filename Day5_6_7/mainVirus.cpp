@@ -1,6 +1,6 @@
 #include "Patient.cpp"
 int main()
 {
-    Patient *human = new Patient;
-    human->TakeMedicine(10);
+    Patient * human = new Patient;
+    human->TakeMedicine(5);
 }

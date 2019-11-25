@@ -1,8 +1,8 @@
 #pragma once
 #include "FluVirus.h"
 #include <time.h>
-# define RED 0xff0000
-# define BLUE 0x0000ff
+#define RED 0xff0000
+#define BLUE 0x0000ff
 
 FluVirus::FluVirus()
 {
@@ -29,9 +29,9 @@ void FluVirus::setM_color(int color)
 {
     this->m_color = color;
 }
-list<Virus*> FluVirus::DoClone()
+list<Virus *>FluVirus::DoClone()
 {
-    list<Virus*> l;
+    list<Virus *> l;
     FluVirus *v = new FluVirus();
     v->setM_dna(this->getM_dna());
     v->setM_resistance(this->getM_resistance());
@@ -42,7 +42,7 @@ list<Virus*> FluVirus::DoClone()
 
 void FluVirus::DoDie()
 {
-    cout << "Released all virus data";
+    cout << "Released all Flu virus data" << endl;
 }
 
 void FluVirus::InitResistance()

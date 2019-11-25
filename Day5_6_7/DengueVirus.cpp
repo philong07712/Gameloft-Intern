@@ -44,10 +44,6 @@ void DengueVirus::InitResistance()
     this->setM_resistance(resit);
 }
 
-void DengueVirus::DoDie()
-{
-    delete[] this->m_protein;
-}
 
 list<Virus*> DengueVirus::DoClone()
 {
@@ -71,6 +67,12 @@ char *DengueVirus::getM_protein()
 void DengueVirus::setM_protein(char *c)
 {
     strcpy(this->m_protein, c);
+}
+
+void DengueVirus::DoDie()
+{
+    cout << "Dengue die" << endl;
+    delete[] this->m_protein;
 }
 
 DengueVirus::~DengueVirus()
