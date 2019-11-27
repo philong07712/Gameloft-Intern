@@ -57,9 +57,10 @@ void Patient::TakeMedicine(int medicine_resitance)
 			++it;
 		}
 		// If virus was died
-		else if ((*it)->getResistance() < 0)
+		else
 		{
 			delete *it;
+			*it = nullptr;
 			it = this->m_virusList.erase(it);
 		}
 	}
@@ -76,6 +77,10 @@ void Patient::TakeMedicine(int medicine_resitance)
 	}
 }
 
+list<Virus*> Patient::getVirusList() {
+	return this->m_virusList;
+}
+
 int Patient::GetState()
 {
 	return this->m_state;
@@ -87,7 +92,7 @@ void Patient::DoDie()
 	this->m_state = 0;
 	list<Virus*> ::iterator it;
 	for (it = this->m_virusList.begin(); it != this->m_virusList.end(); ++it) {
-		delete (*it);
+		delete *it;
 	}
 }
 

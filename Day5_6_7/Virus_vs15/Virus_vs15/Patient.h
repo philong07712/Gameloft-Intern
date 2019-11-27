@@ -16,6 +16,7 @@ public:
 	void DoStart();
 	void TakeMedicine(int);
 	void DoDie();
+	list<Virus*> getVirusList();
 	int GetState();
 	~Patient();
 };

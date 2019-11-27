@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <cstdlib>
-//# include "vld.h"
+# include "vld.h"
 #include <iostream>
 using namespace std;
 #include "Patient.h"
@@ -15,11 +15,11 @@ int main()
 		if (t == '1')
 		{
 			int min = 1;
-			int max = 10;
+			int max = 1;
 			int medicine_resistance = min + (rand() % (int)(max - min + 1));
 			cout << "Resit taken: " << medicine_resistance << endl;
 			p.TakeMedicine(medicine_resistance);
 		}
 	}
-	system("pause");
+	return 0;
 }

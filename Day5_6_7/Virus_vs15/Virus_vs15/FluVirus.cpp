@@ -33,10 +33,6 @@ list<Virus *> FluVirus::DoClone()
 {
 	list<Virus *> l;
 	FluVirus *v = new FluVirus(*this);
-	// v->setM_dna(this->getM_dna());
-	// v->setM_resistance(this->getM_resistance());
-	// v->setM_color(this->getM_color());
-	// l.push_back(v);
 	return l;
 }
 

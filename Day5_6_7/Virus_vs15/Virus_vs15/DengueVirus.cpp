@@ -65,7 +65,9 @@ char *DengueVirus::getProtein()
 
 void DengueVirus::setProtein(char *c)
 {
-	strcpy_s(this->m_protein, 4, c);
+	for (int i = 0; i < 4; i++) {
+		this->m_protein[i] = c[i];
+	}
 }
 
 void DengueVirus::DoDie()
