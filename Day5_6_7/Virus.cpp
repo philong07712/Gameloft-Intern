@@ -2,7 +2,7 @@
 #include "Virus.h"
 #include <iostream>
 #include <fstream>
-#include <string.h>
+#include <string>
 using namespace std;
 
 Virus::Virus() : m_dna(NULL), m_resistance(10)

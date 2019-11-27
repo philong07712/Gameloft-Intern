@@ -1,6 +1,8 @@
 #pragma once
 #include "Patient.h"
 #include <time.h>
+# include "iostream"
+using namespace std;
 Patient::Patient()
 {
     srand((int)time(0));
@@ -18,13 +20,16 @@ void Patient::DoStart()
         // Case flu
         if (type == 0)
         {
-            this->m_virusList.push_back(new FluVirus);
+			Virus *v = new FluVirus();
+            this->m_virusList.push_back(v);
         }
 
         // case Dengue
         else
         {
-            this->m_virusList.push_back(new DengueVirus);
+			Virus *v = new DengueVirus();
+			this->m_virusList.push_back(v);
+
         }
     }
     // this->m_virusList.push_back
@@ -41,14 +46,14 @@ void Patient::TakeMedicine(int medicine_resitance)
     int resVirus = 0;
     list<Virus *>::iterator it;
     // iteator all the Viruses
-    for (it = this->m_virusList.begin(); it != this->m_virusList.end(); it++)
+    for (it = m_virusList.begin(); it != m_virusList.end(); it++)
     {
         (*it)->ReduceResistance(medicine_resitance);
         // Clone virus stage
         if ((*it)->getResistance() > 0)
         {
-            list<Virus *> cloned = (*it)->DoClone();
-            this->m_virusList.insert(it, cloned.begin(), cloned.end());
+			list<Virus *> cloned = (*it)->DoClone();
+            m_virusList.insert(it, cloned.begin(), cloned.end());
         }
         // If virus was died
         else

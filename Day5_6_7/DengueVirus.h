@@ -1,5 +1,5 @@
 #pragma once
-#include "Virus.cpp"
+#include "Virus.h"
 class DengueVirus : public Virus
 {
     char m_protein[4];

@@ -1,6 +1,6 @@
 #pragma once
-#include "Virus.cpp"
-#include "list"
+#include "Virus.h"
+#include <list>
 using namespace std;
 class FluVirus : public Virus
 {

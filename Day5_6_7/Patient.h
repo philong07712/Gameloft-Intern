@@ -1,7 +1,7 @@
 #pragma once
-#include "Virus.cpp"
-#include "DengueVirus.cpp"
-#include "FluVirus.cpp"
+#include "Virus.h"
+#include "DengueVirus.h"
+#include "FluVirus.h"
 #include <vector>
 using namespace std;
 class Patient

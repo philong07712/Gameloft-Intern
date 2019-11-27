@@ -2,6 +2,7 @@
 using namespace std;
 class Virus
 {
+private:
     char *m_dna;
     int m_resistance;
 
