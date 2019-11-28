@@ -1,0 +1,38 @@
+[33m8e9bea4[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m Add helloworld cocos
+[33m177a8cc[m[33m ([m[1;31morigin/master[m[33m)[m No Memory Leak
+[33m35840b7[m Fix leak char[]
+[33mf98f1e0[m Fix bug + add visual studio version
+[33mfb40fec[m Fix clone and set, get
+[33mb46ac90[m Complete
+[33m3532a2a[m Finish patient
+[33m73ae55b[m Cloned Stage
+[33m27912c2[m Fix bugs
+[33m930ac5f[m Fix bug
+[33m954805f[m Do Start + Init Patient
+[33m202bc4f[m Finish Dengue
+[33m08f31e5[m Init Resit + Born Dengue
+[33m43e32f3[m Add FluVirus
+[33mf70c0c2[m Add InitResit
+[33m2cae84a[m Add DoBorn
+[33mf06cb1a[m Add Virus
+[33m6ebb4cb[m Add MyPoint
+[33me806bf4[m Done Deadline
+[33m0c73add[m Save File
+[33m652814f[m Turn all list to pointer
+[33m4121800[m Add duplicate ID and menu
+[33m096faf1[m Fix bug name
+[33m414baf7[m Add ListStudent with display and input
+[33ma69001e[m Add student class and tested it
+[33m3119016[m Add 5 but not so sure
+[33m68d777d[m Add pointer 4
+[33m98b0696[m Add pointer 1 2 3
+[33mbe3703d[m[33m ([m[1;31morigin/5x5[m[33m, [m[1;32m5x5[m[33m)[m Fully Featured hahahaha
+[33mbac4233[m Fully Diagonal
+[33mb489458[m Add diagonal check
+[33m08e26e4[m Adjust vertical horizontal
+[33m7dc5591[m Add vertical and horizontal check
+[33m8ec398b[m Create branch 5x5
+[33mb772920[m Set to master branch
+[33m016190a[m Add TicTacToe
+[33m3768703[m Intial and Add TicTacToe
+[33m0e50817[m first commit
