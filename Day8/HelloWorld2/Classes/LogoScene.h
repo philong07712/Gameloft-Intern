@@ -10,6 +10,7 @@ public:
 	static Scene* createScene();
 	virtual bool init(); 
 	void update(float deltaTime);
+	void changeScene();
 	CREATE_FUNC(LogoScene);
 };
 #endif // __LOGO_SCENE_H__
