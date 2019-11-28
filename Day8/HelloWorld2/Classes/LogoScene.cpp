@@ -7,7 +7,7 @@ Scene * LogoScene::createScene()
 
 bool LogoScene::init()
 {
-	if (!Scene::init) {
+	if (!Scene::init()) {
 		return false;
 	}
 	scheduleUpdate();
@@ -17,4 +17,3 @@ bool LogoScene::init()
 void LogoScene::update(float deltaTime)
 {
 }
-
