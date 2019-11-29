@@ -137,8 +137,3 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 }
 
 // Call back to logo
-void HelloWorld::update(float DeltaTime) {
-	auto myScene = LogoScene::createScene();
-	Director::getInstance()->replaceScene(
-		TransitionFade::create(0.5, myScene, Color3B(0, 255, 255)));
-}
