@@ -1,5 +1,6 @@
-# include "LogoScene.h"
+﻿# include "LogoScene.h"
 # include "HelloWorldScene.h"
+# include "LoadingScene.h"
 Scene * LogoScene::createScene()
 {
 	return LogoScene::create();
@@ -14,6 +15,24 @@ bool LogoScene::init()
 		return false;
 	}
 	scheduleUpdate();
+	// Adding animation
+	auto zombie = Sprite::create();
+	zombie->setPosition(150, 150);
+	addChild(zombie, 3);
+
+	Vector<SpriteFrame*> animFrames;
+	animFrames.pushBack(SpriteFrame::create("Zombie0.png", Rect(0, 0, 100, 130)));
+	animFrames.pushBack(SpriteFrame::create("Zombie1.png", Rect(0, 0, 100, 130)));
+	//animFrames.pushBack(SpriteFrame::create("Zombie2.png", Rect(0, 0, 150, 150)));
+	animFrames.pushBack(SpriteFrame::create("Zombie3.png", Rect(0, 0, 100, 130)));
+	animFrames.pushBack(SpriteFrame::create("Zombie4.png", Rect(0, 0, 100, 130)));
+
+	auto animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
+	auto animate = Animate::create(animation);
+
+	zombie->runAction(RepeatForever::create(animate));
+
+	//addChild(player);
 	// Adding background
 	auto background = Sprite::create("background.jpg");
 	background->setAnchorPoint(Vec2(0, 0));
@@ -34,6 +53,7 @@ bool LogoScene::init()
 	pig->setPosition(100, 200);
 	addChild(pig, 2);
 	//
+	this->schedule(schedule_selector(LogoScene::changeLoading), 3.0f);
 	return true;
 }
 
@@ -49,12 +69,13 @@ void LogoScene::update(float deltaTime)
 		pig->runAction(RepeatForever::create(sequence));
 	}
 	a++;
-	//if (a == 10) {
-	//	this->changeScene();
-	//}
 }
 
-
+void LogoScene::changeLoading(float dt) {
+	auto myScene = LoadingScene::createScene();
+	Director::getInstance()->replaceScene(
+		TransitionFade::create(0.5, myScene, Color3B(0, 255, 255)));
+}
 void LogoScene::changeScene() {
 	auto myScene = HelloWorld::createScene();
 	// Transition Fade
@@ -81,7 +102,4 @@ void LogoScene::changeScene() {
 		Director::getInstance()->replaceScene(TransitionFlipY::create(2, myScene));
 		break;
 	}
-
-
-
 }

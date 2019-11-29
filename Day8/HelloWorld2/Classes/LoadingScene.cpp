@@ -17,5 +17,4 @@ bool LoadingScene::init()
 
 void LoadingScene::update(float deltaTime)
 {
-
 }
