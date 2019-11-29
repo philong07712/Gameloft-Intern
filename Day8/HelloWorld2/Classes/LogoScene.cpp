@@ -5,6 +5,8 @@ Scene * LogoScene::createScene()
 	return LogoScene::create();
 }
 
+cocos2d::Sprite* king;
+cocos2d::Sprite* pig;
 bool LogoScene::init()
 {
 	srand((unsigned)time(0));
@@ -12,20 +14,29 @@ bool LogoScene::init()
 		return false;
 	}
 	scheduleUpdate();
+	//
+	king = Sprite::create("GroundKing.png");
+	king->setPosition(100, 100);
+	king->setScale(2.0f);
+	addChild(king, 1);
+	auto moveTo = MoveTo::create(2, Vec2(300, 300));
+	king->runAction(moveTo);
+	//
+	pig = Sprite::create("GroundPig.png");
+	pig->setScale(2.0f);
+	pig->setPosition(100, 200);
+	addChild(pig, 2);
+	//
 	return true;
 }
 
 int a = 0;
 void LogoScene::update(float deltaTime)
 {
-	auto king = Sprite::create("GroundKing.png");
-	auto scaleBy = ScaleBy::create(2.0f, 3.0f);
-	auto pig = Sprite::create("GroundPig.png");
-	king->setPosition(100, 100);
-	pig->setPosition(100, 150);
-	addChild(king, 1);
-	addChild(pig, 2);
-
+	if (a == 20) {
+		auto scaleBy = ScaleBy::create(3.0f, 3.0f);
+		pig->runAction(scaleBy);
+	}
 	a++;
 	//if (a == 10) {
 	//	this->changeScene();
