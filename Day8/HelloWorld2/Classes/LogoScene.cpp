@@ -18,11 +18,20 @@ bool LogoScene::init()
 int a = 0;
 void LogoScene::update(float deltaTime)
 {
+	auto king = Sprite::create("GroundKing.png");
+	auto scaleBy = ScaleBy::create(2.0f, 3.0f);
+	auto pig = Sprite::create("GroundPig.png");
+	king->setPosition(100, 100);
+	pig->setPosition(100, 150);
+	addChild(king, 1);
+	addChild(pig, 2);
+
 	a++;
-	if (a == 10) {
-		this->changeScene();
-	}
+	//if (a == 10) {
+	//	this->changeScene();
+	//}
 }
+
 
 void LogoScene::changeScene() {
 	auto myScene = HelloWorld::createScene();
