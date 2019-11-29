@@ -15,7 +15,7 @@ bool LoadingScene::init()
 	auto spriteCache = SpriteFrameCache::getInstance();
 	spriteCache->addSpriteFramesWithFile("Robot1.plist", "Robot1.png");
 	auto player = Sprite::create();
-	player->setPosition(100, 100);
+	player->setPosition(200, 200);
 	addChild(player);
 	Vector<SpriteFrame*> animFrames; 
 	animFrames.pushBack(spriteCache->getSpriteFrameByName("character_robot_walk0.png"));
@@ -24,7 +24,10 @@ bool LoadingScene::init()
 	animFrames.pushBack(spriteCache->getSpriteFrameByName("character_robot_walk3.png"));
 	auto animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
 	auto animate = Animate::create(animation);
+	auto moveBy = ScaleBy::create(2.0f, 3.0f);
 	player->runAction(RepeatForever::create(animate));
+	auto sequence = Sequence::create(moveBy, moveBy->reverse(), nullptr);
+	player->runAction(RepeatForever::create(sequence));
 	return true;
 }
 
