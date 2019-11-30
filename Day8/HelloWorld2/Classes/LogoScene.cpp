@@ -34,10 +34,7 @@ bool LogoScene::init()
 
 	//addChild(player);
 	// Adding background
-	auto background = Sprite::create("background.jpg");
-	background->setAnchorPoint(Vec2(0, 0));
-	addChild(background, 1);
-
+	addBackground();
 	// Adding king character
 	king = Sprite::create("GroundKing.png");
 	king->setPosition(100, 100);
@@ -71,11 +68,20 @@ void LogoScene::update(float deltaTime)
 	a++;
 }
 
+void LogoScene::addBackground() {
+	auto background = Sprite::create("backgroundColorFall.png");
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto originSize = Director::getInstance()->getVisibleOrigin();
+	background->setPosition(Point(visibleSize.width / 2 + originSize.x, visibleSize.height / 2 + originSize.y));
+	addChild(background, 1);
+}
+
 void LogoScene::changeLoading(float dt) {
 	auto myScene = LoadingScene::createScene();
 	Director::getInstance()->replaceScene(
 		TransitionFade::create(0.5, myScene, Color3B(0, 255, 255)));
 }
+
 void LogoScene::changeScene() {
 	auto myScene = HelloWorld::createScene();
 	// Transition Fade

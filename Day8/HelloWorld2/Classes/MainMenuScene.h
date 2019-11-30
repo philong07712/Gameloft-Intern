@@ -12,6 +12,7 @@ public:
 	static Scene* createScene();
 	virtual bool init(); 
 	void update(float deltaTime);
+	void addBackground();
 	CREATE_FUNC(MainMenuScene);
 };
 #endif // __MAINMENU_SCENE_H__

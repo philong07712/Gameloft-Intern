@@ -11,6 +11,7 @@ public:
 	virtual bool init(); 
 	void update(float deltaTime);
 	void changeScene();
+	void addBackground();
 	void changeLoading(float dt);
 	CREATE_FUNC(LogoScene);
 };

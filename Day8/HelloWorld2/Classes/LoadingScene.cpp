@@ -12,6 +12,8 @@ bool LoadingScene::init()
 		return false;
 	}
 	scheduleUpdate();
+	// Add background
+	background();
 	auto spriteCache = SpriteFrameCache::getInstance();
 	spriteCache->addSpriteFramesWithFile("Robot1.plist", "Robot1.png");
 	auto player = Sprite::create();
@@ -34,6 +36,14 @@ bool LoadingScene::init()
 	return true;
 }
 
+void LoadingScene::background() {
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto originSize = Director::getInstance()->getVisibleOrigin();
+
+	auto backgroundSprite = Sprite::create("backgroundColorForest.png");
+	backgroundSprite->setPosition(Point(visibleSize.width / 2 + originSize.x, visibleSize.height / 2 + originSize.y));
+	addChild(backgroundSprite);
+}
 void LoadingScene::update(float deltaTime)
 {
 }
