@@ -13,6 +13,8 @@ public:
 	virtual bool init(); 
 	void update(float deltaTime);
 	void addBackground();
+	void addMenu();
+	void menuCloseCallback(Ref* pSender);
 	CREATE_FUNC(MainMenuScene);
 };
 #endif // __MAINMENU_SCENE_H__
