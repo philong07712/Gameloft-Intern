@@ -50,11 +50,19 @@ void MainMenuScene::addMenu()
 	auto itemExit = MenuItemFont::create("Exit", CC_CALLBACK_1(MainMenuScene::menuCloseCallback, this));
 	itemExit->setPosition(width, height - 50);
 	itemExit->setColor(colorBlack);
+	// create closeButton
+	auto closeButton = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(MainMenuScene::menuCloseCallback, this));
+	closeButton->setPosition(width, height - 100);
+	// create settingButton
+	auto settingButton = MenuItemImage::create("normal_button_small.png", "selected_button_small.png");
+	settingButton->setPosition(width, height + 250);
 	// create Menu
 	Vector<MenuItem*> menuItems;
 	menuItems.pushBack(endItem);
 	menuItems.pushBack(itemPlay);
 	menuItems.pushBack(itemExit);
+	menuItems.pushBack(closeButton);
+	menuItems.pushBack(settingButton);
 	auto myMenu = Menu::createWithArray(menuItems);
 	myMenu->setPosition(0, 0);
 	addChild(myMenu, 2);
