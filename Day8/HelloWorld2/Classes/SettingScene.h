@@ -14,6 +14,7 @@ public:
 	void update(float deltaTime);
 	void addBackground();
 	void addMenu();
+	void activeSound();
 	CREATE_FUNC(SettingScene);
 };
 #endif // __SETTING_SCENE_H__
