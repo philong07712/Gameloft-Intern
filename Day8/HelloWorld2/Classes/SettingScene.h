@@ -15,6 +15,9 @@ public:
 	void addBackground();
 	void addMenu();
 	void activeSound();
+	void activeAbout();
+	void createSound();
+	void createAbout();
 	CREATE_FUNC(SettingScene);
 };
 #endif // __SETTING_SCENE_H__
