@@ -20,6 +20,7 @@ cocos2d::ui::CheckBox* checkBox;
 // aboutItems
 cocos2d::ui::ScrollView* scrollView;
 bool aboutMenu;
+
 bool SettingScene::init()
 {
 	srand((unsigned)time(0));
@@ -55,6 +56,13 @@ void SettingScene::addBackground() {
 
 void SettingScene::addMenu()
 {
+	// Add textField
+	auto textField = ui::TextField::create("Insert Name:", "Arial", 30);
+	textField->setMaxLengthEnabled(true);
+	textField->setMaxLength(20);
+	textField->setColor(blackColor);
+	textField->setPosition(Vec2(width, height + 200));
+	addChild(textField, 3);
 	// create settingFont
 	auto label = Label::create("SETTING", "Arial", 30);
 	auto settingLabel = MenuItemLabel::create(label, nullptr);

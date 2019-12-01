@@ -4,7 +4,7 @@
 #define __MAINMENU_SCENE_H__
 #include "ui/CocosGUI.h"
 #include "cocos2d.h"
-
+#include "SettingScene.h"
 USING_NS_CC;
 
 class MainMenuScene : public Scene {

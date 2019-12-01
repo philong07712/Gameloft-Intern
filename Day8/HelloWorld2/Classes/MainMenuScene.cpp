@@ -43,7 +43,11 @@ void MainMenuScene::addMenu()
 	endItem->setPosition(width, height + 100);
 	endItem->setColor(colorBlack);
 	// create itemPlay
-	auto itemPlay = MenuItemFont::create("Play", nullptr);
+	auto itemPlay = MenuItemFont::create("Play", 
+		[&](Ref* pSender) {
+		auto mySence = SettingScene::createScene();
+		Director::getInstance()->replaceScene(TransitionFade::create(2.0f, mySence));
+	});
 	itemPlay->setPosition(width, height);
 	itemPlay->setColor(colorBlack);
 	// create itemExit
