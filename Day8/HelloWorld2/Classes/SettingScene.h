@@ -13,6 +13,7 @@ public:
 	virtual bool init(); 
 	void update(float deltaTime);
 	void addBackground();
+	void addMenu();
 	CREATE_FUNC(SettingScene);
 };
 #endif // __SETTING_SCENE_H__
