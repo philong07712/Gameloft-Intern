@@ -76,6 +76,8 @@ void LogoScene::addBackground() {
 	addChild(background, 1);
 }
 
+
+
 void LogoScene::changeLoading(float dt) {
 	auto myScene = LoadingScene::createScene();
 	Director::getInstance()->replaceScene(

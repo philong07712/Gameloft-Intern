@@ -1,5 +1,6 @@
 # include "LoadingScene.h"
 # include "HelloWorldScene.h"
+# include "GamePlayScene.h"
 Scene * LoadingScene::createScene()
 {
 	return LoadingScene::create();
@@ -34,7 +35,16 @@ bool LoadingScene::init()
 	auto move = Sequence::create(moveBy, moveBy->reverse(), nullptr);
 	auto spawn = Spawn::create(scale, move, nullptr);
 	player->runAction(RepeatForever::create(spawn));
+
+	// Change to GamePlayScene
+	this->schedule(schedule_selector(LoadingScene::changeGamePlay), 3.0f);
 	return true;
+}
+
+void LoadingScene::changeGamePlay(float dt)
+{
+	auto myScene = GamePlayScene::createScene();
+	Director::getInstance()->replaceScene(TransitionFade::create(2.0f, myScene));
 }
 
 void LoadingScene::background() {

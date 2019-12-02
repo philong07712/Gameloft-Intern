@@ -10,7 +10,8 @@ public:
     static cocos2d::Scene* createScene();
 
     virtual bool init();
-    
+	void update(float deltaTime);
+	void addShip();
     // implement the "static create()" method manually
     CREATE_FUNC(GamePlayScene);
 };

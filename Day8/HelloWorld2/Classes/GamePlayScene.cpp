@@ -19,25 +19,32 @@ bool GamePlayScene::init()
         return false;
     }
 	scheduleUpdate();
+	addShip();
     return true;
 }
-
-
-void HelloWorld::menuCloseCallback(Ref* pSender)
+// Add the ship to the gameplay
+void GamePlayScene::addShip()
 {
-    //Close the cocos2d-x game scene and quit the application
-    Director::getInstance()->end();
+	auto spriteCache = SpriteFrameCache::getInstance();
+	spriteCache->addSpriteFramesWithFile("ship.plist", "ship.png");
+	Vector<SpriteFrame*> shipFrames;
+	shipFrames.pushBack(spriteCache->getSpriteFrameByName("1.png"));
+	shipFrames.pushBack(spriteCache->getSpriteFrameByName("2.png"));
+	shipFrames.pushBack(spriteCache->getSpriteFrameByName("3.png"));
+	shipFrames.pushBack(spriteCache->getSpriteFrameByName("4.png"));
+	shipFrames.pushBack(spriteCache->getSpriteFrameByName("5.png"));
+	shipFrames.pushBack(spriteCache->getSpriteFrameByName("6.png"));
+	shipFrames.pushBack(spriteCache->getSpriteFrameByName("7.png"));
+	shipFrames.pushBack(spriteCache->getSpriteFrameByName("8.png"));
+	auto animation = Animation::createWithSpriteFrames(shipFrames, 0.1f);
+	auto animate = Animate::create(animation);
 
-    #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
-
-    /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() and exit(0) as given above,instead trigger a custom event created in RootViewController.mm as below*/
-
-    //EventCustom customEndEvent("game_scene_close_event");
-    //_eventDispatcher->dispatchEvent(&customEndEvent);
-
-
+	auto ship = Sprite::create();
+	addChild(ship);
+	ship->setPosition(200, 200);
+	ship->runAction(RepeatForever::create(animate));
 }
 
-// Call back to logo
+void GamePlayScene::update(float DeltaTime) {
+
+}
