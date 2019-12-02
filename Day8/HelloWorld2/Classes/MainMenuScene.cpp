@@ -65,8 +65,8 @@ void MainMenuScene::addMenu()
 	auto closeButton = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(MainMenuScene::menuCloseCallback, this));
 	closeButton->setPosition(width, height - 200);
 	// create settingButton
-	auto settingButton = MenuItemImage::create("normal_button_small.png", "selected_button_small.png");
-	settingButton->setPosition(width, height + 250);
+	auto settingButton = MenuItemImage::create("setting_normal.png", "setting_pressed.png");
+	settingButton->setPosition(width - 100, height - 50);
 	// create Menu
 	Vector<MenuItem*> menuItems;
 	menuItems.pushBack(endItem);

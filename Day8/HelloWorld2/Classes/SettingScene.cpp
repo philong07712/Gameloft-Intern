@@ -54,6 +54,17 @@ void SettingScene::addBackground() {
 
 void SettingScene::addMenu()
 {
+	// add returnItem
+	auto returnButton = ui::Button::create();
+	auto returnLabel = Label::create("RETURN", "fonts/MarkerFelt.ttf", 24);
+	returnButton->setTitleLabel(returnLabel);
+	returnButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
+	{
+		auto myScene = MainMenuScene::createScene();
+		Director::getInstance()->replaceScene(TransitionFade::create(2.0f, myScene));
+	});
+	returnButton->setPosition(Vec2(100, height * 2 - 50));
+	addChild(returnButton, 3);
 	// Add textField
 	auto textField = ui::TextField::create("Insert Name:", "fonts/MarkerFelt.ttf", 30);
 	textField->setMaxLengthEnabled(true);
@@ -130,7 +141,7 @@ void SettingScene::createAbout() {
 	// init aboutLayout
 	aboutLayout = ui::Layout::create();
 	aboutLayout->setVisible(false);
-	aboutLayout->setContentSize(Size(300, 300));
+	aboutLayout->setContentSize(Size(500, 300));
 	aboutLayout->setPosition(Vec2(width - 100, height + 50));
 	aboutLayout->setAnchorPoint(Vec2(0, 1));
 
@@ -139,10 +150,15 @@ void SettingScene::createAbout() {
 	scrollView->setContentSize(Size(200, 200));
 	scrollView->setBounceEnabled(true);
 	// Add information about the game
-	auto label = Label::createWithSystemFont("Game information", "Arial", 24);
-	label->setPosition(Vec2(scrollView->getContentSize().width / 2, 50));
+	auto inSize = Vec2(scrollView->getContentSize().width / 2, 50);
+	auto label = Label::createWithSystemFont("Game information: ", "Arial", 15);
+	label->setPosition(inSize);
 	label->setColor(blackColor);
+	auto label1 = Label::createWithSystemFont("Author: Hung", "Arial", 15);
+	label1->setPosition(Vec2(scrollView->getContentSize().width / 2, 50 + 30));
+	label1->setColor(blackColor);
 	scrollView->addChild(label);
+	scrollView->addChild(label1);
 	aboutLayout->addChild(scrollView);
 	addChild(aboutLayout, 3);
 }
@@ -157,6 +173,9 @@ void SettingScene::activeAbout() {
 		aboutMenu = false;
 	}
 }
+
+
+
 void SettingScene::update(float deltaTime)
 {
 
