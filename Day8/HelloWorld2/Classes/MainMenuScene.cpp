@@ -38,25 +38,32 @@ void MainMenuScene::addMenu()
 	// Init color variable
 	auto colorBlack = cocos2d::Color3B(10, 10, 10);
 	// create Menu label
-	auto label = Label::create("MENU", "Arial", 30);
+	auto label = Label::create("MENU", "fonts/MarkerFelt.ttf", 30);
 	auto endItem = MenuItemLabel::create(label, nullptr);
 	endItem->setPosition(width, height + 100);
 	endItem->setColor(colorBlack);
 	// create itemPlay
-	auto itemPlay = MenuItemFont::create("Play", 
-		[&](Ref* pSender) {
-		auto mySence = SettingScene::createScene();
-		Director::getInstance()->replaceScene(TransitionFade::create(2.0f, mySence));
-	});
+	auto playLabel = Label::create("PLAY", "fonts/MarkerFelt.ttf", 25);
+	auto itemPlay = MenuItemLabel::create(playLabel, nullptr);
 	itemPlay->setPosition(width, height);
 	itemPlay->setColor(colorBlack);
 	// create itemExit
-	auto itemExit = MenuItemFont::create("Exit", CC_CALLBACK_1(MainMenuScene::menuCloseCallback, this));
-	itemExit->setPosition(width, height - 50);
+	auto exitLabel = Label::create("EXIT", "fonts/MarkerFelt.ttf", 25);
+	auto itemExit = MenuItemLabel::create(exitLabel, CC_CALLBACK_1(MainMenuScene::menuCloseCallback, this));
+	itemExit->setPosition(width, height - 100);
 	itemExit->setColor(colorBlack);
+	// create settingButton
+	auto settingLabel = Label::create("SETTING", "fonts/MarkerFelt.ttf", 25);
+	auto itemSetting = MenuItemLabel::create(settingLabel,
+		[&](Ref* pSender) {
+		auto myScene = SettingScene::createScene();
+		Director::getInstance()->replaceScene(TransitionFade::create(2.0f, myScene));
+	});
+	itemSetting->setPosition(width, height - 50);
+	itemSetting->setColor(colorBlack);
 	// create closeButton
 	auto closeButton = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(MainMenuScene::menuCloseCallback, this));
-	closeButton->setPosition(width, height - 100);
+	closeButton->setPosition(width, height - 200);
 	// create settingButton
 	auto settingButton = MenuItemImage::create("normal_button_small.png", "selected_button_small.png");
 	settingButton->setPosition(width, height + 250);
@@ -66,6 +73,7 @@ void MainMenuScene::addMenu()
 	menuItems.pushBack(itemPlay);
 	menuItems.pushBack(itemExit);
 	menuItems.pushBack(closeButton);
+	menuItems.pushBack(itemSetting);
 	menuItems.pushBack(settingButton);
 	auto myMenu = Menu::createWithArray(menuItems);
 	myMenu->setPosition(0, 0);

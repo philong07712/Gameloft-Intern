@@ -57,30 +57,34 @@ void SettingScene::addBackground() {
 void SettingScene::addMenu()
 {
 	// Add textField
-	auto textField = ui::TextField::create("Insert Name:", "Arial", 30);
+	auto textField = ui::TextField::create("Insert Name:", "fonts/MarkerFelt.ttf", 30);
 	textField->setMaxLengthEnabled(true);
 	textField->setMaxLength(20);
 	textField->setColor(blackColor);
 	textField->setPosition(Vec2(width, height + 200));
 	addChild(textField, 3);
 	// create settingFont
-	auto label = Label::create("SETTING", "Arial", 30);
+	auto label = Label::create("SETTING", "fonts/MarkerFelt.ttf", 50);
+	label->enableGlow(Color4B::YELLOW);
+	label->enableShadow();
 	auto settingLabel = MenuItemLabel::create(label, nullptr);
-	settingLabel->setPosition(width, height + 100);
+	settingLabel->setPosition(width, height + 300);
 	settingLabel->setColor(blackColor);
 	// create soundItem
-	auto soundItem = MenuItemFont::create("Sound", 
+	auto soundLabel = Label::create("Sound", "fonts/MarkerFelt.ttf", 30);
+	auto soundItem = MenuItemLabel::create(soundLabel,
 		[&](Ref* pSender) {
 		activeSound();
 	});
-	soundItem->setPosition(width, height);
+	soundItem->setPosition(width - 300, height);
 	soundItem->setColor(blackColor);
 	// create aboutItem
-	auto aboutItem = MenuItemFont::create("About", 
+	auto aboutLabel = Label::create("About", "fonts/MarkerFelt.ttf", 30);
+	auto aboutItem = MenuItemLabel::create(aboutLabel, 
 		[&](Ref* pSender) {
 		activeAbout();
 	});
-	aboutItem->setPosition(width, height - 50);
+	aboutItem->setPosition(width - 300, height - 50);
 	aboutItem->setColor(blackColor);
 	Vector<MenuItem*> menuItems;
 	menuItems.pushBack(settingLabel);
