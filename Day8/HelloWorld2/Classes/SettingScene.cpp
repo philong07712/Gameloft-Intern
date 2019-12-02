@@ -57,6 +57,7 @@ void SettingScene::addMenu()
 	// add returnItem
 	auto returnButton = ui::Button::create();
 	auto returnLabel = Label::create("RETURN", "fonts/MarkerFelt.ttf", 24);
+	returnLabel->setColor(Color3B(blackColor));
 	returnButton->setTitleLabel(returnLabel);
 	returnButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
 	{

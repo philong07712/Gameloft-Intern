@@ -35,10 +35,24 @@ void MainMenuScene::addMenu()
 	auto originSize = Director::getInstance()->getVisibleOrigin();
 	auto width = visibleSize.width / 2 + originSize.x;
 	auto height = visibleSize.height / 2 + originSize.y;
+	// add slide action
+	auto femaleSlide = Sprite::create("adventure_slide.png");
+	femaleSlide->setPosition(200, height + 200);
+	auto moveBy = MoveBy::create(1.5f, Vec2(600, 0));
+	auto sequenceSlide = Sequence::create(moveBy, moveBy->reverse(), nullptr);
+	femaleSlide->runAction(RepeatForever::create(sequenceSlide));
+	addChild(femaleSlide, 3);
+	// add fall action
+	auto maleFall = Sprite::create("adventure_fall.png");
+	maleFall->setPosition(width + 200, height + 200);
+	auto moveByFall = MoveBy::create(1.5f, Vec2(0, -500));
+	auto sequenceFall = Sequence::create(moveByFall, moveByFall->reverse(), nullptr);
+	maleFall->runAction(RepeatForever::create(sequenceFall));
+	addChild(maleFall, 3);
 	// Init color variable
 	auto colorBlack = cocos2d::Color3B(10, 10, 10);
 	// create Menu label
-	auto label = Label::create("MENU", "fonts/MarkerFelt.ttf", 30);
+	auto label = Label::create("MENU", "fonts/MarkerFelt.ttf", 50);
 	auto endItem = MenuItemLabel::create(label, nullptr);
 	endItem->setPosition(width, height + 100);
 	endItem->setColor(colorBlack);
