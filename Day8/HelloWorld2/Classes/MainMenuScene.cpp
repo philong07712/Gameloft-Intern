@@ -58,7 +58,11 @@ void MainMenuScene::addMenu()
 	endItem->setColor(colorBlack);
 	// create itemPlay
 	auto playLabel = Label::create("PLAY", "fonts/MarkerFelt.ttf", 25);
-	auto itemPlay = MenuItemLabel::create(playLabel, nullptr);
+	auto itemPlay = MenuItemLabel::create(playLabel,
+		[&](Ref* pSender) {
+		auto myScene = LogoScene::createScene();
+		Director::getInstance()->replaceScene(TransitionFade::create(2.0f, myScene));
+	});
 	itemPlay->setPosition(width, height);
 	itemPlay->setColor(colorBlack);
 	// create itemExit

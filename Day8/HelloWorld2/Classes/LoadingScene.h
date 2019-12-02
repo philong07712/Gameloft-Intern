@@ -11,6 +11,7 @@ public:
 	virtual bool init(); 
 	void background();
 	void update(float deltaTime);
+	void addLoading();
 	CREATE_FUNC(LoadingScene);
 };
 #endif // __LOADING_SCENE_H__
