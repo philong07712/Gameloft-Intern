@@ -15,10 +15,10 @@ cocos2d::Color3B blackColor;
 
 // soundItems
 bool soundMenu;
-cocos2d::ui::CheckBox* checkBox;
+cocos2d::ui::Layout* soundLayout;
 
 // aboutItems
-cocos2d::ui::ScrollView* scrollView;
+cocos2d::ui::Layout* aboutLayout;
 bool aboutMenu;
 
 bool SettingScene::init()
@@ -36,10 +36,8 @@ bool SettingScene::init()
 	height = Director::getInstance()->getVisibleSize().height / 2 + originalSize.y;
 	// create soundItem
 	createSound();
-	addChild(checkBox, 3);
 	// create scrollView
 	createAbout();
-	addChild(scrollView, 3);
 	// add background
 	addBackground();
 	SettingScene::addMenu();
@@ -84,7 +82,7 @@ void SettingScene::addMenu()
 		[&](Ref* pSender) {
 		activeAbout();
 	});
-	aboutItem->setPosition(width - 300, height - 50);
+	aboutItem->setPosition(width - 300, height - 200);
 	aboutItem->setColor(blackColor);
 	Vector<MenuItem*> menuItems;
 	menuItems.pushBack(settingLabel);
@@ -98,42 +96,64 @@ void SettingScene::addMenu()
 
 void SettingScene::activeSound() {
 	if (soundMenu == false) {
-		checkBox->setOpacity(100);
+		soundLayout->setVisible(true);
 		soundMenu = true;
 	}
 	else {
-		checkBox->setOpacity(0);
+		soundLayout->setVisible(false);
 		soundMenu = false;
 	}
 }
 
 void SettingScene::createSound() {
-	checkBox = ui::CheckBox::create("unselected_checkbox.png", "selected_checkbox.png");
-	checkBox->setPosition(Vec2(width + 200, height));
-	checkBox->setOpacity(0);
+	soundLayout = ui::Layout::create();
+	soundLayout->setPosition(Vec2(width - 100, height));
+	soundLayout->setContentSize(Size(200, 50));
+	soundLayout->setAnchorPoint(Vec2(0, 1));
+	// create checkBox
+	auto checkBox = ui::CheckBox::create("unselected_checkbox.png", "selected_checkbox.png");
+	checkBox->setPosition(Vec2(300, 50));
+	// create slider
+	auto slider = ui::Slider::create();
+	slider->loadBarTexture("slider_bar_bg.png");
+	slider->loadSlidBallTextures("slider_ball_normal.png", "slider_ball_pressed.png", "slider_ball_disable.png");
+	slider->loadProgressBarTexture("slider_bar_pressed.png");
+	slider->setPercent(10);
+	slider->setPosition(Vec2(100, 50));
+	soundLayout->addChild(slider, 1);
+	soundLayout->addChild(checkBox, 1);
+	soundLayout->setVisible(false);
+	addChild(soundLayout, 3);
 }
 
 void SettingScene::createAbout() {
-	scrollView = ui::ScrollView::create();
+	// init aboutLayout
+	aboutLayout = ui::Layout::create();
+	aboutLayout->setVisible(false);
+	aboutLayout->setContentSize(Size(300, 300));
+	aboutLayout->setPosition(Vec2(width - 100, height + 50));
+	aboutLayout->setAnchorPoint(Vec2(0, 1));
+
+	auto scrollView = ui::ScrollView::create();
 	scrollView->setDirection(ui::ScrollView::Direction::VERTICAL);
 	scrollView->setContentSize(Size(200, 200));
 	scrollView->setBounceEnabled(true);
-	scrollView->setPosition(Vec2(width - 100, height - 300));
 	// Add information about the game
 	auto label = Label::createWithSystemFont("Game information", "Arial", 24);
 	label->setPosition(Vec2(scrollView->getContentSize().width / 2, 50));
 	label->setColor(blackColor);
 	scrollView->addChild(label);
-	scrollView->setOpacity(0);
+	aboutLayout->addChild(scrollView);
+	addChild(aboutLayout, 3);
 }
 
 void SettingScene::activeAbout() {
 	if (aboutMenu == false) {
-		scrollView->setOpacity(100);
+		aboutLayout->setVisible(true);
 		aboutMenu = true;
 	}
 	else {
-		scrollView->setOpacity(0);
+		aboutLayout->setVisible(false);
 		aboutMenu = false;
 	}
 }
