@@ -11,7 +11,6 @@ Scene * SettingScene::createScene()
 cocos2d::Vec2 originalSize;
 float width;
 float height;
-cocos2d::Color3B blackColor;
 
 // soundItems
 bool soundMenu;
@@ -28,7 +27,6 @@ bool SettingScene::init()
 		return false;
 	}
 	scheduleUpdate();
-	blackColor = cocos2d::Color3B(10, 10, 10);
 	originalSize = Director::getInstance()->getVisibleOrigin();
 	soundMenu = false;
 	aboutMenu = false;
@@ -45,7 +43,7 @@ bool SettingScene::init()
 }
 
 void SettingScene::addBackground() {
-	auto backgroundSprite = Sprite::create("backgroundColorDesert.png");
+	auto backgroundSprite = Sprite::create("background.png");
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto originSize = Director::getInstance()->getVisibleOrigin();
 	backgroundSprite->setPosition(Point(visibleSize.width / 2 + originSize.x, visibleSize.height / 2 + originSize.y));
@@ -57,7 +55,6 @@ void SettingScene::addMenu()
 	// add returnItem
 	auto returnButton = ui::Button::create();
 	auto returnLabel = Label::create("RETURN", "fonts/MarkerFelt.ttf", 24);
-	returnLabel->setColor(Color3B(blackColor));
 	returnButton->setTitleLabel(returnLabel);
 	returnButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
 	{
@@ -70,7 +67,6 @@ void SettingScene::addMenu()
 	auto textField = ui::TextField::create("Insert Name:", "fonts/MarkerFelt.ttf", 30);
 	textField->setMaxLengthEnabled(true);
 	textField->setMaxLength(20);
-	textField->setColor(blackColor);
 	textField->setPosition(Vec2(width, height + 200));
 	addChild(textField, 3);
 	// create settingFont
@@ -79,23 +75,21 @@ void SettingScene::addMenu()
 	label->enableShadow();
 	auto settingLabel = MenuItemLabel::create(label, nullptr);
 	settingLabel->setPosition(width, height + 300);
-	settingLabel->setColor(blackColor);
 	// create soundItem
 	auto soundLabel = Label::create("Sound", "fonts/MarkerFelt.ttf", 30);
 	auto soundItem = MenuItemLabel::create(soundLabel,
 		[&](Ref* pSender) {
 		activeSound();
 	});
-	soundItem->setPosition(width - 300, height);
-	soundItem->setColor(blackColor);
+	soundItem->setPosition(width - 150, height);
 	// create aboutItem
 	auto aboutLabel = Label::create("About", "fonts/MarkerFelt.ttf", 30);
 	auto aboutItem = MenuItemLabel::create(aboutLabel, 
 		[&](Ref* pSender) {
 		activeAbout();
 	});
-	aboutItem->setPosition(width - 300, height - 200);
-	aboutItem->setColor(blackColor);
+	aboutItem->setPosition(width - 150, height - 100);
+
 	Vector<MenuItem*> menuItems;
 	menuItems.pushBack(settingLabel);
 	menuItems.pushBack(soundItem);
@@ -154,10 +148,8 @@ void SettingScene::createAbout() {
 	auto inSize = Vec2(scrollView->getContentSize().width / 2, 50);
 	auto label = Label::createWithSystemFont("Game information: ", "Arial", 15);
 	label->setPosition(inSize);
-	label->setColor(blackColor);
 	auto label1 = Label::createWithSystemFont("Author: Hung", "Arial", 15);
 	label1->setPosition(Vec2(scrollView->getContentSize().width / 2, 50 + 30));
-	label1->setColor(blackColor);
 	scrollView->addChild(label);
 	scrollView->addChild(label1);
 	aboutLayout->addChild(scrollView);

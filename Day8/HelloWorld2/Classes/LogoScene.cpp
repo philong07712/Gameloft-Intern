@@ -69,7 +69,7 @@ void LogoScene::update(float deltaTime)
 }
 
 void LogoScene::addBackground() {
-	auto background = Sprite::create("backgroundColorFall.png");
+	auto background = Sprite::create("background.png");
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto originSize = Director::getInstance()->getVisibleOrigin();
 	background->setPosition(Point(visibleSize.width / 2 + originSize.x, visibleSize.height / 2 + originSize.y));

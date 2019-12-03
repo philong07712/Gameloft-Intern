@@ -51,7 +51,7 @@ void LoadingScene::background() {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto originSize = Director::getInstance()->getVisibleOrigin();
 
-	auto backgroundSprite = Sprite::create("backgroundColorForest.png");
+	auto backgroundSprite = Sprite::create("background.png");
 	backgroundSprite->setPosition(Point(visibleSize.width / 2 + originSize.x, visibleSize.height / 2 + originSize.y));
 	addChild(backgroundSprite);
 }

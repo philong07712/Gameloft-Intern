@@ -21,7 +21,7 @@ bool MainMenuScene::init()
 }
 
 void MainMenuScene::addBackground() {
-	auto backgroundSprite = Sprite::create("backgroundCastles.png");
+	auto backgroundSprite = Sprite::create("background.png");
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto originSize = Director::getInstance()->getVisibleOrigin();
 	backgroundSprite->setPosition(Point(visibleSize.width / 2 + originSize.x, visibleSize.height / 2 + originSize.y));
@@ -50,12 +50,10 @@ void MainMenuScene::addMenu()
 	maleFall->runAction(RepeatForever::create(sequenceFall));
 	addChild(maleFall, 3);
 	// Init color variable
-	auto colorBlack = cocos2d::Color3B(10, 10, 10);
 	// create Menu label
 	auto label = Label::create("MENU", "fonts/MarkerFelt.ttf", 50);
 	auto endItem = MenuItemLabel::create(label, nullptr);
 	endItem->setPosition(width, height + 100);
-	endItem->setColor(colorBlack);
 	// create itemPlay
 	auto playLabel = Label::create("PLAY", "fonts/MarkerFelt.ttf", 25);
 	auto itemPlay = MenuItemLabel::create(playLabel,
@@ -64,21 +62,18 @@ void MainMenuScene::addMenu()
 		Director::getInstance()->replaceScene(TransitionFade::create(2.0f, myScene));
 	});
 	itemPlay->setPosition(width, height);
-	itemPlay->setColor(colorBlack);
 	// create itemExit
 	auto exitLabel = Label::create("EXIT", "fonts/MarkerFelt.ttf", 25);
 	auto itemExit = MenuItemLabel::create(exitLabel, CC_CALLBACK_1(MainMenuScene::menuCloseCallback, this));
 	itemExit->setPosition(width, height - 100);
-	itemExit->setColor(colorBlack);
 	// create settingButton
 	auto settingLabel = Label::create("SETTING", "fonts/MarkerFelt.ttf", 25);
 	auto itemSetting = MenuItemLabel::create(settingLabel,
 		[&](Ref* pSender) {
 		auto myScene = SettingScene::createScene();
-		Director::getInstance()->replaceScene(TransitionFade::create(2.0f, myScene));
+		Director::getInstance()->replaceScene(TransitionFade::create(0.5f, myScene));
 	});
 	itemSetting->setPosition(width, height - 50);
-	itemSetting->setColor(colorBlack);
 	// create closeButton
 	auto closeButton = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(MainMenuScene::menuCloseCallback, this));
 	closeButton->setPosition(width, height - 200);

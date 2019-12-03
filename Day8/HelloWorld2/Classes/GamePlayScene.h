@@ -8,10 +8,10 @@ class GamePlayScene : public cocos2d::Scene
 {
 public:
     static cocos2d::Scene* createScene();
-
     virtual bool init();
 	void update(float deltaTime);
 	void addShip();
+	void addBackGround();
 	void continueMoving();
 	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
 	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event);

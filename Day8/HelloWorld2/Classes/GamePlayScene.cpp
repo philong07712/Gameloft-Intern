@@ -24,6 +24,7 @@ bool GamePlayScene::init()
         return false;
     }
 	scheduleUpdate();
+	addBackGround();
 	addShip();
 	// Add touch listener
 	auto listener = EventListenerTouchOneByOne::create();
@@ -39,6 +40,16 @@ bool GamePlayScene::init()
 
     return true;
 }
+
+void GamePlayScene::addBackGround()
+{
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto originSize = Director::getInstance()->getVisibleOrigin();
+	auto backGround = Sprite::create("bg_for_game.png");
+	backGround->setPosition(Vec2(visibleSize.width / 2 + originSize.x, visibleSize.height / 2 + originSize.y));
+	addChild(backGround);
+}
+
 // Add the ship to the gameplay
 void GamePlayScene::addShip()
 {
@@ -107,10 +118,6 @@ void GamePlayScene::onKeyPressed(EventKeyboard::KeyCode keyCode, cocos2d::Event*
 			break;
 	}
 	isHolding = true;
-}
-
-void continueMoving() {
-
 }
 
 void GamePlayScene::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
