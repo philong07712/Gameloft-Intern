@@ -2,7 +2,7 @@
 # include "HelloWorldScene.h"
 # include "LoadingScene.h"
 # include "MainMenuScene.h"
-
+# include "GamePlayScene.h"
 Scene * MainMenuScene::createScene()
 {
 	return MainMenuScene::create();
@@ -87,7 +87,7 @@ void MainMenuScene::changeSetting(Ref* pSender)
 
 void MainMenuScene::changePlay(Ref* pSender)
 {
-	auto myScene = LoadingScene::createScene();
+	auto myScene = GamePlayScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(1.0f, myScene));
 }
 void MainMenuScene::update(float deltaTime)

@@ -6,8 +6,6 @@ USING_NS_CC;
 
 // Global variable
 cocos2d::Sprite* ship;
-bool isHolding;
-EventKeyboard::KeyCode key;
 
 Scene* GamePlayScene::createScene()
 {
@@ -89,7 +87,6 @@ void GamePlayScene::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event)
 void GamePlayScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
 }
-
 //Keyboard move
 void GamePlayScene::onKeyPressed(EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
@@ -97,56 +94,58 @@ void GamePlayScene::onKeyPressed(EventKeyboard::KeyCode keyCode, cocos2d::Event*
 	auto moveRight = MoveBy::create(0.1f, Vec2(30, 0));
 	switch (keyCode) {
 		case EventKeyboard::KeyCode::KEY_UP_ARROW :
-			key = EventKeyboard::KeyCode::KEY_UP_ARROW;
-			event->getCurrentTarget()->runAction(moveUp);
+		{
+			auto repeatForever = RepeatForever::create(moveUp);
+			repeatForever->setTag(1);
+			event->getCurrentTarget()->runAction(repeatForever);
 			break;
+		}
 		case EventKeyboard::KeyCode::KEY_DOWN_ARROW :
-			key = EventKeyboard::KeyCode::KEY_DOWN_ARROW;
-			event->getCurrentTarget()->runAction(moveUp->reverse());
+		{
+			auto repeatForever = RepeatForever::create(moveUp->reverse());
+			repeatForever->setTag(2);
+			event->getCurrentTarget()->runAction(repeatForever);
 			break;
+		}
 		case EventKeyboard::KeyCode::KEY_RIGHT_ARROW :
-			key = EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
-			event->getCurrentTarget()->runAction(moveRight);
+		{
+			auto repeatForever = RepeatForever::create(moveRight);
+			repeatForever->setTag(3);
+			event->getCurrentTarget()->runAction(repeatForever);
 			break;
+		}
 		case  EventKeyboard::KeyCode::KEY_LEFT_ARROW :
-			key = EventKeyboard::KeyCode::KEY_LEFT_ARROW;
-			event->getCurrentTarget()->runAction(moveRight->reverse());
+		{
+			auto repeatForever = RepeatForever::create(moveRight->reverse());
+			repeatForever->setTag(4);
+			event->getCurrentTarget()->runAction(repeatForever);
 			break;
+		}
 		default:
 			break;
 	}
-	isHolding = true;
 }
 
 void GamePlayScene::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-	isHolding = false;
-}
-
-void GamePlayScene::continueMoving() {
-	auto moveUp = MoveBy::create(0.1f, Vec2(0, 10));
-	auto moveRight = MoveBy::create(0.1f, Vec2(10, 0));
-	if (isHolding == true) {
-		switch (key) {
-		case EventKeyboard::KeyCode::KEY_UP_ARROW:
-			ship->runAction(moveUp);
-			break;
-		case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-			ship->runAction(moveUp->reverse());
-			break;
-		case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-			ship->runAction(moveRight);
-			break;
-		case  EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-			ship->runAction(moveRight->reverse());
-			break;
-		default:
-			break;
-		}
+	switch (keyCode) {
+	case EventKeyboard::KeyCode::KEY_UP_ARROW:
+		ship->stopActionByTag(1);
+		break;
+	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+		ship->stopActionByTag(2);
+		break;
+	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+		ship->stopActionByTag(3);
+		break;
+	case  EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+		ship->stopActionByTag(4);
+		break;
+	default:
+		break;
 	}
 }
 
 void GamePlayScene::update(float DeltaTime) {
-	continueMoving();
 }
 

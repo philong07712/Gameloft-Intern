@@ -122,7 +122,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-    auto scene = LogoScene::createScene();
+    auto scene = LoadingScene::createScene();
 
     // run
     director->runWithScene(scene);

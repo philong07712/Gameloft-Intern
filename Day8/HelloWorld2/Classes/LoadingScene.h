@@ -12,7 +12,7 @@ public:
 	void background();
 	void update(float deltaTime);
 	void addLoading();
-	void changeGamePlay(float dt);
+	void changeMainMenu(float dt);
 	CREATE_FUNC(LoadingScene);
 };
 #endif // __LOADING_SCENE_H__
