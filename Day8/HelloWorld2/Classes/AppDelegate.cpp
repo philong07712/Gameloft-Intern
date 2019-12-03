@@ -29,6 +29,7 @@
 #include "LoadingScene.h"
 #include "SettingScene.h"
 #include "GamePlayScene.h"
+#include "ResourceManager.h"
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
 
@@ -120,7 +121,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
 
     register_all_packages();
-
+	//ResourceManager::getInstance()->Init("C:\\Users\\OS\\Desktop\\Gameloft\\assets\\Resources");
     // create a scene. it's an autorelease object
     auto scene = LoadingScene::createScene();
 
