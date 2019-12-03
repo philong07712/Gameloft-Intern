@@ -31,6 +31,7 @@ void LoadingScene::background() {
 
 	auto backgroundSprite = Sprite::create("background.png");
 	backgroundSprite->setPosition(Point(visibleSize.width / 2 + originSize.x, visibleSize.height / 2 + originSize.y));
+	backgroundSprite->setScale(1.5f);
 	addChild(backgroundSprite, -1);
 }
 

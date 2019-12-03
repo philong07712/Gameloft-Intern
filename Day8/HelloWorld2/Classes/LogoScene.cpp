@@ -1,7 +1,7 @@
 ﻿# include "LogoScene.h"
 # include "HelloWorldScene.h"
 # include "LoadingScene.h"
-
+#include "MainMenuScene.h"
 // Global variable
 cocos2d::Size visibleSize;
 cocos2d::Vec2 originSize;
@@ -34,11 +34,12 @@ void LogoScene::addBackground() {
 	auto background = Sprite::create("bg_for_game.png");
 	background->setPosition(Point(visibleSize.width / 2 + originSize.x, visibleSize.height / 2 + originSize.y));
 	addChild(background, -1);
+	background->setScale(1.5f);
 }
 
 
 void LogoScene::changeLoading(float dt) {
-	auto myScene = LoadingScene::createScene();
+	auto myScene = MainMenuScene::createScene();
 	Director::getInstance()->replaceScene(
 		TransitionFade::create(0.5, myScene));
 }

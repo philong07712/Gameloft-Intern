@@ -53,15 +53,15 @@ void SettingScene::addBackground() {
 void SettingScene::addMenu()
 {
 	// add returnItem
-	auto returnButton = ui::Button::create();
-	auto returnLabel = Label::create("RETURN", "fonts/MarkerFelt.ttf", 24);
-	returnButton->setTitleLabel(returnLabel);
+	auto returnButton = ui::Button::create("icons/home_normal.png", "icons/home_pressed.png");
+	//auto returnLabel = Label::create("RETURN", "fonts/MarkerFelt.ttf", 24);
+	//returnButton->setTitleLabel(returnLabel);
 	returnButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
 	{
 		auto myScene = MainMenuScene::createScene();
 		Director::getInstance()->replaceScene(TransitionFade::create(0.5f, myScene));
 	});
-	returnButton->setPosition(Vec2(100, height * 2 - 50));
+	returnButton->setPosition(Vec2(50, height * 2 - 50));
 	addChild(returnButton, 3);
 	// Add textField
 	auto textField = ui::TextField::create("Insert Name:", "fonts/MarkerFelt.ttf", 30);

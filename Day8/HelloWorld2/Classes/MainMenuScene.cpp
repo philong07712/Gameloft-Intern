@@ -87,7 +87,7 @@ void MainMenuScene::changeSetting(Ref* pSender)
 
 void MainMenuScene::changePlay(Ref* pSender)
 {
-	auto myScene = LogoScene::createScene();
+	auto myScene = LoadingScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(1.0f, myScene));
 }
 void MainMenuScene::update(float deltaTime)

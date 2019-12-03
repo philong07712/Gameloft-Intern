@@ -47,6 +47,7 @@ void GamePlayScene::addBackGround()
 	auto originSize = Director::getInstance()->getVisibleOrigin();
 	auto backGround = Sprite::create("bg_for_game.png");
 	backGround->setPosition(Vec2(visibleSize.width / 2 + originSize.x, visibleSize.height / 2 + originSize.y));
+	backGround->setScale(1.5f);
 	addChild(backGround);
 }
 
@@ -75,21 +76,18 @@ void GamePlayScene::addShip()
 // Touch move
 bool GamePlayScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-	auto moveBy = MoveBy::create(2.0f, Vec2(200, 0));
-	ship->runAction(moveBy);
+	auto mousePos = touch->getLocation();
+	auto moveTo = MoveTo::create(0.3f, mousePos);
+	ship->runAction(moveTo);
 	return true;
 }
 
 void GamePlayScene::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-	auto moveBy = MoveBy::create(2.0f, Vec2(100, 100));
-	ship->runAction(moveBy);
 }
 
 void GamePlayScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-	auto moveBy = MoveBy::create(2.0f, Vec2(0, 300));
-	ship->runAction(moveBy);
 }
 
 //Keyboard move
