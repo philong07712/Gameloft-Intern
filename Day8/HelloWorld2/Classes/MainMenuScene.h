@@ -15,6 +15,7 @@ public:
 	void addBackground();
 	void addMenu();
 	void changeSetting(Ref* pSender);
+	void changePlay(Ref* pSender);
 	void menuCloseCallback(Ref* pSender);
 	CREATE_FUNC(MainMenuScene);
 };

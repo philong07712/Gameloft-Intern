@@ -40,30 +40,32 @@ void MainMenuScene::addMenu()
 	logo->setPosition(Vec2(width, height + 200));
 	addChild(logo);
 	// create itemPlay
-	auto playLabel = Label::create("PLAY", "fonts/MarkerFelt.ttf", 25);
-	auto itemPlay = MenuItemLabel::create(playLabel,
-		[&](Ref* pSender) {
-		auto myScene = LogoScene::createScene();
-		Director::getInstance()->replaceScene(TransitionFade::create(2.0f, myScene));
-	});
+	auto playLabel = Label::create("PLAY", "fonts/MarkerFelt.ttf", 40);
+	auto itemPlay = MenuItemLabel::create(playLabel, CC_CALLBACK_1(MainMenuScene::changePlay, this));
 	itemPlay->setPosition(width, height);
-	// create itemExit
-	auto exitLabel = Label::create("EXIT", "fonts/MarkerFelt.ttf", 25);
-	auto itemExit = MenuItemLabel::create(exitLabel, CC_CALLBACK_1(MainMenuScene::menuCloseCallback, this));
-	itemExit->setPosition(width, height - 100);
+	// create playButton
+	auto playButton = MenuItemImage::create("icons/play_normal.png", "icons/play_pressed.png", CC_CALLBACK_1(MainMenuScene::changePlay, this));
+	playButton->setPosition(itemPlay->getPosition().x - 125, itemPlay->getPosition().y);
+	playButton->setScale(0.5f);
 	// create settingButton
-	auto settingLabel = Label::create("SETTING", "fonts/MarkerFelt.ttf", 25);
+	auto settingLabel = Label::create("SETTING", "fonts/MarkerFelt.ttf", 40);
 	auto itemSetting = MenuItemLabel::create(settingLabel, CC_CALLBACK_1(MainMenuScene::changeSetting, this));
-	itemSetting->setPosition(width, height - 50);
-	// create closeButton
-	auto closeButton = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(MainMenuScene::menuCloseCallback, this));
-	closeButton->setPosition(width, height - 200);
+	itemSetting->setPosition(itemPlay->getPosition().x, itemPlay->getPosition().y - 100);
 	// create settingButton
 	auto settingButton = MenuItemImage::create("setting_normal.png", "setting_pressed.png", CC_CALLBACK_1(MainMenuScene::changeSetting, this));
-	settingButton->setPosition(width - 100, height - 50);
+	settingButton->setPosition(itemSetting->getPosition().x - 125, itemSetting->getPosition().y);
+	// create itemExit
+	auto exitLabel = Label::create("EXIT", "fonts/MarkerFelt.ttf", 40);
+	auto itemExit = MenuItemLabel::create(exitLabel, CC_CALLBACK_1(MainMenuScene::menuCloseCallback, this));
+	itemExit->setPosition(itemSetting->getPosition().x, itemSetting->getPosition().y - 100);
+	// create closeButton
+	auto closeButton = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(MainMenuScene::menuCloseCallback, this));
+	closeButton->setPosition(itemExit->getPosition().x - 125, itemExit->getPosition().y);
+	closeButton->setScale(1.75f);
 	// create Menu
 	Vector<MenuItem*> menuItems;
 	menuItems.pushBack(itemPlay);
+	menuItems.pushBack(playButton);
 	menuItems.pushBack(itemExit);
 	menuItems.pushBack(closeButton);
 	menuItems.pushBack(itemSetting);
@@ -83,6 +85,11 @@ void MainMenuScene::changeSetting(Ref* pSender)
 	Director::getInstance()->replaceScene(TransitionFade::create(0.5f, myScene));
 }
 
+void MainMenuScene::changePlay(Ref* pSender)
+{
+	auto myScene = LogoScene::createScene();
+	Director::getInstance()->replaceScene(TransitionFade::create(1.0f, myScene));
+}
 void MainMenuScene::update(float deltaTime)
 {
 
