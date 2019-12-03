@@ -14,6 +14,7 @@ public:
 	void update(float deltaTime);
 	void addBackground();
 	void addMenu();
+	void changeSetting(Ref* pSender);
 	void menuCloseCallback(Ref* pSender);
 	CREATE_FUNC(MainMenuScene);
 };

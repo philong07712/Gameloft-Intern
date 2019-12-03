@@ -25,7 +25,7 @@ void MainMenuScene::addBackground() {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto originSize = Director::getInstance()->getVisibleOrigin();
 	backgroundSprite->setPosition(Point(visibleSize.width / 2 + originSize.x, visibleSize.height / 2 + originSize.y));
-	addChild(backgroundSprite, 1);
+	addChild(backgroundSprite, -1);
 }
 
 void MainMenuScene::addMenu()
@@ -35,25 +35,10 @@ void MainMenuScene::addMenu()
 	auto originSize = Director::getInstance()->getVisibleOrigin();
 	auto width = visibleSize.width / 2 + originSize.x;
 	auto height = visibleSize.height / 2 + originSize.y;
-	// add slide action
-	auto femaleSlide = Sprite::create("adventure_slide.png");
-	femaleSlide->setPosition(200, height + 200);
-	auto moveBy = MoveBy::create(1.5f, Vec2(600, 0));
-	auto sequenceSlide = Sequence::create(moveBy, moveBy->reverse(), nullptr);
-	femaleSlide->runAction(RepeatForever::create(sequenceSlide));
-	addChild(femaleSlide, 3);
-	// add fall action
-	auto maleFall = Sprite::create("adventure_fall.png");
-	maleFall->setPosition(width + 200, height + 200);
-	auto moveByFall = MoveBy::create(1.5f, Vec2(0, -500));
-	auto sequenceFall = Sequence::create(moveByFall, moveByFall->reverse(), nullptr);
-	maleFall->runAction(RepeatForever::create(sequenceFall));
-	addChild(maleFall, 3);
-	// Init color variable
-	// create Menu label
-	auto label = Label::create("MENU", "fonts/MarkerFelt.ttf", 50);
-	auto endItem = MenuItemLabel::create(label, nullptr);
-	endItem->setPosition(width, height + 100);
+	// addLogo
+	auto logo = Sprite::create("logo.png");
+	logo->setPosition(Vec2(width, height + 200));
+	addChild(logo);
 	// create itemPlay
 	auto playLabel = Label::create("PLAY", "fonts/MarkerFelt.ttf", 25);
 	auto itemPlay = MenuItemLabel::create(playLabel,
@@ -68,21 +53,16 @@ void MainMenuScene::addMenu()
 	itemExit->setPosition(width, height - 100);
 	// create settingButton
 	auto settingLabel = Label::create("SETTING", "fonts/MarkerFelt.ttf", 25);
-	auto itemSetting = MenuItemLabel::create(settingLabel,
-		[&](Ref* pSender) {
-		auto myScene = SettingScene::createScene();
-		Director::getInstance()->replaceScene(TransitionFade::create(0.5f, myScene));
-	});
+	auto itemSetting = MenuItemLabel::create(settingLabel, CC_CALLBACK_1(MainMenuScene::changeSetting, this));
 	itemSetting->setPosition(width, height - 50);
 	// create closeButton
 	auto closeButton = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(MainMenuScene::menuCloseCallback, this));
 	closeButton->setPosition(width, height - 200);
 	// create settingButton
-	auto settingButton = MenuItemImage::create("setting_normal.png", "setting_pressed.png");
+	auto settingButton = MenuItemImage::create("setting_normal.png", "setting_pressed.png", CC_CALLBACK_1(MainMenuScene::changeSetting, this));
 	settingButton->setPosition(width - 100, height - 50);
 	// create Menu
 	Vector<MenuItem*> menuItems;
-	menuItems.pushBack(endItem);
 	menuItems.pushBack(itemPlay);
 	menuItems.pushBack(itemExit);
 	menuItems.pushBack(closeButton);
@@ -95,6 +75,12 @@ void MainMenuScene::addMenu()
 
 void MainMenuScene::menuCloseCallback(Ref* pSender) {
 	exit(0);
+}
+
+void MainMenuScene::changeSetting(Ref* pSender)
+{
+	auto myScene = SettingScene::createScene();
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5f, myScene));
 }
 
 void MainMenuScene::update(float deltaTime)

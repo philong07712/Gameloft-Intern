@@ -59,7 +59,7 @@ void SettingScene::addMenu()
 	returnButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
 	{
 		auto myScene = MainMenuScene::createScene();
-		Director::getInstance()->replaceScene(TransitionFade::create(2.0f, myScene));
+		Director::getInstance()->replaceScene(TransitionFade::create(0.5f, myScene));
 	});
 	returnButton->setPosition(Vec2(100, height * 2 - 50));
 	addChild(returnButton, 3);
@@ -117,8 +117,8 @@ void SettingScene::createSound() {
 	soundLayout->setContentSize(Size(200, 50));
 	soundLayout->setAnchorPoint(Vec2(0, 1));
 	// create checkBox
-	auto checkBox = ui::CheckBox::create("unselected_checkbox.png", "selected_checkbox.png");
-	checkBox->setPosition(Vec2(300, 50));
+	auto checkBox = ui::CheckBox::create("icons/checkbox_normal.png", "icons/checkbox_checked.png");
+	checkBox->setPosition(Vec2(250, 50));
 	// create slider
 	auto slider = ui::Slider::create();
 	slider->loadBarTexture("slider_bar_bg.png");
