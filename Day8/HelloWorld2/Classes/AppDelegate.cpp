@@ -26,6 +26,7 @@
 #include "HelloWorldScene.h"
 #include "LogoScene.h"
 #include "MainMenuScene.h"
+#include "LoadingScene.h"
 #include "SettingScene.h"
 #include "GamePlayScene.h"
 // #define USE_AUDIO_ENGINE 1

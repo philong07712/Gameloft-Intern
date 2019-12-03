@@ -12,6 +12,7 @@ public:
 	void update(float deltaTime);
 	void changeScene();
 	void addBackground();
+	void addLogo();
 	void changeLoading(float dt);
 	CREATE_FUNC(LogoScene);
 };
