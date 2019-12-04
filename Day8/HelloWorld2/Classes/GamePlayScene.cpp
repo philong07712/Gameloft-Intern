@@ -130,6 +130,8 @@ void GamePlayScene::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event
 	}
 }
 
-void GamePlayScene::update(float DeltaTime) {
+void GamePlayScene::update(float DeltaTime) 
+{
+	ship->Update(DeltaTime);
 }
 

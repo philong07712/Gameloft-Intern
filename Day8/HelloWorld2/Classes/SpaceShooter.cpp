@@ -1,8 +1,20 @@
 ﻿# include "SpaceShooter.h"
+# include "Bullet.h"
 using namespace std;
 
 SpaceShooter::SpaceShooter(cocos2d::Scene* scene)
 {
+	// create the bullet
+	for (int i = 0; i < 20; i++)
+	{
+		Bullet *bullet = new Bullet(scene);
+		this->m_bullets.push_back(bullet);
+		scene->addChild(bullet->getSprite());
+		bullet->getSprite()->setVisible(false);
+		bullet->getSprite()->setPosition(i * 20, 0);
+	}
+
+	// create the spaceShip
 	auto ship = cocos2d::Sprite::create();
 	auto spriteCache = cocos2d::SpriteFrameCache::getInstance();
 	spriteCache->addSpriteFramesWithFile("Sprites\\SpaceShip\\ship.plist", "Sprites\\SpaceShip\\ship.png");
@@ -28,13 +40,26 @@ SpaceShooter::~SpaceShooter()
 void SpaceShooter::Init()
 {
 }
-
+static int a = 0;
 void SpaceShooter::Update(float dt)
 {
+	auto moveBy = MoveBy::create(10.0f, Vec2(0, 20));
+	auto sequence = Sequence::create(moveBy, moveBy->reverse(), nullptr);
+	for (int i = 0; i < 20; i++)
+	{
+		auto bullet = this->m_bullets[i]->getSprite();
+		bullet->runAction(RepeatForever::create(sequence->clone()));
+		bullet->setVisible(true);
+		if (bullet->getPosition().y > 1000)
+		{
+			bullet->setPosition(bullet->getPosition().x, 0);
+		}
+	}
 }
 
 void SpaceShooter::Shoot()
-{
+{ 
+
 }
 
 void SpaceShooter::Collision(vector<Rock*> rock)

@@ -5,6 +5,7 @@
 #include "PlayObject.h"
 #include "Rock.h"
 using namespace std;
+USING_NS_CC;
 class SpaceShooter : public PlayObject {
 	vector<PlayObject*> m_bullets;
 public:

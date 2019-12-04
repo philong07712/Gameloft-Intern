@@ -31,7 +31,7 @@ void LoadingScene::changeMainMenu(float dt)
 void LoadingScene::background() {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto originSize = Director::getInstance()->getVisibleOrigin();
-	auto backgroundSprite = ResourceManager::getInstance()->GetSpriteById('0');
+	auto backgroundSprite = ResourceManager::getInstance()->GetSpriteById(0);
 	//auto backgroundSprite = Sprite::create("background.png");
 	backgroundSprite->setPosition(Point(visibleSize.width / 2 + originSize.x, visibleSize.height / 2 + originSize.y));
 	backgroundSprite->setScale(1.5f);

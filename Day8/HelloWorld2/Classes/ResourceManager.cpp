@@ -45,8 +45,9 @@ void ResourceManager::Load(std::string fileName)
 			std::istringstream pathLine(line);
 			pathLine >> text >> idPath;
 			// convert stringId to int
+			int id = stoi(number);
 			auto sprite = Sprite::create(idPath);
-			this->m_sprites.insert(number[0], sprite);
+			this->m_sprites.insert(id, sprite);
 		}
 	}
 	if (text == "#BUTTON") {
@@ -64,9 +65,10 @@ void ResourceManager::Load(std::string fileName)
 			std::getline(ss, line, '\n');
 			std::istringstream pathLine2(line);
 			pathLine2 >> text >> idPath2;
+			int id = stoi(number);
 			// convert stringId to int
 			auto button = ui::Button::create(idPath1, idPath2);
-			this->m_buttons.insert(number[0], button);
+			this->m_buttons.insert(id, button);
 		}
 	}
 
@@ -82,23 +84,24 @@ void ResourceManager::Load(std::string fileName)
 			std::istringstream pathLine1(line);
 			pathLine1 >> text >> idPath1;
 			// convert stringId to int
+			int id = stoi(number);
 			auto label = Label::create("Hello", idPath, 24);
-			this->m_labels.insert(number[0], label);
+			this->m_labels.insert(id, label);
 		}
 	}
 }
 
-Sprite * ResourceManager::GetSpriteById(char id)
+Sprite * ResourceManager::GetSpriteById(int id)
 {
 	return this->m_sprites.at(id);
 }
 
-ui::Button * ResourceManager::GetButtonById(char id)
+ui::Button * ResourceManager::GetButtonById(int id)
 {
 	return this->m_buttons.at(id);
 }
 
-Label * ResourceManager::GetLabelById(char id)
+Label * ResourceManager::GetLabelById(int id)
 {
 	return this->m_labels.at(id);
 }
