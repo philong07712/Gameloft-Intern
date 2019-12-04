@@ -2,6 +2,7 @@
 # include "HelloWorldScene.h"
 # include "LoadingScene.h"
 #include "MainMenuScene.h"
+#include "ResourceManager.h"
 // Global variable
 cocos2d::Size visibleSize;
 cocos2d::Vec2 originSize;

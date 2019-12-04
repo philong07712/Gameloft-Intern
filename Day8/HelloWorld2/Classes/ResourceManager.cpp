@@ -25,62 +25,85 @@ void ResourceManager::Load(std::string fileName)
 	if (isExist) {
 		content = FileUtils::getInstance()->getStringFromFile(fileName);
 	}
-
-	std::string spriteString = "SPRITE ";
-	std::string buttonString = "BUTTON ";
-	std::string fontString = "FONT ";
-	size_t findSprite = content.find(spriteString);
-	size_t findFont = content.find(fontString);
-	size_t findButton = content.find(buttonString);
-	// Size
-
-	int sizeSprite = content[findSprite + spriteString.size() + 1] - '0';
-	int sizeButton = content[findButton + buttonString.size() + 1] - '0';
-	int sizeFont = content[findFont + fontString.size() + 1] - '0';
-
 	std::stringstream ss(content);
 	std::string line;
-	int size;
-	while (std::getline(ss, line, '#'))
-	{
-		if (line.find(spriteString) != std::string::npos)
-		{
-			size = line[spriteString.size()] - '0'; 
-			std::stringstream ssLine(line);
-			std::string miniLine;
-			//while (std::getline(ssLine, miniLine, ))
-			//{
+	std::string text, numberLine, idPath;
 
-			//}
+	getline(ss, line, '\n');
+	std::istringstream is(line);
+	is >> text >> numberLine;
+	int size = std::stoi(numberLine);
+	if (text == "#SPRITE") {
+		for (int i = 0; i < size; i++) {
+			// get the ID line
+			getline(ss, line, '\n');
+			std::string number, idPath;
+			std::istringstream idLine(line);
+			idLine >> text >> number;
+			// get PATH line
+			std::getline(ss, line, '\n');
+			std::istringstream pathLine(line);
+			pathLine >> text >> idPath;
+			// convert stringId to int
+			auto sprite = Sprite::create(idPath);
+			this->m_sprites.insert(number[0], sprite);
 		}
-		else if (line.find(buttonString) != std::string::npos)
-		{
-			size = line[buttonString.size()] - '0';
+	}
+	if (text == "#BUTTON") {
+		for (int i = 0; i < size; i++) {
+			// get the ID line
+			getline(ss, line, '\n');
+			std::string number, idPath1, idPath2;
+			std::istringstream idLine(line);
+			idLine >> text >> number;
+			// get PATH line
+			std::getline(ss, line, '\n');
+			std::istringstream pathLine1(line);
+			pathLine1 >> text >> idPath1;
+			// get PATH2 line
+			std::getline(ss, line, '\n');
+			std::istringstream pathLine2(line);
+			pathLine2 >> text >> idPath2;
+			// convert stringId to int
+			auto button = ui::Button::create(idPath1, idPath2);
+			this->m_buttons.insert(number[0], button);
 		}
-		if (line.find(fontString) != std::string::npos)
-		{
-			size = line[fontString.size()] - '0';
+	}
+
+	if (text == "#FONT") {
+		for (int i = 0; i < size; i++) {
+			// get the ID line
+			getline(ss, line, '\n');
+			std::string number, idPath1, idPath2;
+			std::istringstream idLine(line);
+			idLine >> text >> number;
+			// get PATH line
+			std::getline(ss, line, '\n');
+			std::istringstream pathLine1(line);
+			pathLine1 >> text >> idPath1;
+			// convert stringId to int
+			auto label = Label::create("Hello", idPath, 24);
+			this->m_labels.insert(number[0], label);
 		}
 	}
 }
 
 Sprite * ResourceManager::GetSpriteById(char id)
 {
-	return nullptr;
+	return this->m_sprites.at(id);
 }
 
 ui::Button * ResourceManager::GetButtonById(char id)
 {
-	return nullptr;
+	return this->m_buttons.at(id);
 }
 
 Label * ResourceManager::GetLabelById(char id)
 {
-	return nullptr;
+	return this->m_labels.at(id);
 }
 
 
 ResourceManager::~ResourceManager()
 {
-
 }

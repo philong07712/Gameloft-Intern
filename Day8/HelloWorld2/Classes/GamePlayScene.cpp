@@ -2,10 +2,11 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 #include "GamePlayScene.h"
+#include "SpaceShooter.h"
 USING_NS_CC;
 
 // Global variable
-cocos2d::Sprite* ship;
+SpaceShooter* ship;
 
 Scene* GamePlayScene::createScene()
 {
@@ -33,8 +34,8 @@ bool GamePlayScene::init()
 	auto listenerKeyBoard = EventListenerKeyboard::create();
 	listenerKeyBoard->onKeyPressed = CC_CALLBACK_2(GamePlayScene::onKeyPressed, this);
 	listenerKeyBoard->onKeyReleased = CC_CALLBACK_2(GamePlayScene::onKeyReleased, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, ship);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerKeyBoard, ship);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, ship->getSprite());
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerKeyBoard, ship->getSprite());
 
     return true;
 }
@@ -52,31 +53,14 @@ void GamePlayScene::addBackGround()
 // Add the ship to the gameplay
 void GamePlayScene::addShip()
 {
-	auto spriteCache = SpriteFrameCache::getInstance();
-	spriteCache->addSpriteFramesWithFile("ship.plist", "ship.png");
-	Vector<SpriteFrame*> shipFrames;
-	shipFrames.pushBack(spriteCache->getSpriteFrameByName("1.png"));
-	shipFrames.pushBack(spriteCache->getSpriteFrameByName("2.png"));
-	shipFrames.pushBack(spriteCache->getSpriteFrameByName("3.png"));
-	shipFrames.pushBack(spriteCache->getSpriteFrameByName("4.png"));
-	shipFrames.pushBack(spriteCache->getSpriteFrameByName("5.png"));
-	shipFrames.pushBack(spriteCache->getSpriteFrameByName("6.png"));
-	shipFrames.pushBack(spriteCache->getSpriteFrameByName("7.png"));
-	shipFrames.pushBack(spriteCache->getSpriteFrameByName("8.png"));
-	auto animation = Animation::createWithSpriteFrames(shipFrames, 0.1f);
-	auto animate = Animate::create(animation);
-
-	ship = Sprite::create();
-	addChild(ship);
-	ship->setPosition(200, 200);
-	ship->runAction(RepeatForever::create(animate));
+	ship = new SpaceShooter(this);
 }
 // Touch move
 bool GamePlayScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
 	auto mousePos = touch->getLocation();
 	auto moveTo = MoveTo::create(0.3f, mousePos);
-	ship->runAction(moveTo);
+	ship->getSprite()->runAction(moveTo);
 	return true;
 }
 
@@ -130,16 +114,16 @@ void GamePlayScene::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event
 {
 	switch (keyCode) {
 	case EventKeyboard::KeyCode::KEY_UP_ARROW:
-		ship->stopActionByTag(1);
+		ship->getSprite()->stopActionByTag(1);
 		break;
 	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-		ship->stopActionByTag(2);
+		ship->getSprite()->stopActionByTag(2);
 		break;
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		ship->stopActionByTag(3);
+		ship->getSprite()->stopActionByTag(3);
 		break;
 	case  EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-		ship->stopActionByTag(4);
+		ship->getSprite()->stopActionByTag(4);
 		break;
 	default:
 		break;

@@ -3,11 +3,13 @@
 #include "ui/CocosGUI.h"
 #include "cocos2d.h"
 
-class Object {
+class PlayObject {
 	cocos2d::Sprite* m_sprite;
 public:
-	Object();
-	~Object();
+	cocos2d::Sprite* getSprite();
+	void setSprite(cocos2d::Sprite* sprite);
+	PlayObject();
+	~PlayObject();
 	virtual void Init() = 0;
 	virtual void Update(float dt) = 0;
 };

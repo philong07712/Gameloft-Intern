@@ -2,6 +2,7 @@
 # include "HelloWorldScene.h"
 # include "GamePlayScene.h"
 # include "MainMenuScene.h"
+# include "ResourceManager.h"
 Scene * LoadingScene::createScene()
 {
 	return LoadingScene::create();
@@ -15,6 +16,7 @@ bool LoadingScene::init()
 	}
 	scheduleUpdate();
 	addLoading();
+	background();
 	// Change to GamePlayScene
 	this->schedule(schedule_selector(LoadingScene::changeMainMenu), 3.0f);
 	return true;
@@ -29,8 +31,8 @@ void LoadingScene::changeMainMenu(float dt)
 void LoadingScene::background() {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto originSize = Director::getInstance()->getVisibleOrigin();
-
-	auto backgroundSprite = Sprite::create("background.png");
+	auto backgroundSprite = ResourceManager::getInstance()->GetSpriteById('0');
+	//auto backgroundSprite = Sprite::create("background.png");
 	backgroundSprite->setPosition(Point(visibleSize.width / 2 + originSize.x, visibleSize.height / 2 + originSize.y));
 	backgroundSprite->setScale(1.5f);
 	addChild(backgroundSprite, -1);
