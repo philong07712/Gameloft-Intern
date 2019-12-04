@@ -11,7 +11,6 @@ SpaceShooter::SpaceShooter(cocos2d::Scene* scene)
 		this->m_bullets.push_back(bullet);
 		scene->addChild(bullet->getSprite());
 		bullet->getSprite()->setVisible(false);
-		bullet->getSprite()->setPosition(i * 20, 0);
 	}
 
 	// create the spaceShip
@@ -40,19 +39,27 @@ SpaceShooter::~SpaceShooter()
 void SpaceShooter::Init()
 {
 }
-static int a = 0;
+static float a = 0;
 void SpaceShooter::Update(float dt)
 {
-	auto moveBy = MoveBy::create(10.0f, Vec2(0, 20));
-	auto sequence = Sequence::create(moveBy, moveBy->reverse(), nullptr);
+	a += dt;
+	auto moveBy = MoveBy::create(2.0f, Vec2(0, 1100));
+	auto sequence = Sequence::create(moveBy, nullptr);
 	for (int i = 0; i < 20; i++)
 	{
 		auto bullet = this->m_bullets[i]->getSprite();
-		bullet->runAction(RepeatForever::create(sequence->clone()));
-		bullet->setVisible(true);
+		if (!bullet->isVisible() && a > dt * 15) {
+			bullet->setVisible(true);
+			bullet->setPosition(this->getSprite()->getPosition().x, this->getSprite()->getPosition().y);
+			bullet->runAction(sequence->clone());
+			a = 0;
+			break;
+		}
 		if (bullet->getPosition().y > 1000)
 		{
-			bullet->setPosition(bullet->getPosition().x, 0);
+			bullet->stopAllActions();
+			bullet->setVisible(false);
+			bullet->setPosition(this->getSprite()->getPosition().x, this->getSprite()->getPosition().y);
 		}
 	}
 }
