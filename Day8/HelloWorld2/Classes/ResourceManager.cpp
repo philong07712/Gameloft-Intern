@@ -1,7 +1,7 @@
 ﻿# include "ResourceManager.h"
+ResourceManager* ResourceManager::s_instance;
 ResourceManager::ResourceManager()
 {
-	//FileUtils::setWritablePath("D:\GameloftIntern\Day8\HelloWorld2\Resources");
 }
 
 ResourceManager* ResourceManager::getInstance()
@@ -12,15 +12,25 @@ ResourceManager* ResourceManager::getInstance()
 	return s_instance;
 }
 
-void ResourceManager::Init(const String path)
+void ResourceManager::Init(const std::string path)
 {
 	m_dataFolderPath = path;
-	//char* name = (char*)FileUtils::getInstance()->getFileData(path);
+	Load("Data.bin");
 }
 
-void ResourceManager::Load(String fileName)
+void ResourceManager::Load(std::string fileName)
 {
-
+	auto isExist = FileUtils::getInstance()->isFileExist(fileName);
+	std::string content = "";
+	if (isExist) {
+		content = FileUtils::getInstance()->getStringFromFile(fileName);
+	}
+	//for (int i = 0; i < content.size(); i++) {
+	//	if (content[i] == '#')
+	//	{
+	//		std::getline(content)
+	//	}
+	//}
 }
 
 Sprite * ResourceManager::GetSpriteById(char id)

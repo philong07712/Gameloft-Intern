@@ -121,7 +121,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
 
     register_all_packages();
-	//ResourceManager::getInstance()->Init("C:\\Users\\OS\\Desktop\\Gameloft\\assets\\Resources");
+	ResourceManager::getInstance()->Init("D:\\GameloftIntern\\Day8\\HelloWorld2\\Resources");
     // create a scene. it's an autorelease object
     auto scene = LoadingScene::createScene();
 
