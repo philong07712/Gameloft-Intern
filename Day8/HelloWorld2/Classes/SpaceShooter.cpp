@@ -46,12 +46,12 @@ static float a = 0;
 void SpaceShooter::Update(float dt)
 {
 	a += dt;
-	auto moveBy = MoveBy::create(2.0f, Vec2(0, 1100));
+	auto moveBy = MoveBy::create(1.5f, Vec2(0, 1100));
 	auto sequence = Sequence::create(moveBy, nullptr);
 	for (int i = 0; i < 20; i++)
 	{
 		auto bullet = this->m_bullets[i]->getSprite();
-		if (!bullet->isVisible() && a > dt * 15) {
+		if (!bullet->isVisible() && a > dt * 10) {
 			bullet->setVisible(true);
 			bullet->setPosition(this->getSprite()->getPosition().x, this->getSprite()->getPosition().y);
 			bullet->runAction(sequence->clone());

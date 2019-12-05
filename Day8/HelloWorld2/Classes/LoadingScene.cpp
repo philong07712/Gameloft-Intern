@@ -16,7 +16,7 @@ bool LoadingScene::init()
 	}
 	scheduleUpdate();
 	addLoading();
-	background();
+	//background();
 	// Change to GamePlayScene
 	this->schedule(schedule_selector(LoadingScene::changeMainMenu), 3.0f);
 	return true;
