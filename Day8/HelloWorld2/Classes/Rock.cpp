@@ -19,5 +19,12 @@ void Rock::Init()
 
 void Rock::Update(float dt)
 {
-	
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto rock = getSprite();
+	if (rock->getPosition().y < -100)
+	{
+		rock->setVisible(false);
+		rock->stopAllActions();
+		rock->setPosition(rock->getPosition().x, visibleSize.height + 300);
+	}
 }

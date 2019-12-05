@@ -6,7 +6,6 @@
 USING_NS_CC;
 
 // Global variable
-//cocos2d::Size visibleSize;
 
 
 Scene* GamePlayScene::createScene()
@@ -152,10 +151,10 @@ void GamePlayScene::update(float DeltaTime)
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	m_spaceShip->Update(DeltaTime);
 
-	// generate rock
+	// make the rock move
 	int rockSize = this->m_rocks.size();
 	int randomNumber = rand() % (rockSize + 1);
-	auto moveBy = MoveBy::create(4.0f, Vec2(0, -1300));
+	auto moveBy = MoveBy::create(8.0f, Vec2(0, -1300));
 	if (a > 15 * DeltaTime)
 	{
 		for (int i = randomNumber; i < rockSize; i++)
@@ -172,13 +171,8 @@ void GamePlayScene::update(float DeltaTime)
 	}
 	for (int i = 0; i < rockSize; i++)
 	{
-		auto rock = this->m_rocks[i]->getSprite();
-		if (rock->getPosition().y < -100)
-		{
-			rock->setVisible(false);
-			rock->stopAllActions();
-			rock->setPosition(rock->getPosition().x, visibleSize.height + 300);
-		}
+		this->m_rocks[i]->Update(DeltaTime);
 	}
+	m_spaceShip->Collision(m_rocks);
 }
 

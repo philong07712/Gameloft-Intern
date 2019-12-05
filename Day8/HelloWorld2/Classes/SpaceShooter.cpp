@@ -1,5 +1,6 @@
 ﻿# include "SpaceShooter.h"
 # include "Bullet.h"
+# include "MainMenuScene.h"
 using namespace std;
 
 SpaceShooter::SpaceShooter(cocos2d::Scene* scene)
@@ -67,10 +68,31 @@ void SpaceShooter::Update(float dt)
 }
 
 void SpaceShooter::Shoot()
-{ 
+{
 
 }
 
-void SpaceShooter::Collision(vector<Rock*> rock)
+void SpaceShooter::Collision(vector<Rock*> rocks)
 {
+	for (int i = 0; i < rocks.size(); i++)
+	{
+		auto rock = rocks[i]->getSprite();
+		for (int i = 0; i < this->m_bullets.size(); i++)
+		{
+			auto bullet = this->m_bullets[i]->getSprite();
+			if (bullet->getBoundingBox().intersectsRect(rock->getBoundingBox()) 
+				&& rock->isVisible() && bullet->isVisible())
+			{
+				bullet->setVisible(false);
+				rock->setVisible(false);
+				rock->setPosition(rock->getPosition().x, -100);
+				bullet->setPosition(bullet->getPosition().x, 1000);
+			}
+		}
+		if (getSprite()->getBoundingBox().intersectsRect(rock->getBoundingBox()) && rock->isVisible())
+		{
+			auto myScene = MainMenuScene::createScene();
+			Director::getInstance()->replaceScene(TransitionFade::create(1.0f, myScene));
+		}
+	}
 }
