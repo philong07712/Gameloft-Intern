@@ -6,7 +6,8 @@
 USING_NS_CC;
 
 // Global variable
-SpaceShooter* ship;
+//cocos2d::Size visibleSize;
+
 
 Scene* GamePlayScene::createScene()
 {
@@ -25,6 +26,7 @@ bool GamePlayScene::init()
 	scheduleUpdate();
 	addBackGround();
 	addShip();
+	GenerateRock();
 	// Add touch listener
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(GamePlayScene::onTouchBegan, this);
@@ -34,8 +36,8 @@ bool GamePlayScene::init()
 	auto listenerKeyBoard = EventListenerKeyboard::create();
 	listenerKeyBoard->onKeyPressed = CC_CALLBACK_2(GamePlayScene::onKeyPressed, this);
 	listenerKeyBoard->onKeyReleased = CC_CALLBACK_2(GamePlayScene::onKeyReleased, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, ship->getSprite());
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerKeyBoard, ship->getSprite());
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, m_spaceShip->getSprite());
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerKeyBoard, m_spaceShip->getSprite());
 
     return true;
 }
@@ -50,17 +52,30 @@ void GamePlayScene::addBackGround()
 	addChild(backGround);
 }
 
-// Add the ship to the gameplay
+// Add the m_spaceShip to the gameplay
 void GamePlayScene::addShip()
 {
-	ship = new SpaceShooter(this);
+	m_spaceShip = new SpaceShooter(this);
+}
+
+void GamePlayScene::GenerateRock()
+{
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	int size = 30;
+	for (int i = 0; i < size; i++)
+	{
+		auto rock = new Rock(this);
+		m_rocks.push_back(rock);
+		addChild(rock->getSprite());
+		rock->getSprite()->setPosition(i * visibleSize.width / size, visibleSize.height + 300);
+	}
 }
 // Touch move
 bool GamePlayScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
 	auto mousePos = touch->getLocation();
 	auto moveTo = MoveTo::create(0.3f, mousePos);
-	ship->getSprite()->runAction(moveTo);
+	m_spaceShip->getSprite()->runAction(moveTo);
 	return true;
 }
 
@@ -114,24 +129,56 @@ void GamePlayScene::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event
 {
 	switch (keyCode) {
 	case EventKeyboard::KeyCode::KEY_UP_ARROW:
-		ship->getSprite()->stopActionByTag(1);
+		m_spaceShip->getSprite()->stopActionByTag(1);
 		break;
 	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-		ship->getSprite()->stopActionByTag(2);
+		m_spaceShip->getSprite()->stopActionByTag(2);
 		break;
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		ship->getSprite()->stopActionByTag(3);
+		m_spaceShip->getSprite()->stopActionByTag(3);
 		break;
 	case  EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-		ship->getSprite()->stopActionByTag(4);
+		m_spaceShip->getSprite()->stopActionByTag(4);
 		break;
 	default:
 		break;
 	}
 }
 
+float a = 0;
 void GamePlayScene::update(float DeltaTime) 
 {
-	ship->Update(DeltaTime);
+	a += DeltaTime;
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	m_spaceShip->Update(DeltaTime);
+
+	// generate rock
+	int rockSize = this->m_rocks.size();
+	int randomNumber = rand() % (rockSize + 1);
+	auto moveBy = MoveBy::create(4.0f, Vec2(0, -1300));
+	if (a > 15 * DeltaTime)
+	{
+		for (int i = randomNumber; i < rockSize; i++)
+		{
+			auto rock = this->m_rocks[i]->getSprite();
+			if (!rock->isVisible())
+			{
+				rock->runAction(moveBy->clone());
+				rock->setVisible(true);
+				i = rockSize + 10;
+				a = 0;
+			}
+		}
+	}
+	for (int i = 0; i < rockSize; i++)
+	{
+		auto rock = this->m_rocks[i]->getSprite();
+		if (rock->getPosition().y < -100)
+		{
+			rock->setVisible(false);
+			rock->stopAllActions();
+			rock->setPosition(rock->getPosition().x, visibleSize.height + 300);
+		}
+	}
 }
 

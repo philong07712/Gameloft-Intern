@@ -17,7 +17,5 @@ void Bullet::Init()
 
 void Bullet::Update(float dt)
 {
-	auto moveBy = MoveTo::create(4.0f, Vec2(0, 900));
-	auto sequence = Sequence::create(moveBy, moveBy->reverse(), nullptr);
-	this->getSprite()->runAction(sequence);
+
 }

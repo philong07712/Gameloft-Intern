@@ -39,7 +39,9 @@ SpaceShooter::~SpaceShooter()
 void SpaceShooter::Init()
 {
 }
+// Intial Global
 static float a = 0;
+
 void SpaceShooter::Update(float dt)
 {
 	a += dt;

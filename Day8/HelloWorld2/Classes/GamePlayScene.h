@@ -4,15 +4,22 @@
 
 #include "cocos2d.h"
 #include "LogoScene.h"
+#include "Rock.h"
+#include "SpaceShooter.h"
+using namespace std;
 class GamePlayScene : public cocos2d::Scene
 {
+private:
+	vector<Rock*> m_rocks;
+	SpaceShooter* m_spaceShip;
 public:
+	void GenerateRock();
     static cocos2d::Scene* createScene();
     virtual bool init();
 	void update(float deltaTime);
 	void addShip();
 	void addBackGround();
-	void continueMoving();
+	// add touch
 	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
 	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event);
 	virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event);
