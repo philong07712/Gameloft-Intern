@@ -2,6 +2,7 @@
 # include "Bullet.h"
 # include "MainMenuScene.h"
 # include "GameOverScene.h"
+# include "ResourceManager.h"
 using namespace std;
 
 cocos2d::Scene* targetScene;
@@ -43,7 +44,6 @@ SpaceShooter::~SpaceShooter()
 
 void SpaceShooter::Init()
 {
-	SpaceShooter::Effect();
 }
 // Intial Global
 static float a = 0;
@@ -76,18 +76,7 @@ void SpaceShooter::Shoot()
 {
 
 }
-Sprite* effect;
-void SpaceShooter::Effect()
-{
-	auto emitter = CCParticleSystemQuad::create("purple_effect.plist");
-	//emitter->setTextureWithRect(Director::getInstance()->getTextureCache()->addImage("purple_effect.png"), Rect(0, 0, 32, 32));
-	//auto emitter = ParticleExplosion::create();
-	emitter->setDuration(5.0f);
-	emitter->setScale(0.25f);
-	targetScene->addChild(emitter);
-	emitter->setPosition(300, 500);
-}
-
+int score;
 void SpaceShooter::Collision(vector<Rock*> rocks)
 {
 	for (int i = 0; i < rocks.size(); i++)
@@ -99,18 +88,38 @@ void SpaceShooter::Collision(vector<Rock*> rocks)
 			if (bullet->getBoundingBox().intersectsRect(rock->getBoundingBox()) 
 				&& rock->isVisible() && bullet->isVisible())
 			{
+				score++;
+				// create Effect
+				auto emitter = CCParticleSystemQuad::create("purple_effect.plist");
+				emitter->setPosition(rock->getPosition().x, rock->getPosition().y);
+				targetScene->addChild(emitter);
+				emitter->setScale(0.25f);
+				emitter->setAutoRemoveOnFinish(true);
+
 				bullet->setVisible(false);
 				rock->setVisible(false);
 				rock->setPosition(rock->getPosition().x, -100);
 				bullet->setPosition(bullet->getPosition().x, 1000);
-
 			}
 		}
 		if (getSprite()->getBoundingBox().intersectsRect(rock->getBoundingBox()) && rock->isVisible())
 		{
+			WriteScore();
 			auto myScene = GameOverScene::createScene();
 			Director::getInstance()->replaceScene(TransitionFade::create(0.0f, myScene));
 		}
 	}
+}
+
+void SpaceShooter::WriteScore()
+{
+	ResourceManager::getInstance()->setScore(score);
+	int maxScore = ResourceManager::getInstance()->getHighScore();
+	if (maxScore < score)
+	{
+		maxScore = score;
+	}
+	ResourceManager::getInstance()->setHighScore(maxScore);
+	score = 0;
 }
 

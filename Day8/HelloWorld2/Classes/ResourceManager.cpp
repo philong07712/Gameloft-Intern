@@ -14,6 +14,11 @@ ResourceManager* ResourceManager::getInstance()
 
 void ResourceManager::Init(const std::string path)
 {
+	auto content = FileUtils::getInstance()->getStringFromFile("Score.txt");
+	std::stringstream ss(content);
+	std::string text, highScore, inputString = "";
+	ss >> text >> highScore;
+	this->m_highScore = stoi(highScore);
 	m_dataFolderPath = path;
 	Load("Data.bin");
 }
@@ -116,6 +121,26 @@ Label * ResourceManager::GetLabelById(int id)
 Label * ResourceManager::GetLabelArial()
 {
 	return nullptr;
+}
+
+int ResourceManager::getScore()
+{
+	return this->m_score;
+}
+
+void ResourceManager::setScore(int score)
+{
+	this->m_score = score;
+}
+
+int ResourceManager::getHighScore()
+{
+	return this->m_highScore;
+}
+
+void ResourceManager::setHighScore(int highScore)
+{
+	this->m_highScore = highScore;
 }
 
 ResourceManager::~ResourceManager()

@@ -3,10 +3,10 @@
 #include "SimpleAudioEngine.h"
 #include "GamePlayScene.h"
 #include "SpaceShooter.h"
+# include "ResourceManager.h"
 USING_NS_CC;
 
 // Global variable
-
 
 Scene* GamePlayScene::createScene()
 {
@@ -59,6 +59,7 @@ void GamePlayScene::addShip()
 
 void GamePlayScene::GenerateRock()
 {
+	ResourceManager::getInstance()->setScore(0);
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	int size = 30;
 	for (int i = 0; i < size; i++)

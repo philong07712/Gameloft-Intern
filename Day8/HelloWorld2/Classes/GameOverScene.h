@@ -14,6 +14,7 @@ public:
 	void update(float deltaTime);
 	void addBackground();
 	void addMenu();
+	void Score();
 	CREATE_FUNC(GameOverScene);
 };
 #endif // __GAMEOVER_SCENE_H__

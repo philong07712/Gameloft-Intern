@@ -43,12 +43,15 @@ void GameOverScene::addMenu()
 	auto label = Label::create("GAME OVER", "fonts/MarkerFelt.ttf", 50);
 	addChild(label);
 	label->setPosition(visibleSize.width / 2, visibleSize.height / 2 + 200);
+	// Add ScoreLabel
+	Score();
 	// Return to mainMenu Button
 	auto homeButton = ui::Button::create("icons/home_normal.png", "icons/home_pressed.png");
 	addChild(homeButton);
 	// 
 	homeButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
 	{
+
 		auto myScene = MainMenuScene::createScene();
 		Director::getInstance()->replaceScene(TransitionFade::create(0.5f, myScene));
 	});	
@@ -65,3 +68,18 @@ void GameOverScene::addMenu()
 	});
 	playAgainButton->setPosition(Size(visibleSize.width / 2 - 100, visibleSize.height / 2 - 100));
 }
+
+void GameOverScene::Score()
+{
+	int score = ResourceManager::getInstance()->getScore();
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto originSize = Director::getInstance()->getVisibleOrigin();
+	string playerScore = "Score: " + std::to_string(score) + "\n";
+	playerScore += "High Score: " + std::to_string(ResourceManager::getInstance()->getHighScore());
+	auto labelScore = Label::create(playerScore, "fonts/MarkerFelt.ttf", 40);
+	addChild(labelScore);
+	labelScore->setPosition(visibleSize.width / 2, visibleSize.height / 2 + 50);
+	std::string inputStr = "HighScore: " + std::to_string(ResourceManager::getInstance()->getHighScore());
+	FileUtils::getInstance()->writeStringToFile(inputStr, "Score.txt");
+}
+
