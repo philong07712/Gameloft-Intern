@@ -50,6 +50,10 @@ void ResourceManager::Load(std::string fileName)
 			this->m_sprites.insert(id, sprite);
 		}
 	}
+	getline(ss, line, '\n');
+	std::istringstream buttonstream(line);
+	buttonstream >> text >> numberLine;
+	size = std::stoi(numberLine);
 	if (text == "#BUTTON") {
 		for (int i = 0; i < size; i++) {
 			// get the ID line
@@ -71,7 +75,10 @@ void ResourceManager::Load(std::string fileName)
 			this->m_buttons.insert(id, button);
 		}
 	}
-
+	getline(ss, line, '\n');
+	std::istringstream fontStream(line);
+	fontStream >> text >> numberLine;
+	size = std::stoi(numberLine);
 	if (text == "#FONT") {
 		for (int i = 0; i < size; i++) {
 			// get the ID line
@@ -85,7 +92,7 @@ void ResourceManager::Load(std::string fileName)
 			pathLine1 >> text >> idPath1;
 			// convert stringId to int
 			int id = stoi(number);
-			auto label = Label::create("Hello", idPath, 24);
+			auto label = Label::createWithTTF("Hello", idPath1, 24);
 			this->m_labels.insert(id, label);
 		}
 	}
@@ -103,9 +110,13 @@ ui::Button * ResourceManager::GetButtonById(int id)
 
 Label * ResourceManager::GetLabelById(int id)
 {
-	return this->m_labels.at(id);
+	return m_labels.at(id);
 }
 
+Label * ResourceManager::GetLabelArial()
+{
+	return nullptr;
+}
 
 ResourceManager::~ResourceManager()
 {

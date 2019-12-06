@@ -22,5 +22,6 @@ public:
 	Sprite* GetSpriteById(int id);
 	ui::Button* GetButtonById(int id);
 	Label* GetLabelById(int id);
+	Label* GetLabelArial();
 
 };

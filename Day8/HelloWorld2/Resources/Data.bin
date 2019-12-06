@@ -28,6 +28,6 @@ NORMAL_PATH: Buttons/setting_normal.png
 PRESSED_PATH: Buttons/setting_pressed.png
 #FONT 2
 ID: 0
-PATH: Fonts/MarkerFelt.ttf
+PATH: fonts/MarkerFelt.ttf
 ID: 1
-PATH: Fonts/arial.ttf
+PATH: fonts/arial.ttf

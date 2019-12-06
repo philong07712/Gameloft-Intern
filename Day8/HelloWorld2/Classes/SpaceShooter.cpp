@@ -1,10 +1,14 @@
 ﻿# include "SpaceShooter.h"
 # include "Bullet.h"
 # include "MainMenuScene.h"
+# include "GameOverScene.h"
 using namespace std;
 
+cocos2d::Scene* targetScene;
 SpaceShooter::SpaceShooter(cocos2d::Scene* scene)
 {
+	targetScene = scene;
+	SpaceShooter::Init();
 	// create the bullet
 	for (int i = 0; i < 20; i++)
 	{
@@ -39,6 +43,7 @@ SpaceShooter::~SpaceShooter()
 
 void SpaceShooter::Init()
 {
+	SpaceShooter::Effect();
 }
 // Intial Global
 static float a = 0;
@@ -71,6 +76,17 @@ void SpaceShooter::Shoot()
 {
 
 }
+Sprite* effect;
+void SpaceShooter::Effect()
+{
+	auto emitter = CCParticleSystemQuad::create("purple_effect.plist");
+	//emitter->setTextureWithRect(Director::getInstance()->getTextureCache()->addImage("purple_effect.png"), Rect(0, 0, 32, 32));
+	//auto emitter = ParticleExplosion::create();
+	emitter->setDuration(5.0f);
+	emitter->setScale(0.25f);
+	targetScene->addChild(emitter);
+	emitter->setPosition(300, 500);
+}
 
 void SpaceShooter::Collision(vector<Rock*> rocks)
 {
@@ -87,12 +103,14 @@ void SpaceShooter::Collision(vector<Rock*> rocks)
 				rock->setVisible(false);
 				rock->setPosition(rock->getPosition().x, -100);
 				bullet->setPosition(bullet->getPosition().x, 1000);
+
 			}
 		}
 		if (getSprite()->getBoundingBox().intersectsRect(rock->getBoundingBox()) && rock->isVisible())
 		{
-			auto myScene = MainMenuScene::createScene();
-			Director::getInstance()->replaceScene(TransitionFade::create(1.0f, myScene));
+			auto myScene = GameOverScene::createScene();
+			Director::getInstance()->replaceScene(TransitionFade::create(0.0f, myScene));
 		}
 	}
 }
+

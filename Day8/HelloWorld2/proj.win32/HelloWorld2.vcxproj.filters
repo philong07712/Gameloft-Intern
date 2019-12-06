@@ -51,7 +51,7 @@
     <ClCompile Include="..\Classes\PlayObject.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameOverScenne.cpp">
+    <ClCompile Include="..\Classes\GameOverScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,7 +95,7 @@
     <ClInclude Include="..\Classes\PlayObject.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameOverScenne.h">
+    <ClInclude Include="..\Classes\GameOverScene.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

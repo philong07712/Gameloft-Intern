@@ -15,4 +15,5 @@ public:
 	void Update(float dt);
 	void Shoot();
 	void Collision(vector<Rock*> rock);
+	void Effect();
 };

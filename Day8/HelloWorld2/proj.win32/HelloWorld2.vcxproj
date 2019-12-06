@@ -150,7 +150,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Bullet.cpp" />
-    <ClCompile Include="..\Classes\GameOverScenne.cpp" />
+    <ClCompile Include="..\Classes\GameOverScene.cpp" />
     <ClCompile Include="..\Classes\GamePlayScene.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\LoadingScene.cpp" />
@@ -166,7 +166,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Bullet.h" />
-    <ClInclude Include="..\Classes\GameOverScenne.h" />
+    <ClInclude Include="..\Classes\GameOverScene.h" />
     <ClInclude Include="..\Classes\GamePlayScene.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\LoadingScene.h" />

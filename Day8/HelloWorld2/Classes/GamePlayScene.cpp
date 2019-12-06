@@ -154,7 +154,7 @@ void GamePlayScene::update(float DeltaTime)
 	// make the rock move
 	int rockSize = this->m_rocks.size();
 	int randomNumber = rand() % (rockSize + 1);
-	auto moveBy = MoveBy::create(8.0f, Vec2(0, -1300));
+	auto moveBy = MoveBy::create(5.0f, Vec2(0, -1300));
 	if (a > 15 * DeltaTime)
 	{
 		for (int i = randomNumber; i < rockSize; i++)
