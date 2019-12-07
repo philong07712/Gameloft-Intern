@@ -23,6 +23,7 @@ bool GamePlayScene::init()
     {
         return false;
     }
+	addAudio();
 	scheduleUpdate();
 	addBackGround();
 	addShip();
@@ -180,8 +181,26 @@ void GamePlayScene::update(float DeltaTime)
 	m_spaceShip->Collision(m_rocks);
 	if (!m_spaceShip->getSprite()->isVisible())
 	{
+		stopAudio();
 		auto myScene = GameOverScene::createScene();
 		Director::getInstance()->replaceScene(TransitionFade::create(0.0f, myScene));
 	}
 }
 
+void GamePlayScene::addAudio()
+{
+	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
+	if (!audio->isBackgroundMusicPlaying()) {
+		audio->playBackgroundMusic("Sounds/ingame.mp3", true);
+	}
+	else
+	{
+		audio->resumeBackgroundMusic();
+	}
+}
+
+void GamePlayScene::stopAudio()
+{
+	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
+	audio->pauseBackgroundMusic();
+}

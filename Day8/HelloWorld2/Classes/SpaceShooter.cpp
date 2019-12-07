@@ -3,6 +3,7 @@
 # include "MainMenuScene.h"
 # include "GameOverScene.h"
 # include "ResourceManager.h"
+# include "SimpleAudioEngine.h"
 using namespace std;
 
 cocos2d::Scene* targetScene;
@@ -56,7 +57,9 @@ void SpaceShooter::Update(float dt)
 	for (int i = 0; i < 20; i++)
 	{
 		auto bullet = this->m_bullets[i]->getSprite();
-		if (!bullet->isVisible() && a > dt * 10) {
+		if (!bullet->isVisible() && a > dt * 20) {
+			auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
+			audio->playEffect("Sounds/shoot.wav", false, 1.0f, 1.0f, 1.0f);
 			bullet->setVisible(true);
 			bullet->setPosition(this->getSprite()->getPosition().x, this->getSprite()->getPosition().y);
 			bullet->runAction(sequence->clone());
@@ -109,6 +112,9 @@ void SpaceShooter::Collision(vector<Rock*> rocks)
 				&& rock->isVisible() && bullet->isVisible())
 			{
 				score++;
+				// create soundEffect
+				auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
+				audio->playEffect("Sounds/explosion.wav", false, 1.0f, 1.0f, 1.0f);
 				// create Effect
 				auto emitter = CCParticleSystemQuad::create("purple_effect.plist");
 				emitter->setPosition(rock->getPosition().x, rock->getPosition().y);

@@ -16,10 +16,9 @@ bool MainMenuScene::init()
 	if (!Scene::init()) {
 		return false;
 	}
+	addAudio();
 	scheduleUpdate();
 	addBackground();
-	auto audio = SimpleAudioEngine::getInstance();
-	audio->playBackgroundMusic("Sounds/title.mp3", true);
 	addMenu();
 	return true;
 }
@@ -67,14 +66,34 @@ void MainMenuScene::menuCloseCallback(Ref* pSender) {
 	exit(0);
 }
 
+void MainMenuScene::addAudio()
+{
+	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
+	if (!audio->isBackgroundMusicPlaying()) {
+		audio->playBackgroundMusic("Sounds/title.mp3", true);
+	}
+	else
+	{
+		audio->resumeBackgroundMusic();
+	}
+}
+
+void MainMenuScene::stopAudio()
+{
+	auto audio = SimpleAudioEngine::getInstance();
+	audio->pauseBackgroundMusic();
+}
+
 void MainMenuScene::changeSetting(Ref* pSender)
 {
+	stopAudio();
 	auto myScene = SettingScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(0.5f, myScene));
 }
 
 void MainMenuScene::changePlay(Ref* pSender)
 {
+	stopAudio();
 	auto myScene = GamePlayScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(1.0f, myScene));
 }

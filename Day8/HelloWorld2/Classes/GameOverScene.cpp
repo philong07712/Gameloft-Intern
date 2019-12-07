@@ -2,6 +2,7 @@
 # include "MainMenuScene.h"
 # include "GamePlayScene.h"
 #include "ResourceManager.h"
+# include "SimpleAudioEngine.h"
 Scene * GameOverScene::createScene()
 {
 	return GameOverScene::create();
@@ -14,7 +15,6 @@ bool GameOverScene::init()
 	if (!Scene::init()) {
 		return false;
 	}
-
 	scheduleUpdate();
 	addBackground();
 	addMenu();
@@ -82,4 +82,5 @@ void GameOverScene::Score()
 	std::string inputStr = "HighScore: " + std::to_string(ResourceManager::getInstance()->getHighScore());
 	FileUtils::getInstance()->writeStringToFile(inputStr, "Score.txt");
 }
+
 

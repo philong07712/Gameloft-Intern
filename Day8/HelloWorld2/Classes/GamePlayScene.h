@@ -25,6 +25,9 @@ public:
 	virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event);
 	virtual void onKeyPressed(EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
+	// Add the audio
+	void addAudio();
+	void stopAudio();
     // implement the "static create()" method manually
     CREATE_FUNC(GamePlayScene);
 };

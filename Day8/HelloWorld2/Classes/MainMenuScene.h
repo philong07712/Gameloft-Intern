@@ -17,6 +17,9 @@ public:
 	void changeSetting(Ref* pSender);
 	void changePlay(Ref* pSender);
 	void menuCloseCallback(Ref* pSender);
+	// Audio
+	void addAudio();
+	void stopAudio();
 	CREATE_FUNC(MainMenuScene);
 };
 #endif // __MAINMENU_SCENE_H__

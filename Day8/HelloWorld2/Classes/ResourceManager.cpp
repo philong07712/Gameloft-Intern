@@ -1,4 +1,5 @@
 ﻿# include "ResourceManager.h"
+# include "SimpleAudioEngine.h"
 ResourceManager* ResourceManager::s_instance;
 ResourceManager::ResourceManager()
 {
@@ -121,6 +122,16 @@ Label * ResourceManager::GetLabelById(int id)
 Label * ResourceManager::GetLabelArial()
 {
 	return nullptr;
+}
+
+void ResourceManager::preloadAudio()
+{
+	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
+	audio->preloadBackgroundMusic("Sounds/ingame.mp3");
+	audio->preloadBackgroundMusic("Sounds/title.mp3");
+	audio->preloadEffect("Sounds/fire.mp3");
+	audio->preloadEffect("Sounds/killed.mp3");
+	audio->preloadEffect("Sounds/confirm.mp3");
 }
 
 int ResourceManager::getScore()
