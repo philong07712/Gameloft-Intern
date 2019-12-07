@@ -70,6 +70,26 @@ void SpaceShooter::Update(float dt)
 			bullet->setPosition(this->getSprite()->getPosition().x, this->getSprite()->getPosition().y);
 		}
 	}
+
+	// Set border for the ship
+	Vec2 loc = getSprite()->getPosition();
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	if (loc.x < -150)
+	{
+		getSprite()->setPosition(visibleSize.width, loc.y);
+	}
+	else if (loc.x > visibleSize.width + 100)
+	{
+		getSprite()->setPosition(-50, loc.y);
+	}
+	else if (loc.y < -150)
+	{
+		getSprite()->setPosition(loc.x, visibleSize.height);
+	}
+	else if (loc.y > visibleSize.height + 100)
+	{
+		getSprite()->setPosition(loc.x, -50);
+	}
 }
 
 void SpaceShooter::Shoot()
@@ -105,12 +125,10 @@ void SpaceShooter::Collision(vector<Rock*> rocks)
 		if (getSprite()->getBoundingBox().intersectsRect(rock->getBoundingBox()) && rock->isVisible())
 		{
 			WriteScore();
-			auto myScene = GameOverScene::createScene();
-			Director::getInstance()->replaceScene(TransitionFade::create(0.0f, myScene));
+			getSprite()->setVisible(false);
 		}
 	}
 }
-
 void SpaceShooter::WriteScore()
 {
 	ResourceManager::getInstance()->setScore(score);

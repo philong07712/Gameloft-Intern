@@ -3,6 +3,8 @@
 # include "LoadingScene.h"
 # include "MainMenuScene.h"
 # include "GamePlayScene.h"
+# include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
 Scene * MainMenuScene::createScene()
 {
 	return MainMenuScene::create();
@@ -16,6 +18,8 @@ bool MainMenuScene::init()
 	}
 	scheduleUpdate();
 	addBackground();
+	auto audio = SimpleAudioEngine::getInstance();
+	audio->playBackgroundMusic("Sounds/title.mp3", true);
 	addMenu();
 	return true;
 }
@@ -56,7 +60,7 @@ void MainMenuScene::addMenu()
 	menuItems.pushBack(settingButton);
 	auto myMenu = Menu::createWithArray(menuItems);
 	myMenu->setPosition(0, 0);
-	addChild(myMenu, 2);
+	addChild(myMenu);
 }
 
 void MainMenuScene::menuCloseCallback(Ref* pSender) {

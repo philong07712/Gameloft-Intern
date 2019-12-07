@@ -4,6 +4,7 @@
 #include "GamePlayScene.h"
 #include "SpaceShooter.h"
 # include "ResourceManager.h"
+# include "GameOverScene.h"
 USING_NS_CC;
 
 // Global variable
@@ -148,6 +149,8 @@ void GamePlayScene::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event
 float a = 0;
 void GamePlayScene::update(float DeltaTime) 
 {
+
+
 	a += DeltaTime;
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	m_spaceShip->Update(DeltaTime);
@@ -175,5 +178,10 @@ void GamePlayScene::update(float DeltaTime)
 		this->m_rocks[i]->Update(DeltaTime);
 	}
 	m_spaceShip->Collision(m_rocks);
+	if (!m_spaceShip->getSprite()->isVisible())
+	{
+		auto myScene = GameOverScene::createScene();
+		Director::getInstance()->replaceScene(TransitionFade::create(0.0f, myScene));
+	}
 }
 
