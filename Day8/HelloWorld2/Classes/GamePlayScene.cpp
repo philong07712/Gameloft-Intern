@@ -24,7 +24,6 @@ bool GamePlayScene::init()
         return false;
     }
 	addBackGround();
-	addMap();
 	addAudio();
 	scheduleUpdate();
 	addShip();
@@ -151,7 +150,14 @@ void GamePlayScene::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event
 float a = 0;
 void GamePlayScene::update(float DeltaTime) 
 {
-	updateMap();
+	if (ResourceManager::getInstance()->getScore() >= 10 && maps.empty())
+	{
+		addMap();
+	}
+	if (!maps.empty())
+	{
+		updateMap();
+	}
 	a += DeltaTime;
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	m_spaceShip->Update(DeltaTime);
@@ -178,6 +184,7 @@ void GamePlayScene::update(float DeltaTime)
 	{
 		this->m_rocks[i]->Update(DeltaTime);
 	}
+	
 	m_spaceShip->Collision(m_rocks);
 	if (!m_spaceShip->getSprite()->isVisible())
 	{

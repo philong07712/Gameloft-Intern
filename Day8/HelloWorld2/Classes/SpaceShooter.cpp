@@ -57,7 +57,7 @@ void SpaceShooter::Update(float dt)
 	for (int i = 0; i < 20; i++)
 	{
 		auto bullet = this->m_bullets[i]->getSprite();
-		if (!bullet->isVisible() && a > dt * 20) {
+		if (!bullet->isVisible() && a > dt * 15) {
 			auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
 			audio->playEffect("Sounds/shoot.wav", false, 1.0f, 1.0f, 1.0f);
 
@@ -103,6 +103,10 @@ void SpaceShooter::Shoot()
 int score;
 void SpaceShooter::Collision(vector<Rock*> rocks)
 {
+	if (score == 10)
+	{
+		ResourceManager::getInstance()->setScore(score);
+	}
 	for (int i = 0; i < rocks.size(); i++)
 	{
 		auto rock = rocks[i]->getSprite();
