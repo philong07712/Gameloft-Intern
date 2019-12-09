@@ -23,9 +23,10 @@ bool GamePlayScene::init()
     {
         return false;
     }
+	addBackGround();
+	addMap();
 	addAudio();
 	scheduleUpdate();
-	addBackGround();
 	addShip();
 	GenerateRock();
 	// Add touch listener
@@ -50,7 +51,7 @@ void GamePlayScene::addBackGround()
 	auto backGround = Sprite::create("bg_for_game.png");
 	backGround->setPosition(Vec2(visibleSize.width / 2 + originSize.x, visibleSize.height / 2 + originSize.y));
 	backGround->setScale(1.5f);
-	addChild(backGround);
+	addChild(backGround, -1);
 }
 
 // Add the m_spaceShip to the gameplay
@@ -69,7 +70,7 @@ void GamePlayScene::GenerateRock()
 		auto rock = new Rock(this);
 		m_rocks.push_back(rock);
 		addChild(rock->getSprite());
-		rock->getSprite()->setPosition(i * visibleSize.width / size, visibleSize.height + 300);
+		rock->getSprite()->setPosition(90 + (i * (visibleSize.width - 180) / size), visibleSize.height + 300);
 	}
 }
 // Touch move
@@ -150,8 +151,7 @@ void GamePlayScene::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event
 float a = 0;
 void GamePlayScene::update(float DeltaTime) 
 {
-
-
+	updateMap();
 	a += DeltaTime;
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	m_spaceShip->Update(DeltaTime);
@@ -205,23 +205,32 @@ void GamePlayScene::stopAudio()
 	audio->pauseBackgroundMusic();
 }
 
-std::vector <TMXTiledMap*> maps;
 void GamePlayScene::addMap()
 {
 	auto map = TMXTiledMap::create("TileMaps/bg.tmx");
 	maps.push_back(map);
 	map = TMXTiledMap::create("TileMaps/bg.tmx");
 	maps.push_back(map);
-	maps[0]->setPosition(Vec2(0, 0));
-	maps[1]->setPosition(Vec2(0, (maps[0]->getContentSize().height)));
+	//maps[0]->setPosition(Vec2(0, 0));
+	//maps[1]->setPosition(Vec2(0, (maps[0]->getContentSize().height)));
+	maps[0]->setPosition(Vec2(0, Director::getInstance()->getVisibleSize().height));
+	maps[1]->setPosition(Vec2(0, maps[0]->getPosition().y + (maps[0]->getContentSize().height)));
 	addChild(maps[0], -1);
 	addChild(maps[1], -1);
 
-	auto moveBy = MoveBy::create(5.0f, Vec2(0, -1500));
+	auto moveBy = MoveBy::create(10.0f, Vec2(0, -1500));
 	maps[0]->runAction(RepeatForever::create(moveBy));
 	maps[1]->runAction(RepeatForever::create(moveBy->clone()));
 }
 
 void GamePlayScene::updateMap()
 {
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	for (int i = 0; i < 2; i++)
+	{
+		if (maps[i]->getPosition().y < -((maps[i]->getContentSize().height)))
+		{
+			maps[i]->setPosition(Vec2(0, 1 * (maps[i]->getContentSize().height)));
+		}
+	}
 }

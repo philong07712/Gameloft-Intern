@@ -13,6 +13,7 @@ private:
 	vector<Rock*> m_rocks;
 	SpaceShooter* m_spaceShip;
 public:
+	std::vector <TMXTiledMap*> maps;
 	void GenerateRock();
     static cocos2d::Scene* createScene();
     virtual bool init();
