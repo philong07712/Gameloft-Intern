@@ -57,7 +57,7 @@ void SpaceShooter::Update(float dt)
 	for (int i = 0; i < 20; i++)
 	{
 		auto bullet = this->m_bullets[i]->getSprite();
-		if (!bullet->isVisible() && a > dt * 15) {
+		if (!bullet->isVisible() && a > dt * 10) {
 			auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
 			audio->playEffect("Sounds/shoot.wav", false, 1.0f, 1.0f, 1.0f);
 

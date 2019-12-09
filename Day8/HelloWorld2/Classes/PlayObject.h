@@ -10,6 +10,7 @@ public:
 	void setSprite(cocos2d::Sprite* sprite);
 	PlayObject();
 	~PlayObject();
+	cocos2d::Sprite* DuplicateSprite(cocos2d::Sprite* sprite);
 	virtual void Init() = 0;
 	virtual void Update(float dt) = 0;
 };

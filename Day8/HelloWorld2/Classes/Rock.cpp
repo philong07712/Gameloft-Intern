@@ -12,8 +12,7 @@ Rock::~Rock()
 void Rock::Init()
 {
 	float randomSize = 0.5 + ((float)rand()) / (float)RAND_MAX;
-	auto rockSprite = ResourceManager::getInstance()->GetSpriteById(3);
-	auto rock = Sprite::createWithSpriteFrame(rockSprite->getSpriteFrame());
+	auto rock = DuplicateSprite(ResourceManager::getInstance()->GetSpriteById(3));
 	rock->setScale(randomSize);
 	setSprite(rock);
 	getSprite()->setVisible(false);

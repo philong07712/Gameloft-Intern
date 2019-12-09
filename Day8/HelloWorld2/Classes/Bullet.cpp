@@ -2,8 +2,7 @@
 # include "ResourceManager.h"
 Bullet::Bullet(cocos2d::Scene * scene)
 {
-	auto bulletSprite = ResourceManager::getInstance()->GetSpriteById(2);
-	auto bullet = Sprite::createWithSpriteFrame(bulletSprite->getSpriteFrame());
+	auto bullet = DuplicateSprite(ResourceManager::getInstance()->GetSpriteById(2));
 	this->setSprite(bullet);
 }
 

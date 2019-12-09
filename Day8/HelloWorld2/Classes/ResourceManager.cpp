@@ -54,6 +54,7 @@ void ResourceManager::Load(std::string fileName)
 			// convert stringId to int
 			int id = stoi(number);
 			auto sprite = Sprite::create(idPath);
+			sprite->retain();
 			this->m_sprites.insert(id, sprite);
 		}
 	}
@@ -79,6 +80,7 @@ void ResourceManager::Load(std::string fileName)
 			int id = stoi(number);
 			// convert stringId to int
 			auto button = ui::Button::create(idPath1, idPath2);
+			button->retain();
 			this->m_buttons.insert(id, button);
 		}
 	}
@@ -100,6 +102,7 @@ void ResourceManager::Load(std::string fileName)
 			// convert stringId to int
 			int id = stoi(number);
 			auto label = Label::createWithTTF("Hello", idPath1, 24);
+			label->retain();
 			this->m_labels.insert(id, label);
 		}
 	}
@@ -130,6 +133,8 @@ void ResourceManager::preloadAudio()
 	audio->preloadEffect("Sounds/killed.mp3");
 	audio->preloadEffect("Sounds/confirm.mp3");
 }
+
+
 
 int ResourceManager::getScore()
 {
