@@ -211,13 +211,10 @@ void GamePlayScene::addMap()
 	maps.push_back(map);
 	map = TMXTiledMap::create("TileMaps/bg.tmx");
 	maps.push_back(map);
-	//maps[0]->setPosition(Vec2(0, 0));
-	//maps[1]->setPosition(Vec2(0, (maps[0]->getContentSize().height)));
 	maps[0]->setPosition(Vec2(0, Director::getInstance()->getVisibleSize().height));
 	maps[1]->setPosition(Vec2(0, maps[0]->getPosition().y + (maps[0]->getContentSize().height)));
 	addChild(maps[0], -1);
 	addChild(maps[1], -1);
-
 	auto moveBy = MoveBy::create(10.0f, Vec2(0, -1500));
 	maps[0]->runAction(RepeatForever::create(moveBy));
 	maps[1]->runAction(RepeatForever::create(moveBy->clone()));
