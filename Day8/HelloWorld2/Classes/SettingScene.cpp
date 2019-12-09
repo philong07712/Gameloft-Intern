@@ -116,6 +116,15 @@ void SettingScene::createSound() {
 	layerSound->setVisible(false);
 	layerSound->setPosition(0, 100);
 	addChild(layerSound, 2);
+	// create return button
+	auto returnButton = ui::Button::create("Buttons/resume_normal.png", "Buttons/resume_pressed.png");
+	layerSound->addChild(returnButton);
+	returnButton->setPosition(Vec2(50, layerSound->getContentSize().height - 50));
+	returnButton->setScale(0.5f);
+	returnButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
+	{
+		layerSound->setVisible(false);
+	});	
 	// create labelSoundTitile
 	auto labelSoundTitile = Label::create("SOUND", "fonts/MarkerFelt.ttf", 50);
 	layerSound->addChild(labelSoundTitile);
@@ -166,6 +175,15 @@ void SettingScene::createAbout() {
 	layerAbout->setVisible(false);
 	layerAbout->setPosition(0, 100);
 	addChild(layerAbout, 2);
+	// create return button
+	auto returnButton = ui::Button::create("Buttons/resume_normal.png", "Buttons/resume_pressed.png");
+	layerAbout->addChild(returnButton);
+	returnButton->setPosition(Vec2(50, layerSound->getContentSize().height - 50));
+	returnButton->setScale(0.5f);
+	returnButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
+	{
+		layerAbout->setVisible(false);
+	});
 	// create labelAboutTitle
 	auto labelAboutTitle = Label::create("ABOUT", "fonts/MarkerFelt.ttf", 50);
 	layerAbout->addChild(labelAboutTitle);
