@@ -30,6 +30,7 @@
 #include "SettingScene.h"
 #include "GamePlayScene.h"
 #include "ResourceManager.h"
+#include "GamePlay2Scene.h"
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
 
@@ -124,7 +125,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 	ResourceManager::getInstance()->Init("D:\\GameloftIntern\\Day8\\HelloWorld2\\Resources");
     // create a scene. it's an autorelease object
-    auto scene = LoadingScene::createScene();
+    auto scene = GamePlay2Sene::createScene();
 
     // run
     director->runWithScene(scene);

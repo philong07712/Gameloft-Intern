@@ -19,5 +19,8 @@ public:
 	void createSound();
 	void createAbout();
 	CREATE_FUNC(SettingScene);
+
+	void playConfirmAudio();
+
 };
 #endif // __SETTING_SCENE_H__

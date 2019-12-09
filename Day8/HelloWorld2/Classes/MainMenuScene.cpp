@@ -76,6 +76,7 @@ void MainMenuScene::addAudio()
 	{
 		audio->resumeBackgroundMusic();
 	}
+	CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.0f);
 }
 
 void MainMenuScene::stopAudio()
@@ -84,8 +85,15 @@ void MainMenuScene::stopAudio()
 	audio->pauseBackgroundMusic();
 }
 
+void MainMenuScene::playConfirmAudio()
+{
+	auto audio = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sounds/confirm.wav", false,
+		1.0f, 1.0f, 1.0f);
+}
+
 void MainMenuScene::changeSetting(Ref* pSender)
 {
+	playConfirmAudio();
 	stopAudio();
 	auto myScene = SettingScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(0.5f, myScene));
@@ -93,6 +101,7 @@ void MainMenuScene::changeSetting(Ref* pSender)
 
 void MainMenuScene::changePlay(Ref* pSender)
 {
+	playConfirmAudio();
 	stopAudio();
 	auto myScene = GamePlayScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(1.0f, myScene));

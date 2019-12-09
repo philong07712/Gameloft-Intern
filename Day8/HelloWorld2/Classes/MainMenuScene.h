@@ -20,6 +20,7 @@ public:
 	// Audio
 	void addAudio();
 	void stopAudio();
+	void playConfirmAudio();
 	CREATE_FUNC(MainMenuScene);
 };
 #endif // __MAINMENU_SCENE_H__

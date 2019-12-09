@@ -3,6 +3,7 @@
 # include "LoadingScene.h"
 # include "MainMenuScene.h"
 # include "SettingScene.h"
+# include "SimpleAudioEngine.h"
 Scene * SettingScene::createScene()
 {
 	return SettingScene::create();
@@ -53,6 +54,7 @@ void SettingScene::addMenu()
 	//returnButton->setTitleLabel(returnLabel);
 	returnButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
 	{
+		playConfirmAudio();
 		auto myScene = MainMenuScene::createScene();
 		Director::getInstance()->replaceScene(TransitionFade::create(0.5f, myScene));
 	});
@@ -74,6 +76,7 @@ void SettingScene::addMenu()
 	auto soundLabel = Label::create("Sound", "fonts/MarkerFelt.ttf", 30);
 	auto soundItem = MenuItemLabel::create(soundLabel,
 		[&](Ref* pSender) {
+		playConfirmAudio();
 		activeSound();
 	});
 	soundItem->setPosition(width - 150, height);
@@ -81,6 +84,7 @@ void SettingScene::addMenu()
 	auto aboutLabel = Label::create("About", "fonts/MarkerFelt.ttf", 30);
 	auto aboutItem = MenuItemLabel::create(aboutLabel, 
 		[&](Ref* pSender) {
+		playConfirmAudio();
 		activeAbout();
 	});
 	aboutItem->setPosition(width - 150, height - 100);
@@ -205,6 +209,12 @@ void SettingScene::createAbout() {
 	label1->setPosition(Vec2(scrollView->getContentSize().width / 2, label->getPosition().y + 30));
 	scrollView->addChild(label);
 	scrollView->addChild(label1);
+}
+
+void SettingScene::playConfirmAudio()
+{
+	auto audio = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sounds/confirm.wav", false,
+		1.0f, 1.0f, 1.0f);
 }
 
 void SettingScene::activeAbout() {

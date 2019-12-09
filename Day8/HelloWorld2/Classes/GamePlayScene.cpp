@@ -204,3 +204,24 @@ void GamePlayScene::stopAudio()
 	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
 	audio->pauseBackgroundMusic();
 }
+
+std::vector <TMXTiledMap*> maps;
+void GamePlayScene::addMap()
+{
+	auto map = TMXTiledMap::create("TileMaps/bg.tmx");
+	maps.push_back(map);
+	map = TMXTiledMap::create("TileMaps/bg.tmx");
+	maps.push_back(map);
+	maps[0]->setPosition(Vec2(0, 0));
+	maps[1]->setPosition(Vec2(0, (maps[0]->getContentSize().height)));
+	addChild(maps[0], -1);
+	addChild(maps[1], -1);
+
+	auto moveBy = MoveBy::create(5.0f, Vec2(0, -1500));
+	maps[0]->runAction(RepeatForever::create(moveBy));
+	maps[1]->runAction(RepeatForever::create(moveBy->clone()));
+}
+
+void GamePlayScene::updateMap()
+{
+}

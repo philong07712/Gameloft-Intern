@@ -28,6 +28,9 @@ public:
 	// Add the audio
 	void addAudio();
 	void stopAudio();
+
+	void addMap();
+	void updateMap();
     // implement the "static create()" method manually
     CREATE_FUNC(GamePlayScene);
 };
