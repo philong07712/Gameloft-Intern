@@ -116,7 +116,7 @@ void SpaceShooter::Collision(vector<Rock*> rocks)
 				auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
 				audio->playEffect("Sounds/explosion.wav", false, 1.0f, 1.0f, 1.0f);
 				// create Effect
-				auto emitter = CCParticleSystemQuad::create("purple_effect.plist");
+				auto emitter = CCParticleSystemQuad::create("explosion.plist");
 				emitter->setPosition(rock->getPosition().x, rock->getPosition().y);
 				targetScene->addChild(emitter);
 				emitter->setScale(0.25f);

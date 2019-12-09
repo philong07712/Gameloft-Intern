@@ -120,10 +120,6 @@ Label * ResourceManager::GetLabelById(int id)
 	return m_labels.at(id);
 }
 
-Label * ResourceManager::GetLabelArial()
-{
-	return nullptr;
-}
 
 void ResourceManager::preloadAudio()
 {
