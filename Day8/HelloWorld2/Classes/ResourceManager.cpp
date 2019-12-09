@@ -15,6 +15,7 @@ ResourceManager* ResourceManager::getInstance()
 
 void ResourceManager::Init(const std::string path)
 {
+	preloadAudio();
 	auto content = FileUtils::getInstance()->getStringFromFile("Score.txt");
 	std::stringstream ss(content);
 	std::string text, highScore, inputString = "";

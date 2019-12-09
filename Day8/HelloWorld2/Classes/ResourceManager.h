@@ -29,6 +29,7 @@ public:
 	ui::Button* GetButtonById(int id);
 	Label* GetLabelById(int id);
 	Label* GetLabelArial();
+
 	// Pre load the audio
 	void preloadAudio();
 

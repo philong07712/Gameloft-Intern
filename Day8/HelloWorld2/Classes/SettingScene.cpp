@@ -13,11 +13,9 @@ float width;
 float height;
 
 // soundItems
-bool soundMenu;
 LayerColor* layerSound;
 // aboutItems
-cocos2d::ui::Layout* aboutLayout;
-bool aboutMenu;
+LayerColor* layerAbout;
 
 bool SettingScene::init()
 {
@@ -27,8 +25,6 @@ bool SettingScene::init()
 	}
 	scheduleUpdate();
 	originalSize = Director::getInstance()->getVisibleOrigin();
-	soundMenu = false;
-	aboutMenu = false;
 	width = Director::getInstance()->getVisibleSize().width / 2 + originalSize.x;
 	height = Director::getInstance()->getVisibleSize().height / 2 + originalSize.y;
 	// create soundItem
@@ -99,8 +95,8 @@ void SettingScene::addMenu()
 	addChild(menu);
 }
 
-void SettingScene::activeSound() {
-
+void SettingScene::activeSound() 
+{
 	if (!layerSound->isVisible()) {
 		layerSound->setVisible(true);
 	}
@@ -110,80 +106,97 @@ void SettingScene::activeSound() {
 }
 
 void SettingScene::createSound() {
-	//auto soundLayout = ui::Layout::create();
-	//soundLayout->setPosition(Vec2(width - 100, height));
-	//soundLayout->setContentSize(Size(200, 50));
-	//soundLayout->setAnchorPoint(Vec2(0, 1));
-	// create checkBox
-	auto checkBox = ui::CheckBox::create("icons/checkbox_normal.png", "icons/checkbox_checked.png");
-	checkBox->setPosition(Vec2(250, 50));
-	// create slider
-	auto slider = ui::Slider::create();
-	slider->loadBarTexture("slider_bar_bg.png");
-	slider->loadSlidBallTextures("slider_ball_normal.png", "slider_ball_pressed.png", "slider_ball_disable.png");
-	slider->loadProgressBarTexture("slider_bar_pressed.png");
-	slider->setPercent(10);
-	slider->setPosition(Vec2(100, 50));
-	//soundLayout->addChild(slider, 1);
-	//soundLayout->addChild(checkBox, 1);
 	// Adding the layout
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto originSize = Director::getInstance()->getVisibleOrigin();
-	// layerSound created
-	layerSound = LayerColor::create(Color4B(0, 204, 102, 255));
-	//layerSound->addChild(soundLayout);
-	layerSound->addChild(slider);
-	layerSound->addChild(checkBox);
+	// create layerSound
+	layerSound = LayerColor::create(Color4B(198, 153, 222, 255));
 	auto size = layerSound->getContentSize();
 	layerSound->setContentSize(Size(size.width, size.height - 200));
 	layerSound->setVisible(false);
 	layerSound->setPosition(0, 100);
 	addChild(layerSound, 2);
+	// create labelSoundTitile
+	auto labelSoundTitile = Label::create("SOUND", "fonts/MarkerFelt.ttf", 50);
+	layerSound->addChild(labelSoundTitile);
+	labelSoundTitile->enableGlow(Color4B::YELLOW);
+	labelSoundTitile->enableShadow();
+	labelSoundTitile->setPosition(Vec2(layerSound->getContentSize().width / 2, layerSound->getContentSize().height - 50));
+	// create checkBoxMute and create labelMute
+	auto checkBoxMute = ui::CheckBox::create("icons/checkbox_normal.png", "icons/checkbox_checked.png");
+	layerSound->addChild(checkBoxMute);
+	checkBoxMute->setPosition(Vec2(labelSoundTitile->getPosition().x - 50, labelSoundTitile->getPosition().y - 100));
+	checkBoxMute->setScale(0.5f);
 
-	auto labelSound = Label::create("SOUND", "fonts/MarkerFelt.ttf", 40);
-	labelSound->enableGlow(Color4B::YELLOW);
-	labelSound->enableShadow();
+	auto labelMute = Label::create("Mute", "fonts/MarkerFelt.ttf", 25);
+	layerSound->addChild(labelMute);
+	labelMute->setPosition(Vec2(checkBoxMute->getPosition().x + 50, checkBoxMute->getPosition().y));
+	// create checkBoxSound and create labelSound
+	auto checkBoxSound = ui::CheckBox::create("icons/checkbox_normal.png", "icons/checkbox_checked.png");
+	layerSound->addChild(checkBoxSound);
+	checkBoxSound->setPosition(Vec2(checkBoxMute->getPosition().x, checkBoxMute->getPosition().y - 50));
+	checkBoxSound->setScale(0.5f);
+
+	auto  labelSound = Label::create("Sound", "fonts/MarkerFelt.ttf", 25);
+	labelSound->setPosition(Vec2(checkBoxSound->getPosition().x + 50, checkBoxSound->getPosition().y));
 	layerSound->addChild(labelSound);
-	labelSound->setPosition(size.width / 2, size.height / 2 + 100);
+	// create sliderVolume and labelVolume
+	auto  labelVolume = Label::create("Volume", "fonts/MarkerFelt.ttf", 25);
+	labelVolume->setPosition(Vec2(checkBoxSound->getPosition().x, checkBoxSound->getPosition().y - 100));
+	layerSound->addChild(labelVolume);
+
+	auto sliderVolume = ui::Slider::create();
+	sliderVolume->loadBarTexture("slider_bar_bg.png");
+	sliderVolume->loadSlidBallTextures("slider_ball_normal.png", "slider_ball_pressed.png", "slider_ball_disable.png");
+	sliderVolume->loadProgressBarTexture("slider_bar_pressed.png");
+	sliderVolume->setPercent(10);
+	sliderVolume->setPosition(Vec2(labelVolume->getPosition().x + 50, labelVolume->getPosition().y - 50));
+	// layerSound created
+	layerSound->addChild(sliderVolume);
 
 }
 
 void SettingScene::createAbout() {
-	// init aboutLayout
-	aboutLayout = ui::Layout::create();
-	aboutLayout->setVisible(false);
-	aboutLayout->setContentSize(Size(500, 300));
-	aboutLayout->setPosition(Vec2(width - 100, height + 50));
-	aboutLayout->setAnchorPoint(Vec2(0, 1));
-
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto originSize = Director::getInstance()->getVisibleOrigin();
+	// init Layer
+	layerAbout = LayerColor::create(Color4B(198, 153, 222, 255));
+	auto size = layerAbout->getContentSize();
+	layerAbout->setContentSize(Size(size.width, size.height - 200));
+	layerAbout->setVisible(false);
+	layerAbout->setPosition(0, 100);
+	addChild(layerAbout, 2);
+	// create labelAboutTitle
+	auto labelAboutTitle = Label::create("ABOUT", "fonts/MarkerFelt.ttf", 50);
+	layerAbout->addChild(labelAboutTitle);
+	labelAboutTitle->enableGlow(Color4B::YELLOW);
+	labelAboutTitle->enableShadow();
+	labelAboutTitle->setPosition(Vec2(layerAbout->getContentSize().width / 2, layerAbout->getContentSize().height - 50));
+	// create scrollView
 	auto scrollView = ui::ScrollView::create();
+	layerAbout->addChild(scrollView);
 	scrollView->setDirection(ui::ScrollView::Direction::VERTICAL);
-	scrollView->setContentSize(Size(200, 200));
+	scrollView->setPosition(Vec2(50, 0));
+	scrollView->setContentSize(Size(400, 400));
 	scrollView->setBounceEnabled(true);
 	// Add information about the game
-	auto inSize = Vec2(scrollView->getContentSize().width / 2, 50);
-	auto label = Label::createWithSystemFont("Game information: ", "Arial", 15);
+	auto inSize = Vec2(scrollView->getContentSize().width / 2, scrollView->getContentSize().height / 2);
+	auto label = Label::createWithSystemFont("Game information: ", "Arial", 20);
 	label->setPosition(inSize);
-	auto label1 = Label::createWithSystemFont("Author: Hung", "Arial", 15);
-	label1->setPosition(Vec2(scrollView->getContentSize().width / 2, 50 + 30));
+	auto label1 = Label::createWithSystemFont("Author: Hung", "Arial", 20);
+	label1->setPosition(Vec2(scrollView->getContentSize().width / 2, label->getPosition().y + 30));
 	scrollView->addChild(label);
 	scrollView->addChild(label1);
-	aboutLayout->addChild(scrollView);
-	addChild(aboutLayout, 3);
 }
 
 void SettingScene::activeAbout() {
-	if (aboutMenu == false) {
-		aboutLayout->setVisible(true);
-		aboutMenu = true;
+	if (!layerAbout->isVisible()) {
+		layerAbout->setVisible(true);
 	}
 	else {
-		aboutLayout->setVisible(false);
-		aboutMenu = false;
+		layerAbout->setVisible(false);
 	}
 }
-
-
 
 void SettingScene::update(float deltaTime)
 {
