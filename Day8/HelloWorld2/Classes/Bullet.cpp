@@ -17,6 +17,8 @@ void Bullet::initPhysicBody()
 	physicBody->setGravityEnable(false);
 	physicBody->setRotationEnable(false);
 	physicBody->setContactTestBitmask(1);
+	physicBody->setTag(10);
+	getSprite()->setTag(10);
 	getSprite()->setPhysicsBody(physicBody);
 }
 
