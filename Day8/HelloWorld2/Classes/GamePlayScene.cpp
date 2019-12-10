@@ -57,6 +57,7 @@ void GamePlayScene::addBackGround()
 void GamePlayScene::addShip()
 {
 	m_spaceShip = new SpaceShooter(this);
+	addChild(m_spaceShip->getSprite());
 }
 
 void GamePlayScene::GenerateRock()

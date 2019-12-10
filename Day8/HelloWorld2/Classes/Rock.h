@@ -9,4 +9,5 @@ public:
 	~Rock();
 	void Init();
 	void Update(float dt);
+	void InitPhysic();
 };

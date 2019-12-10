@@ -12,7 +12,6 @@ SpaceShooter::SpaceShooter(cocos2d::Scene* scene)
 	targetScene = scene;
 	SpaceShooter::Init();
 	// create the bullet
-	
 }
 
 void SpaceShooter::Init()
@@ -26,15 +25,14 @@ void SpaceShooter::Init()
 	}
 
 	// create the spaceShip
-	auto ship = cocos2d::Sprite::create();
 	auto spriteCache = cocos2d::SpriteFrameCache::getInstance();
 	spriteCache->addSpriteFramesWithFile("Sprites\\SpaceShip\\ship.plist", "Sprites\\SpaceShip\\ship.png");
+	auto ship = cocos2d::Sprite::createWithSpriteFrame(spriteCache->getSpriteFrameByName("1.png"));
 	cocos2d::Vector<cocos2d::SpriteFrame*> shipFrames;
-	targetScene->addChild(ship);
 	int maxFrame = 8;
 	const auto maxChar = 35;
 	char frameName[maxChar] = { 0 };
-	for (int i = 1; i <= maxFrame; i++) {
+	for (int i = 2; i <= maxFrame; i++) {
 		sprintf(frameName, "%d.png", i);
 		shipFrames.pushBack(spriteCache->getSpriteFrameByName(frameName));
 	}
@@ -60,7 +58,7 @@ void SpaceShooter::Shoot(float dt)
 	for (int i = 0; i < 20; i++)
 	{
 		auto bullet = this->m_bullets[i]->getSprite();
-		if (!bullet->isVisible() && a > dt * 10) {
+		if (!bullet->isVisible() && a > dt * 20) {
 			auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
 			audio->playEffect("Sounds/shoot.wav", false, 1.0f, 1.0f, 1.0f);
 

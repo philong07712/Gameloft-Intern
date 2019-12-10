@@ -16,6 +16,7 @@ void Rock::Init()
 	rock->setScale(randomSize);
 	setSprite(rock);
 	getSprite()->setVisible(false);
+	InitPhysic();
 }
 
 void Rock::Update(float dt)
@@ -28,4 +29,10 @@ void Rock::Update(float dt)
 		rock->stopAllActions();
 		rock->setPosition(rock->getPosition().x, visibleSize.height + 300);
 	}
+}
+
+void Rock::InitPhysic()
+{
+	auto physicBody = PhysicsBody::createBox(getSprite()->getContentSize());
+	getSprite()->setPhysicsBody(physicBody);
 }
