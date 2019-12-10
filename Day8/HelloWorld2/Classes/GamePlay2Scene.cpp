@@ -44,6 +44,7 @@ void GamePlay2Scene::update(float DeltaTime)
 	delayRock += DeltaTime;
 	moveRock(DeltaTime);
 	m_spaceShip->Update(DeltaTime);
+	m_spaceShip->Collision(this->m_rocks);
 }
 
 void GamePlay2Scene::updateMap()

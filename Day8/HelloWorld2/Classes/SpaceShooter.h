@@ -16,5 +16,6 @@ public:
 	void Shoot(float dt);
 	void borderShip();
 	void Collision(vector<Rock*> rock);
+	bool onContactBegin(PhysicsContact* contact);
 	void WriteScore();
 };

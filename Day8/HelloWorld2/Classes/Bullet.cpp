@@ -16,8 +16,7 @@ void Bullet::initPhysicBody()
 	auto physicBody = PhysicsBody::createBox(this->getSprite()->getContentSize());
 	physicBody->setGravityEnable(false);
 	physicBody->setRotationEnable(false);
-	physicBody->setCategoryBitmask(0x01);
-	physicBody->setCollisionBitmask(0x02);
+	physicBody->setContactTestBitmask(1);
 	getSprite()->setPhysicsBody(physicBody);
 }
 

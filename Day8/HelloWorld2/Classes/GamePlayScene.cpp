@@ -185,8 +185,8 @@ void GamePlayScene::update(float DeltaTime)
 	{
 		this->m_rocks[i]->Update(DeltaTime);
 	}
-	
 	m_spaceShip->Collision(m_rocks);
+	
 	if (!m_spaceShip->getSprite()->isVisible())
 	{
 		stopAudio();

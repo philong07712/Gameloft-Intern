@@ -34,7 +34,7 @@ void Rock::Update(float dt)
 void Rock::InitPhysic()
 {
 	auto physicBody = PhysicsBody::createBox(getSprite()->getContentSize());
-	physicBody->setCategoryBitmask(0x02);
-	physicBody->setCollisionBitmask(0x01);
+	physicBody->setContactTestBitmask(1);
+	physicBody->setTag(100);
 	getSprite()->setPhysicsBody(physicBody);
 }

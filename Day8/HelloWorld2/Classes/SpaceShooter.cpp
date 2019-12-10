@@ -113,7 +113,7 @@ void SpaceShooter::Collision(vector<Rock*> rocks)
 		for (int i = 0; i < this->m_bullets.size(); i++)
 		{
 			auto bullet = this->m_bullets[i]->getSprite();
-			if (bullet->getBoundingBox().intersectsRect(rock->getBoundingBox()) 
+			if (bullet->getBoundingBox().intersectsRect(rock->getBoundingBox())
 				&& rock->isVisible() && bullet->isVisible())
 			{
 				score++;
@@ -139,6 +139,11 @@ void SpaceShooter::Collision(vector<Rock*> rocks)
 			getSprite()->setVisible(false);
 		}
 	}
+}
+
+bool SpaceShooter::onContactBegin(PhysicsContact * contact)
+{
+	return false;
 }
 
 void SpaceShooter::WriteScore()
