@@ -13,7 +13,8 @@ public:
 	~SpaceShooter();
 	void Init();
 	void Update(float dt);
-	void Shoot();
+	void Shoot(float dt);
+	void borderShip();
 	void Collision(vector<Rock*> rock);
 	void WriteScore();
 };

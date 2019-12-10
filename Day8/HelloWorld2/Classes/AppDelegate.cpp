@@ -125,7 +125,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 	ResourceManager::getInstance()->Init("D:\\GameloftIntern\\Day8\\HelloWorld2\\Resources");
     // create a scene. it's an autorelease object
-    auto scene = LoadingScene::createScene();
+    auto scene = GamePlay2Sene::createScene();
 
     // run
     director->runWithScene(scene);

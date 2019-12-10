@@ -12,11 +12,16 @@ SpaceShooter::SpaceShooter(cocos2d::Scene* scene)
 	targetScene = scene;
 	SpaceShooter::Init();
 	// create the bullet
+	
+}
+
+void SpaceShooter::Init()
+{
 	for (int i = 0; i < 20; i++)
 	{
-		Bullet *bullet = new Bullet(scene);
+		Bullet *bullet = new Bullet(targetScene);
 		this->m_bullets.push_back(bullet);
-		scene->addChild(bullet->getSprite());
+		targetScene->addChild(bullet->getSprite());
 		bullet->getSprite()->setVisible(false);
 	}
 
@@ -25,7 +30,7 @@ SpaceShooter::SpaceShooter(cocos2d::Scene* scene)
 	auto spriteCache = cocos2d::SpriteFrameCache::getInstance();
 	spriteCache->addSpriteFramesWithFile("Sprites\\SpaceShip\\ship.plist", "Sprites\\SpaceShip\\ship.png");
 	cocos2d::Vector<cocos2d::SpriteFrame*> shipFrames;
-	scene->addChild(ship);
+	targetScene->addChild(ship);
 	int maxFrame = 8;
 	const auto maxChar = 35;
 	char frameName[maxChar] = { 0 };
@@ -38,20 +43,18 @@ SpaceShooter::SpaceShooter(cocos2d::Scene* scene)
 	ship->runAction(cocos2d::RepeatForever::create(animate));
 	setSprite(ship);
 }
-
-SpaceShooter::~SpaceShooter()
-{
-}
-
-void SpaceShooter::Init()
-{
-}
 // Intial Global
 static float a = 0;
 
 void SpaceShooter::Update(float dt)
 {
 	a += dt;
+	Shoot(dt);
+	borderShip();
+}
+
+void SpaceShooter::Shoot(float dt)
+{
 	auto moveBy = MoveBy::create(1.5f, Vec2(0, 1100));
 	auto sequence = Sequence::create(moveBy, nullptr);
 	for (int i = 0; i < 20; i++)
@@ -74,7 +77,10 @@ void SpaceShooter::Update(float dt)
 			bullet->setPosition(this->getSprite()->getPosition().x, this->getSprite()->getPosition().y);
 		}
 	}
+}
 
+void SpaceShooter::borderShip()
+{
 	// Set border for the ship
 	Vec2 loc = getSprite()->getPosition();
 	auto visibleSize = Director::getInstance()->getVisibleSize();
@@ -96,10 +102,6 @@ void SpaceShooter::Update(float dt)
 	}
 }
 
-void SpaceShooter::Shoot()
-{
-
-}
 int score;
 void SpaceShooter::Collision(vector<Rock*> rocks)
 {
@@ -140,6 +142,7 @@ void SpaceShooter::Collision(vector<Rock*> rocks)
 		}
 	}
 }
+
 void SpaceShooter::WriteScore()
 {
 	ResourceManager::getInstance()->setScore(score);
@@ -152,3 +155,6 @@ void SpaceShooter::WriteScore()
 	score = 0;
 }
 
+SpaceShooter::~SpaceShooter()
+{
+}
