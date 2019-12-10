@@ -29,6 +29,7 @@ bool GamePlay2Scene::init()
 	delayRock = 0;
 	initPhysic();
 	initShip();
+	addMap();
 	GenerateRock();
 	addListener();
 	m_spaceShip->Collision(this->m_rocks);
@@ -38,10 +39,29 @@ bool GamePlay2Scene::init()
 
 void GamePlay2Scene::addMap()
 {
+	auto map = TMXTiledMap::create("TileMaps/bg.tmx");
+	auto physicBody = PhysicsBody::createEdgeBox(map->getContentSize());
+	physicBody->setGravityEnable(false);
+	map->setPhysicsBody(physicBody);
+	maps.push_back(map);
+	map = TMXTiledMap::create("TileMaps/bg.tmx");
+	physicBody = PhysicsBody::createEdgeBox(map->getContentSize());
+	map->setPhysicsBody(physicBody);
+	physicBody->setGravityEnable(false);	
+
+	maps.push_back(map);
+	maps[0]->setPosition(Vec2(0, Director::getInstance()->getVisibleSize().height));
+	maps[1]->setPosition(Vec2(0, maps[0]->getPosition().y + (maps[0]->getContentSize().height)));
+	addChild(maps[0], -1);
+	addChild(maps[1], -1);
+	auto moveBy = MoveBy::create(10.0f, Vec2(0, -1500));
+	maps[0]->runAction(RepeatForever::create(moveBy));
+	maps[1]->runAction(RepeatForever::create(moveBy->clone()));
 }
 
 void GamePlay2Scene::update(float DeltaTime)
 {
+	updateMap();
 	delayRock += DeltaTime;
 	moveRock(DeltaTime);
 	m_spaceShip->Update(DeltaTime);
@@ -49,6 +69,14 @@ void GamePlay2Scene::update(float DeltaTime)
 
 void GamePlay2Scene::updateMap()
 {
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	for (int i = 0; i < 2; i++)
+	{
+		if (maps[i]->getPosition().y < -((maps[i]->getContentSize().height)))
+		{
+			maps[i]->setPosition(Vec2(0, 1 * (maps[i]->getContentSize().height)));
+		}
+	}
 }
 
 void GamePlay2Scene::initPhysic()
@@ -85,7 +113,6 @@ void GamePlay2Scene::addListener()
 {
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(GamePlay2Scene::onTouchBegan, this);
-
 	auto listenerKeyBoard = EventListenerKeyboard::create();
 	listenerKeyBoard->onKeyPressed = CC_CALLBACK_2(GamePlay2Scene::onKeyPressed, this);
 	listenerKeyBoard->onKeyReleased = CC_CALLBACK_2(GamePlay2Scene::onKeyReleased, this);
@@ -106,6 +133,7 @@ void GamePlay2Scene::moveRock(float DeltaTime)
 			auto rock = this->m_rocks[i]->getSprite();
 			if (!rock->isVisible())
 			{
+				rock->setPosition(rock->getPosition().x, Director::getInstance()->getVisibleSize().height + 300);
 				rock->runAction(moveBy->clone());
 				rock->setVisible(true);
 				i = rockSize + 10;

@@ -58,7 +58,7 @@ void SpaceShooter::Shoot(float dt)
 	for (int i = 0; i < 20; i++)
 	{
 		auto bullet = this->m_bullets[i]->getSprite();
-		if (!bullet->isVisible() && a > dt * 10) {
+		if (!bullet->isVisible() && a > dt * 20) {
 			auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
 			audio->playEffect("Sounds/shoot.wav", false, 1.0f, 1.0f, 1.0f);
 
@@ -128,41 +128,17 @@ void SpaceShooter::Collision(vector<Rock*> rocks)
 		return SpaceShooter::onContactBegin(contact);
 	};
 	targetScene->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, targetScene);
-	//if (score == 10)
-	//{
-	//	ResourceManager::getInstance()->setScore(score);
-	//}
-	//for (int i = 0; i < rocks.size(); i++)
-	//{
-	//	auto rock = rocks[i]->getSprite();
-	//	for (int i = 0; i < this->m_bullets.size(); i++)
-	//	{
-	//		auto bullet = this->m_bullets[i]->getSprite();
-	//		if (bullet->getPhysicsBody()->getNode() && rock->getPhysicsBody()->getNode())
-	//		{	
-	//			score++;
-	//			// create soundEffect
-	//			auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
-	//			audio->playEffect("Sounds/explosion.wav", false, 1.0f, 1.0f, 1.0f);
-	//			// create Effect
-	//			auto emitter = CCParticleSystemQuad::create("explosion.plist");
-	//			emitter->setPosition(rock->getPosition().x, rock->getPosition().y);
-	//			targetScene->addChild(emitter);
-	//			emitter->setScale(0.25f);
-	//			emitter->setAutoRemoveOnFinish(true);
-
-	//			bullet->setVisible(false);
-	//			rock->setVisible(false);
-	//			rock->setPosition(rock->getPosition().x, -100);
-	//			bullet->setPosition(bullet->getPosition().x, 1000);
-	//		}
-	//	}
-	//	if (getSprite()->getBoundingBox().intersectsRect(rock->getBoundingBox()) && rock->isVisible())
-	//	{
-	//		WriteScore();
-	//		getSprite()->setVisible(false);
-	//	}
-	//}
+	if (score == 10)
+	{
+		ResourceManager::getInstance()->setScore(score);
+	}
+	
+		//if (getSprite()->getBoundingBox().intersectsRect(rock->getBoundingBox()) && rock->isVisible())
+		//{
+		//	WriteScore();
+		//	getSprite()->setVisible(false);
+		//}
+	
 }
 
 bool SpaceShooter::onContactBegin(PhysicsContact& contact)

@@ -36,6 +36,7 @@ void Rock::InitPhysic()
 	auto physicBody = PhysicsBody::createBox(getSprite()->getContentSize());
 	physicBody->setContactTestBitmask(1);
 	physicBody->setTag(100);
+	physicBody->setGravityEnable(false);
 	getSprite()->setTag(100);
 	getSprite()->setPhysicsBody(physicBody);
 }
